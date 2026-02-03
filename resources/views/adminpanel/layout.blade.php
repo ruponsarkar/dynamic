@@ -126,7 +126,7 @@
                             </a>
                         </li> --}}
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ URL('add-conference') }}"
                                 class="nav-link {{ request()->is('add-conference') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -134,7 +134,7 @@
                                     Conference Pro.
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li
                             class="nav-item has-treeview {{ request()->is('journalForm') ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link">
@@ -158,7 +158,7 @@
                 </li> --}}
                             </ul>
                         </li>
-                        {{-- <li
+                        <li
                             class="nav-item has-treeview {{ request()->is('addEditors') ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
@@ -175,7 +175,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> --}}
+                        </li>
                         <li
                             class="nav-item has-treeview {{ request()->is('add-volume') ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link">
@@ -194,6 +194,27 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li
+                        class="nav-item has-treeview {{ request()->is('add-indexing') ? 'menu-is-opening menu-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-swatchbook"></i>
+                            <p>
+                                Indexing
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ URL('add-indexing') }}"
+                                    class="nav-link {{ request()->is('add-indexing') ? 'active' : '' }}">
+                                    <p class="p-4"><i class="fas fa-arrow-right"></i> Add Indexing</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
                         {{-- <li class="nav-item">
               <a href="{{URL('home-article')}}" class="nav-link {{ request()->is('home-article') ? 'active' : ''}}">
             <i class="nav-icon far fa-calendar-alt"></i>
@@ -229,31 +250,43 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-swatchbook"></i>
                                 <p>
-                                    Custom Pages
+                                    Other Pages
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
 
                             @php
                                 $pages = [
-                                    'open-access-policy-licensing-and-copyright' =>
-                                        'Open Access Policy, Licensing and Copyright',
-                                    'fast-track-review-and-publication' => 'Fast Track Review Process',
-                                    'plagiarism-policy' => 'Plagiarism Policy',
-                                    'publication-fees' => 'Article Processing Charges (APCs)',
-                                    'indexing' => 'Indexing',
-                                    'publication-ethics-and-malpractice-statement-editors-responsibilities-pe-ms' =>
-                                        'Publication Ethics and Malpractice Statement Editors Responsibilities (PE & MS)',
-                                    'peer-review-process' => 'Peer-Review Process',
-                                    'conflicts-of-interest' => 'Conflicts of Interest',
-                                    'waiver-and-discounts' => 'Waiver and Discounts',
-                                    'terms-and-conditions' => 'Ownership, Terms and Conditions',
-                                    'digital-preservation' => 'Digital Preservation',
-                                    'corrections-and-retraction' => 'Corrections and Retraction',
-                                    'complaints-and-appeals' => 'Complaints and Appeals',
-                                    'misconduct-and-sanctions' => 'Misconduct and Sanctions',
-                                    'privacy-statement' => 'Privacy Statement',
-                                    'advertising-and-direct-marketing' => 'Advertising and Direct Marketing',
+
+                                'about-us'=>'About Us',
+
+                                'instructons-for-authors'=> 'Instructions for Authors',
+                                'publication-ethics'=>'Publication Ethics',
+                                'review-process'=> 'Review Process',
+                                'privacy-policy'=> 'Privacy Policy',
+                                'copyright-policy' => 'Copyright Policy',
+
+                                'contact-us' => 'Contact Us',
+
+
+                                    // 'open-access-policy-licensing-and-copyright' =>
+                                    // 'Open Access Policy, Licensing and Copyright',
+                                    // 'fast-track-review-and-publication' => 'Fast Track Review Process',
+                                    // 'plagiarism-policy' => 'Plagiarism Policy',
+                                    // 'publication-fees' => 'Article Processing Charges (APCs)',
+                                    // 'indexing' => 'Indexing',
+                                    // 'publication-ethics-and-malpractice-statement-editors-responsibilities-pe-ms' =>
+                                    // 'Publication Ethics and Malpractice Statement Editors Responsibilities (PE & MS)',
+                                    // 'peer-review-process' => 'Peer-Review Process',
+                                    // 'conflicts-of-interest' => 'Conflicts of Interest',
+                                    // 'waiver-and-discounts' => 'Waiver and Discounts',
+                                    // 'terms-and-conditions' => 'Ownership, Terms and Conditions',
+                                    // 'digital-preservation' => 'Digital Preservation',
+                                    // 'corrections-and-retraction' => 'Corrections and Retraction',
+                                    // 'complaints-and-appeals' => 'Complaints and Appeals',
+                                    // 'misconduct-and-sanctions' => 'Misconduct and Sanctions',
+                                    // 'privacy-statement' => 'Privacy Statement',
+                                    // 'advertising-and-direct-marketing' => 'Advertising and Direct Marketing',
                                 ];
                             @endphp
 

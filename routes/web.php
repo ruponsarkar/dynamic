@@ -26,13 +26,18 @@ Route::get('/', [IndexController::class, 'index']);
 
 Route::get('manuscript', [IndexController::class, 'manuscript']);
 Route::post('submit_manuscript', [FormController::class, 'submit_manuscript']);
-Route::get('archives', [IndexController::class, 'archives']);
-Route::get('archives/{v_slug}/{i_slug}', [IndexController::class, 'articles']);
+Route::get('archives/{slug}', [IndexController::class, 'archives']);
+Route::get('archives/{slug}/{v_slug}/{i_slug}', [IndexController::class, 'articles']);
+Route::get('journals', [IndexController::class, 'allJournals']);
 Route::get('journal/{slug}', [IndexController::class, 'journal']);
+Route::get('article/{slug}', [IndexController::class, 'article']);
+Route::get('indexings/{slug}', [IndexController::class, 'indexings']);
 Route::get('current-issue', [IndexController::class, 'currentIssue']);
 
 
 Route::get('conference' , [adminPanelController::class,'conference']);
+
+Route::get('editorial-board/{slug}', [IndexController::class, 'editorialBoard']);
 
 
 
@@ -47,6 +52,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('login', [adminPanelController::class, 'login']);
     Route::get('admin_index', [adminPanelController::class, 'adminIndex']);
+    Route::get('add-indexing' , [adminPanelController::class,'addIndexingPage']);
 
     Route::get('all-manuscript', [adminPanelController::class, 'allManuscript']);
     Route::get('receive-editors', [adminPanelController::class, 'allEditorsRequest']);

@@ -182,7 +182,7 @@
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 1000,
+      delay: 4000,
       disableOnInteraction: false
     },
     slidesPerView: 'auto',
@@ -192,21 +192,21 @@
       clickable: true
     },
     breakpoints: {
-      320: {
-        slidesPerView: 2,
-        spaceBetween: 5
-      },
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 60
-      },
-      640: {
-        slidesPerView: 4,
-        spaceBetween: 80
-      },
+      // 320: {
+      //   slidesPerView: 2,
+      //   spaceBetween: 5
+      // },
+      // 480: {
+      //   slidesPerView: 2,
+      //   spaceBetween: 60
+      // },
+      // 640: {
+      //   slidesPerView: 4,
+      //   spaceBetween: 80
+      // },
       1200: {
-        slidesPerView: 6,
-        spaceBetween: 20
+        slidesPerView: 1,
+        spaceBetween: 10
       }
     }
   });

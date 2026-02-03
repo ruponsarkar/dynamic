@@ -4,10 +4,23 @@
             <div class="d-flex align-items-center justify-content-center">
 
                 <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" class="logo" alt="">
-                <div class="journal-title">
-                    {{-- P-Edu International Journal of Multidisciplinary Studies --}}
-                    {{ $journal->j_name }}
+                <div>
+
+                    <div class="journal-title">
+                        {{-- P-Edu International Journal of Multidisciplinary Studies --}}
+                        {{-- {{ $journal->j_name }} --}}
+                        Global Scholars Academic & Scientific Research Publisher
+                        
+                       
+                    </div>
+                    <div>
+                       <b>
+                           A publisher of scholarly journals and other academic resources.
+                        </b>
+                    </div>
                 </div>
+
+                
 
                 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -19,7 +32,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg shadow-sm">
+    <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #4571ff">
 
         <div class="container">
 
@@ -32,22 +45,77 @@
 
                     <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
                             href="/">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->is('editorial-board') ? 'active' : '' }}"
-                            href="/editorial-board">EDITORIAL BOARD</a></li>
-                    <li class="nav-item"><a
+                    <li class="nav-item"><a class="nav-link {{ request()->is('/about-us') ? 'active' : '' }}"
+                            href="/about-us">ABOUT US</a></li>
+
+                        
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle 
+                                        {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
+                                        href="#"
+                                        id="forAuthorsDropdown"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        FOR AUTHORS
+                                    </a>
+                        
+                                    <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
+                                        <li>
+                                            <a class="dropdown-item 
+                                                {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
+                                                href="/instructons-for-authors">
+                                                INSTRUCTIONS FOR AUTHORS
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item 
+                                                {{ request()->is('publication-ethics') ? 'active' : '' }}"
+                                                href="/publication-ethics">
+                                                PUBLICATION ETHICS
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item 
+                                                {{ request()->is('review-process') ? 'active' : '' }}"
+                                                href="/review-process">
+                                                REVIEW PROCESS
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item 
+                                                {{ request()->is('privacy-policy') ? 'active' : '' }}"
+                                                href="/privacy-policy">
+                                                PRIVECY POLICY
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                    {{-- <li class="nav-item"><a class="nav-link {{ request()->is('editorial-board') ? 'active' : '' }}"
+                            href="/editorial-board">EDITORIAL BOARD</a></li> --}}
+                    <li class="nav-item"><a class="nav-link {{ request()->is('journals') ? 'active' : '' }}"
+                            href="/journals">JOURNALS</a></li>
+                    {{-- <li class="nav-item"><a
                             class="nav-link {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
                             href="/instructons-for-authors">INSTRUCTIONS FOR
-                            AUTHORS</a></li>
+                            AUTHORS</a></li> --}}
+                    <li class="nav-item"><a class="nav-link {{ request()->is('copyright-policy') ? 'active' : '' }}"
+                            href="/copyright-policy">COPYRIGHT</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->is('manuscript') ? 'active' : '' }}"
                             href="/manuscript">SUBMIT ARTICLE</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->is('current-issue') ? 'active' : '' }}"
-                            href="/current-issue">CURRENT ISSUE</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->is('archives') ? 'active' : '' }}"
-                            href="/archives">ARCHIVES</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->is('conference') ? 'active' : '' }}"
-                            href="/conference">CONFERENCE PROCEEDING</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link {{ request()->is('current-issue') ? 'active' : '' }}"
+                            href="/current-issue">CURRENT ISSUE</a></li> --}}
+                    {{-- <li class="nav-item"><a class="nav-link {{ request()->is('archives') ? 'active' : '' }}"
+                            href="/archives">ARCHIVES</a></li> --}}
+                    {{-- <li class="nav-item"><a class="nav-link {{ request()->is('conference') ? 'active' : '' }}"
+                            href="/conference">CONFERENCE PROCEEDING</a></li> --}}
                     <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
-                            href="/contact-us">CONTACT</a></li>
+                            href="#">PAYMENTS</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
+                            href="/contact-us">CONTACT US</a></li>
 
                 </ul>
             </div>

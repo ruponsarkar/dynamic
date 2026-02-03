@@ -10,47 +10,40 @@
 
             <div class="row">
 
+
+                <div class="col-md-3">
+
+
+                    <div class="card-c mb-3">
+                        <img class="img-fluid"
+                                src="{{ url('assets/Journals/img/' . $journal->photo) }}" alt="Image"
+                                style=" width: 100%; object-fit: contain;"
+                                >
+                    </div>
+
+                    @include('partials.quicklinks2')
+
+
+                </div>
+
                 <!-- LEFT SECTION -->
                 <div class="col-md-9">
-                    <div class="card cus-padding">
+                    
+                    <div class="card-c">
 
-                        <h4>{{ $volume->name }} - {{ $issue->name }} ({{ $issue->month }} {{ $volume->year }})</h4>
+                        <div class="card-header">
+                            <div class="h-box">
+                                <div class="h-box-text p-2">
+                                    {{ $volume->name }} - {{ $issue->name }} ({{ $issue->month }} {{ $volume->year }}) | {{ $journal->j_name }}
+                                </div>
+                            </div>
+                        </div>
                         <br>
 
-                        <div>
-                            @foreach ($articles as $a)
-                                <div class="border border-dark rounded p-2 m-2">
-                                    <h5>
-                                        <a href="#">{{ $a->name }}</a>
-                                    </h5>
+                        {{-- <h4>{{ $volume->name }} - {{ $issue->name }} ({{ $issue->month }} {{ $volume->year }})</h4> --}}
+                        <br>
 
-                                    <div>
-                                        Author(s): {{ $a->aname }}
-                                    </div>
-                                    <div class="text-muted">
-                                        {{ $volume->name }} - {{ $issue->name }}
-                                    </div>
-
-                                    @if ($a->page)
-                                        <div class="text-muted">
-                                            Page: {{ $a->page }}
-                                        </div>
-                                    @endif
-
-                                    @if ($a->doi)
-                                        <div class="text-muted">
-                                            DOI : <a href="{{ $a->doi }}">{{ $a->doi }}</a>
-                                        </div>
-                                    @endif
-
-                                    <div>
-                                        <a href="/journal/{{ $a->slug }}">Read More »</a>
-
-                                    </div>
-
-                                </div>
-                            @endforeach
-                        </div>
+                        @include('partials.articles')
 
                     </div>
 
@@ -58,16 +51,7 @@
 
                 </div>
 
-                <!-- RIGHT SIDEBAR -->
-                <div class="col-md-3">
-
-
-
-                    @include('partials.right')
-
-
-                </div>
-
+        
 
 
             </div>

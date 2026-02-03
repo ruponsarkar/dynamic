@@ -63,7 +63,7 @@
                   <div class="form-group row p-1">
                     <label class="col-sm-4 col-form-label">Details (*Optional):</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="details" required="required" placeholder="Details (*Optional)">
+                      <input type="text" class="form-control" name="details"  placeholder="Details (*Optional)">
                     </div>
                   </div>
                   <div class="form-group row p-1">
@@ -71,8 +71,8 @@
                     <div class="col-sm-8">
                     <select name="type" class="form-select" aria-label="Default select example">
                     <option></option>
-                    <option value="ass">Associative</option>
-                    <option value="chief">Chief</option>
+                    <option value="Associative">Associative</option>
+                    <option value="Chief">Chief</option>
                     </select>
                     </div>
                   </div>
@@ -94,6 +94,22 @@
                       <input type="text" class="form-control" name="profile" required="required" placeholder="Profile Link">
                     </div>
                   </div>
+
+                  <div class="form-group row p-1">
+                    <label class="col-sm-4 col-form-label">Do you want to add this editor as top editors?</label>
+                    <div class="col-sm-8">
+                      <select name="is_top_editor" id="top" required class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="1">
+                            Yes
+                        </option>
+                        <option value="0">
+                            No
+                        </option>
+                    </select>
+                    </div>
+                  </div>
+
                   
                   <div class="form-group row p-1">
                     <label class="col-sm-4 col-form-label">Photo:</label>
@@ -161,7 +177,7 @@
                     <td>{{$data->university}}</td>
                     <td>{{$data->details}}</td>
                     <td>{{$data->type}}</td>
-                    <td><a href="../assets/all-editors/{{$data->image}}">{{$data->image}}</a></td>
+                    <td><a href="../assets/img/editor-img/{{$data->image}}">{{$data->image}}</a></td>
                     <!-- <td><a href="update-editors/{{$data->id}}">Edit</a></td> -->
 
                     <td class="text-center"><a href="edit_editor/{{$data->id}}"><i class="far fa-edit"></i></a></td>

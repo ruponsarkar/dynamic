@@ -12,7 +12,7 @@
 
                 <!-- LEFT SECTION -->
                 <div class="col-md-9">
-                    <div class="card cus-padding">
+                    <div class="card-c cus-padding">
                         {!! $data->data !!}
                     </div>
 
@@ -25,7 +25,8 @@
 
 
 
-                    @include('partials.right')
+                    @include('partials.quicklinks1')
+                    @include('partials.top_editors')
 
 
                 </div>

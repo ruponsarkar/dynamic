@@ -53,30 +53,38 @@ class IndexController extends Controller
     }
 
 
-    function archives()
+    function archives($slug)
     {
-
+        $journal = DB::table('journals')->where('slug', $slug)->first();
         $volumes = DB::table('volume')
             ->join('issues', 'issues.v_id', '=', 'volume.id')
             ->select('volume.name as volume_name', 'volume.year', 'volume.slug as volume_slug', 'issues.*')
+            ->where('volume.j_id', $journal->j_id)
             ->orderBy('volume.year', 'desc')
             ->get()
             ->groupBy('year');
 
 
         // return $volumes;
-        return view('archives', ['data' => $volumes]);
+        return view('archives', ['data' => $volumes, 'journal' => $journal]);
     }
 
 
 
-    function articles($v_slug, $i_slug)
+    function articles(Request $request, $slug, $v_slug, $i_slug)
     {
-        $v = DB::table('volume')->where('slug', $v_slug)->first();
-        $i = DB::table('issues')->where('slug', $i_slug)->first();
+
+        $i_id = $request->query('i');
+        $v_id = $request->query('v');
+        $journal = DB::table('journals')->where('slug', $slug)->first();
+
+        $v = DB::table('volume')->where('j_id', $journal->j_id)->where('id', $v_id)->first();
+        $i = DB::table('issues')->where('id', $i_id)->first();
+
 
         $articles = DB::table('article')
             ->where('i_id', $i->id)
+            ->where('j_id', $journal->j_id)
             ->where('status', 1)
             ->orderBy('id', 'desc')
             ->get();
@@ -86,10 +94,33 @@ class IndexController extends Controller
     }
 
 
+    function allJournals(Request $request){
+
+        // $journals = DB::table('journals')->where('active', 1)->orderBy('j_id', 'desc')->get();
+        return view('allJournals');
+    }
+
     function journal($slug){
 
-        $article = DB::table('article')->where('slug', $slug)->first();
-        return view('journal', ['article' => $article]);
+        $journal = DB::table('journals')->where('slug', $slug)->first();
+        $recent = DB::table('article')->where('j_id', '=', $journal->j_id)->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
+        return view('details', ['journal' => $journal, 'articles' => $recent]);
+    }
+
+    function article($slug){
+
+        $data = DB::table('article')->where('slug', $slug)->first();
+
+        return view('article', ['article' => $data]);
+    }
+    function indexings($slug){
+        $journal = DB::table('journals')->where('slug', $slug)->first();
+
+        $data = DB::table('indexing')->where('j_id', $journal->j_id)->get();
+
+        // return $data;
+
+        return view('indexings', ['indexings' => $data]);
     }
 
 
@@ -111,6 +142,18 @@ class IndexController extends Controller
 
         // return $articles;
         return view('articles', ['articles' => $articles, 'volume' => $v, 'issue' => $i]);
+    }
+
+
+    function editorialBoard($slug)
+    {
+        $journal = DB::table('journals')->where('slug', $slug)->first();
+        $editors = DB::table('editors_data')
+        ->where('j_id', $journal->j_id)
+        ->where('active', 1)
+        ->orderBy('type', 'desc')
+        ->get();
+        return view('editorial-board', ['journal' => $journal, 'editors' => $editors]);
     }
 
 }

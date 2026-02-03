@@ -23,7 +23,7 @@
                   <th>Mode</th>
                   <th>Author</th>
                   <th>email & Mobile</th>
-                  <th>Orcid-id</th>
+                  {{-- <th>Orcid-id</th> --}}
                   <th>Journal</th>
                   <th>Manuscript</th>
                   <th>Type</th>
@@ -42,7 +42,7 @@
                   <td>{{$data->mode}}</td>
                   <td>{{$data->author}}</td>
                   <td>{{$data->email}}<br>{{$data->mobile}}</td>
-                  <td>{{$data->orcid_id}}</td>
+                  {{-- <td>{{$data->orcid_id}}</td> --}}
                   <td>{{$data->journal}}</td>
                   <td>{{$data->manuscript}}</td>
                   <td>{{$data->type}}</td>
@@ -92,7 +92,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- <a class="confirmation" href="{{URL('delete-journals/'.$data->j_id)}}"> -->
+        
         <form id="updateStatusForm">
           @csrf
           <input type="hidden" name="status" id="selectedStatus">

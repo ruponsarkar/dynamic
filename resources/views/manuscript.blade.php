@@ -17,7 +17,7 @@
             <div class="container-fluid">
 
                 <div class="row manuscript-bg pb-3">
-                    <div class=" manuscript-form pb-3 card cus-padding">
+                    <div class=" manuscript-form pb-3 card-c cus-padding">
                         <div class="h3 fw-bold text-center p-3">Manuscript Submission</div>
         
                         @if (session()->has('message'))
@@ -96,12 +96,12 @@
                                     <input type="email" name="mail" class="form-control" placeholder="Email">
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="Email" class="col-sm-4 col-form-label">Orcid-id</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="orcid_id" class="form-control" placeholder="Orcid-id">
                                 </div>
-                            </div>
+                            </div> --}}
         
                             <div class="row mb-3">
                                 <label for="Mobile" class="col-sm-4 col-form-label">Mobile</label>
@@ -157,7 +157,8 @@
 
 
 
-              @include('partials.right')
+            @include('partials.quicklinks1')
+            @include('partials.top_editors')
 
 
            </div>

@@ -5,14 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title', 'IRJMS')</title>
+    <title>@yield('title', 'GSASR Publisher')</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/styles.css">
+
 
 
     <!-- Custom -->
@@ -102,8 +104,12 @@
 
 <body>
 
+    <div class="">
+        @include('partials.header')
+    </div>
+    <div class="pb-2">
 
-    @include('partials.header')
+    </div>
 
     {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-nav-dark">
         <div class="container">
@@ -132,7 +138,9 @@
 
     @include('partials.footer')
 
+    <script src="{{ url('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url('assets/js/main.js') }}"></script>
 
 </body>
 

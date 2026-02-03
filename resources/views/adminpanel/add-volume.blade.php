@@ -85,6 +85,7 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>Sl No.</th>
+                                        <th>Journal</th>
                                         <th>Volume Name</th>
                                         <th>Year</th>
                                         <th>Action</th>
@@ -97,6 +98,10 @@
                                     @foreach ($volume as $data)
                                         <tr>
                                             <td>{{ $counter++ }}</td>
+                                            <td>
+
+                                                {{ $data->j_name }}
+                                             </td>
                                             <td>
 
                                                 <div class="list-v">

@@ -2,7 +2,7 @@
 <div class="bg-light py-3">
     <div class="text-center">
 
-        <a href="whatsapp://send?phone=+919336570820" class="mx-2 text-dark">
+        <a href="whatsapp://send?phone=+918638261097" class="mx-2 text-dark">
             <i class="bi bi-whatsapp"></i>
         </a>
 
@@ -31,13 +31,13 @@
         <a href="https://creativecommons.org/licenses/by/4.0/legalcode">View Legal</a>
     </div>
 
-    <div class="text-center">
+    {{-- <div class="text-center">
         Published by <a href="#">Pharmedico Edu International Pvt. Ltd.</a>
-    </div>
+    </div> --}}
 </div>
 
 <footer class="text-center bg-light py-3 mt-2">
-    © 2025 {{ $journal->j_name }}
+    © 2025 Global Scholars Academic & Scientific Research Publisher
 </footer>
 
 <div class="text-center text-muted">
