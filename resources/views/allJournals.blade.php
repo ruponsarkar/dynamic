@@ -32,7 +32,7 @@
                                     <div class="text-center">
                                         <div>
                                             <img class="img-fluid"
-                                            src="{{ url('assets/Journals/img/' . $journal->photo) }}" alt="Image"
+                                            src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
                                             style=" width: 80%; object-fit: contain;"
                                             >
                                         </div>

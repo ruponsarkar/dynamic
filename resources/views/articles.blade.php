@@ -16,7 +16,7 @@
 
                     <div class="card-c mb-3">
                         <img class="img-fluid"
-                                src="{{ url('assets/Journals/img/' . $journal->photo) }}" alt="Image"
+                                src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
                                 style=" width: 100%; object-fit: contain;"
                                 >
                     </div>

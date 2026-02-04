@@ -109,6 +109,6 @@
     </div>
 
     <div>
-        <img src="/assets/Journals/img/{{ $journal->photo }}" class="col-12" alt="">
+        <img src="/assets/journals/img/{{ $journal->photo }}" class="col-12" alt="">
     </div>
 </div>
