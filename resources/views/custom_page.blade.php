@@ -26,7 +26,7 @@
 
 
                     @include('partials.quicklinks1')
-                    @include('partials.top_editors')
+                    {{-- @include('partials.top_editors') --}}
 
 
                 </div>

@@ -1555,7 +1555,7 @@ Contact Form
 
 .top-banner {
   /* background: #0056a3; */
-  background-color: white;
+  background-color: #87f4ad;
   padding: 10px 0;
   /* color: white; */
   text-align: center;
@@ -1625,4 +1625,12 @@ Contact Form
 
 .side-button:hover{
   background-color: #424242;
+}
+
+
+.footer{
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
 }

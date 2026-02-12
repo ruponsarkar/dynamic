@@ -23,17 +23,65 @@
     </div>
 </div>
 
-<div class="py-3 bg-light">
-    <div class="text-center">
+<div class="py-3 footer" >
+    {{-- <div class="text-center">
         The publication is licensed under Creative Commons License
         <img src="https://ijpqa.com/wp-content/uploads/2020/08/creative-commons.png" style="height:30px"
             alt="Creative Commons">
         <a href="https://creativecommons.org/licenses/by/4.0/legalcode">View Legal</a>
+    </div> --}}
+
+
+
+    <div class="container">
+        <div class="row p-0 m-0">
+            <div class="col-md-4 ">
+                <div class="text-left">
+                    <div>
+                        <b>Quick Links</b>
+                    </div>
+                    <div>
+                        <a href="/">Home</a>
+                    </div>
+                    <div>
+                        <a href="/journals">Journals</a>
+                    </div>
+                    <div>
+                        <a href="/instructons-for-authors">Author Instructions</a>
+                    </div>
+                    <div>
+                        <a href="/manuscript">Submit Manuscript</a>
+                    </div>
+                    <div>
+                        <a href="/contact-us">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="text-center">
+                    The publication is licensed under Creative Commons License
+                    <img src="https://ijpqa.com/wp-content/uploads/2020/08/creative-commons.png" style="height:30px"
+                        alt="Creative Commons">
+                    <a href="https://creativecommons.org/licenses/by/4.0/legalcode">View Legal</a>
+                </div>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="text-left">
+                    <div>
+                        <b>Contact Us</b>
+                    </div>
+                    <div>
+                        
+                        
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
     </div>
 
-    {{-- <div class="text-center">
-        Published by <a href="#">Pharmedico Edu International Pvt. Ltd.</a>
-    </div> --}}
 </div>
 
 <footer class="text-center bg-light py-3 mt-2">
