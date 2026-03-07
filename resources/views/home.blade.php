@@ -53,7 +53,7 @@
                                         <div>
                                             <h2>Submit you manuscript here</h2>
                                             <div class="text-center">
-                                                <button class="btn btn-primary">Submit</button>
+                                                <button class="btn btn-primary">Submit Your Manuscript</button>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
 
 
                             </div>
-
+                            
                             <!-- Navigation -->
                             <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon bi bi-chevron-left"></span>

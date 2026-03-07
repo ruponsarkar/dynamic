@@ -1,4 +1,4 @@
-<div >
+<div>
     <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
         <div class="text-white " style="font-size: small">
             <i class="bi bi-telephone"></i> +91 8638261097 &nbsp; &nbsp;
@@ -97,6 +97,60 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle 
+                                        {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
+                        href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        FOR REVIEWERS
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
+                        <li>
+                            <a class="dropdown-item 
+                                                {{ request()->is('instructons-for-reviewers') ? 'active' : '' }}"
+                                href="/instructons-for-reviewers">
+                                REVIEWERS GUIDELINES
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item 
+                                                {{ request()->is('join-reviewers') ? 'active' : '' }}"
+                                href="/join-reviewers">
+                                JOIN REVIEWERS
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle 
+                                        {{ request()->is('instructons-for-editors') ? 'active' : '' }}"
+                        href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        FOR EDITORS
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
+                        <li>
+                            <a class="dropdown-item 
+                                                {{ request()->is('instructons-for-editors') ? 'active' : '' }}"
+                                href="/instructons-for-editors">
+                                EDITORS GUIDELINES
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item 
+                                                {{ request()->is('join-editors') ? 'active' : '' }}"
+                                href="/join-editors">
+                                JOIN EDITORS
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
 
 
                 {{-- <li class="nav-item"><a class="nav-link {{ request()->is('editorial-board') ? 'active' : '' }}"
