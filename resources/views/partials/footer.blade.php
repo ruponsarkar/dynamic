@@ -1,5 +1,5 @@
 <!-- Social Links -->
-<div class="bg-light py-3">
+<div class="bg-light py-3 mt-4">
     <div class="text-center">
 
         <a href="whatsapp://send?phone=+918638261097" class="mx-2 text-dark">
@@ -35,10 +35,12 @@
 
     <div class="container">
         <div class="row p-0 m-0">
-            <div class="col-md-4 ">
+            <div class="col-md-4 " style="text-align: justify;">
                 <div class="text-left">
                     <div>
-                        <b>Quick Links</b>
+                        <u>
+                            <b>Quick Links</b>
+                        </u>
                     </div>
                     <div>
                         <a href="/">Home</a>
@@ -58,22 +60,32 @@
                 </div>
             </div>
 
-            <div class="col-md-4 ">
-                <div class="text-center">
+            <div class="col-md-5 " style="display: flex; align-items: center; flex-direction: column; justify-content: space-around; gap: 10px;">
+                <div class="text-center" style="">
                     The publication is licensed under Creative Commons License
                     <img src="https://ijpqa.com/wp-content/uploads/2020/08/creative-commons.png" style="height:30px"
                         alt="Creative Commons">
                     <a href="https://creativecommons.org/licenses/by/4.0/legalcode">View Legal</a>
                 </div>
+
+                <div class="">
+                    © 2025 Global Scholars Academic & Scientific Research Publisher
+                </div>
             </div>
 
-            <div class="col-md-4 ">
+            <div class="col-md-3 " style="text-align: justify;">
                 <div class="text-left">
                     <div>
-                        <b>Contact Us</b>
+                        <u>
+                            <b>Contact Us</b>
+                        </u>
                     </div>
-                    <div>
-                        
+                    <div style="text-align: justify;">
+                        <i class="bi bi-user"></i> Address xxxxxx
+                        <br>
+                        <i class="bi bi-telephone"></i> +91 8638261097
+                        <br>
+                        <i class="bi bi-envelope"></i> 2Q5m0@example.com
                         
                     </div>
                    
@@ -84,9 +96,9 @@
 
 </div>
 
-<footer class="text-center bg-light py-3 mt-2">
+{{-- <footer class="text-center bg-light py-2">
     © 2025 Global Scholars Academic & Scientific Research Publisher
-</footer>
+</footer> --}}
 
 <div class="text-center text-muted">
     <small>

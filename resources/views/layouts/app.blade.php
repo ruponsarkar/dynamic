@@ -96,8 +96,8 @@
             background: #0056a3;
             color: white;
             padding: 15px;
-            text-align: center;
-            margin-top: 40px;
+            /* text-align: center; */
+            /* margin-top: 40px; */
         }
     </style>
 </head>
