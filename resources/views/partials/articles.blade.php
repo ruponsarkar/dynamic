@@ -22,7 +22,7 @@
 
             <div>
                 <a href="/article/{{ $article->slug}}">View</a>
-                <a href="">Download PDF</a>
+                 <a href="/assets/articles/{{$article->file}}">Download PDF</a>
             </div>
 
 

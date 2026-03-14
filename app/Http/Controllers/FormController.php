@@ -56,7 +56,7 @@ class FormController extends Controller
         $request->cv->move(base_path('public_html/assets/editors/cv'), $cv);
 
 
-        return redirect('Join_editor')->with('message', 'Your request Submitted successfully');
+        return redirect('join-editor')->with('message', 'Your request Submitted successfully');
     }
 
 
@@ -193,6 +193,6 @@ class FormController extends Controller
         $request->cv->move(base_path('public_html/assets/reviewers/cv'), $cv);
 
 
-        return redirect('join_reviewer')->with('message', 'Your request Submitted successfully');
+        return redirect('join-reviewer')->with('message', 'Your request Submitted successfully');
     }
 }

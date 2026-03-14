@@ -100,7 +100,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle 
-                                        {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
+                                        {{ request()->is('instructions-for-authors') ? 'active' : '' }}"
                         href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         FOR REVIEWERS
@@ -109,15 +109,15 @@
                     <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
                         <li>
                             <a class="dropdown-item 
-                                                {{ request()->is('instructons-for-reviewers') ? 'active' : '' }}"
-                                href="/instructons-for-reviewers">
+                                                {{ request()->is('instructions-for-reviewers') ? 'active' : '' }}"
+                                href="/instructions-for-reviewers">
                                 REVIEWERS GUIDELINES
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item 
                                                 {{ request()->is('join-reviewers') ? 'active' : '' }}"
-                                href="/join-reviewers">
+                                href="/join-reviewer">
                                 JOIN REVIEWERS
                             </a>
                         </li>
@@ -126,7 +126,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle 
-                                        {{ request()->is('instructons-for-editors') ? 'active' : '' }}"
+                                        {{ request()->is('instructions-for-editors') ? 'active' : '' }}"
                         href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         FOR EDITORS
@@ -135,15 +135,15 @@
                     <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
                         <li>
                             <a class="dropdown-item 
-                                                {{ request()->is('instructons-for-editors') ? 'active' : '' }}"
-                                href="/instructons-for-editors">
+                                                {{ request()->is('instructions-for-editors') ? 'active' : '' }}"
+                                href="/instructions-for-editors">
                                 EDITORS GUIDELINES
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item 
                                                 {{ request()->is('join-editors') ? 'active' : '' }}"
-                                href="/join-editors">
+                                href="/join-editor">
                                 JOIN EDITORS
                             </a>
                         </li>

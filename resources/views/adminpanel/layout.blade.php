@@ -108,15 +108,15 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
               <a href="{{URL('receive-editors')}}" class="nav-link {{ request()->is('receive-editors') ? 'active' : ''}}">
                 <i class="nav-icon fas fa-user-plus"></i>
                 <p>
                   Editor Receive
                 </p>
               </a>
-            </li> --}}
-                        {{-- <li class="nav-item">
+            </li>
+                        <li class="nav-item">
                             <a href="{{ URL('receive-reviewers') }}"
                                 class="nav-link {{ request()->is('receive-reviewers') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -124,7 +124,7 @@
                                     Reviewer Receive
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
 
                         {{-- <li class="nav-item">
                             <a href="{{ URL('add-conference') }}"

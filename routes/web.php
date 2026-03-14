@@ -40,6 +40,16 @@ Route::get('conference' , [adminPanelController::class,'conference']);
 Route::get('editorial-board/{slug}', [IndexController::class, 'editorialBoard']);
 
 
+Route::get('/join-editor', function () {
+    return view('join_editor');
+});
+Route::get('/join-reviewer', function () {
+    return view('join_reviewer');
+});
+
+Route::post('submit_editor', action: [FormController::class, 'submit_editor']);
+Route::post('submit_reviewer', [FormController::class, 'submit_reviewer']);
+
 
 
 
