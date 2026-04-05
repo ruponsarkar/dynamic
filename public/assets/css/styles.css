@@ -228,7 +228,7 @@ color: #151515;
 --------------------------------------------------------------*/
 #hero {
 width: 100%;
-height: 490px;
+/* height: 490px; */
 overflow: hidden;
 padding: 0;
 position: relative;
@@ -1503,15 +1503,16 @@ Contact Form
   /* height: 100%; */
   width: 100%;
   box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
-  border: 2px solid #00000047;
+  /* border: 2px solid #00000047; */
   border-radius: 10px;
 }
 
 .h-box{
-  background-color: #4472ff;
+  background-color: black;
+  text-align: center;
   color: white;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 }
 
 .h-box-text{
@@ -1555,7 +1556,7 @@ Contact Form
 
 .top-banner {
   /* background: #0056a3; */
-  background-color: #87f4ad;
+  /* background-color: #87f4ad; */
   padding: 10px 0;
   /* color: white; */
   text-align: center;
@@ -1633,4 +1634,8 @@ Contact Form
     color: #fff;
     text-decoration: none;
   }
+}
+
+.carousel-inner {
+  height: 240px;
 }

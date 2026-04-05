@@ -26,8 +26,10 @@ class IndexController extends Controller
         ->where('status', 1)
         ->get();
 
+        $articles = DB::table('article')->where('status', 1)->limit(5)->get();
+
         // return $content;
-        return view('home', ['contents' => $content]);
+        return view('home', ['contents' => $content, 'articles'=>$articles]);
     }
 
     public function custom_pages($path)

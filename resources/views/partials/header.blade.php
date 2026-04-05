@@ -1,15 +1,15 @@
 <div>
-    <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
+    {{-- <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
         <div class="text-white " style="font-size: small">
             <i class="bi bi-telephone"></i> +91 8638261097 &nbsp; &nbsp;
             <i class="bi bi-envelope"></i> 2Q5m0@example.com
         </div>
-    </div>
+    </div> --}}
 
     <!-- TOP BLUE HEADING (EXACT COPY) -->
     <div class="top-banner ">
         <div class="container">
-            <div class="d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-between">
 
                 <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" class="logo" alt="">
                 <div>
@@ -17,7 +17,7 @@
                     <div class="journal-title">
                         {{-- P-Edu International Journal of Multidisciplinary Studies --}}
                         {{-- {{ $journal->j_name }} --}}
-                        Global Scholars Academic & Scientific Research Publisher
+                        International Research and Global Society
 
 
                     </div>
@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #4571ff">
+<nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #343539; border-top: 4px solid #207daf;">
 
     <div class="container">
 
@@ -53,6 +53,10 @@
 
                 <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
                         href="/">HOME</a></li>
+
+                <li class="nav-item"><a class="nav-link {{ request()->is('journals') ? 'active' : '' }}"
+                        href="/journals">JOURNALS</a></li>
+
                 <li class="nav-item"><a class="nav-link {{ request()->is('/about-us') ? 'active' : '' }}"
                         href="/about-us">ABOUT US</a></li>
 

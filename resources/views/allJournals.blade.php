@@ -13,7 +13,7 @@
               
 
                 <!-- LEFT SECTION -->
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="card-c">
 
                         <div class="card-header">
@@ -28,16 +28,49 @@
                         <div class="row p-4">
 
                             @foreach ($journals as $journal)
-                                <div class="col-md-4 pb-4" onclick="window.location='{{ url('journal/' . $journal->slug) }}'" style="cursor: pointer;">
-                                    <div class="text-center">
-                                        <div>
-                                            <img class="img-fluid"
-                                            src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
-                                            style=" width: 80%; object-fit: contain;"
-                                            >
-                                        </div>
-                                        <div class="h-box p-2">
-                                            {{ $journal->j_name }}
+                                <div class="col-md-6 pb-4" onclick="window.location='{{ url('journal/' . $journal->slug) }}'" style="cursor: pointer;">
+                                    <div class="card-c p-3">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img class="img-fluid"
+                                                src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
+                                                style=" width: 80%; object-fit: contain;"
+                                                >
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div>
+                                                    <b>
+                                                        {{ $journal->j_name }}
+                                                    </b>
+                                                </div>
+
+                                                <div>
+                                                    ISSN: {{ $journal->issn }}
+                                                </div>
+                                                <div>
+                                                    <small>
+
+                                                        Frequency: {{ $journal->frequency }}
+                                                    </small>
+                                                </div>
+                                                <div>
+                                                    <small>
+
+                                                        Publishers:: {{ $journal->publisher }}
+                                                    </small>
+                                                </div>
+                                                <div>
+                                                    <small>
+
+                                                        Country of Origin:: {{ $journal->country_of_origin }}
+                                                    </small>
+                                                </div>
+
+                                                <div>
+                                                    <button class="btn btn-secondary btn-sm">View Journal</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -55,7 +88,7 @@
 
                 <!-- RIGHT SIDEBAR -->
 
-                <div class="col-md-3">
+                {{-- <div class="col-md-3">
 
 
 
@@ -63,7 +96,7 @@
                     @include('partials.top_editors')
 
 
-                </div>
+                </div> --}}
              
 
 
