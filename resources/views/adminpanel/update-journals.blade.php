@@ -54,6 +54,23 @@
         <label for="email">Frequency</label>
         <input type="text" class="form-control" id="details" name="frequency" value="{{$journal->frequency}}">
       </div>
+
+      <div class="pb-3">
+        <label for="email">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject" value="{{$journal->subject}}">
+      </div>
+      
+      <div class="pb-3">
+        <label for="email">Format</label>
+        <input type="text" class="form-control" id="format" name="formatOfarticle" value="{{$journal->format}}">
+      </div>
+
+      <div class="pb-3">
+        <label for="email">Starting year</label>
+        <input type="text" class="form-control" id="Starting year" name="starting_year" value="{{$journal->starting_year}}">
+      </div>
+
+
       <div class="pb-3">
         <label for="phone">Language</label>
         <input type="text" class="form-control" id="type" name="language" value="{{$journal->language}}">

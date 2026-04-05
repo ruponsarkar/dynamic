@@ -51,7 +51,7 @@
                                         </div> --}}
 
                                         <div>
-                                            <h2>Submit you manuscript here</h2>
+                                            <h2>Submit your manuscript here</h2>
                                             <div class="text-center">
                                                 <button class="btn btn-primary">Submit Your Manuscript</button>
                                             </div>

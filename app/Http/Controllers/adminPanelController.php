@@ -151,6 +151,9 @@ class adminPanelController extends Controller
         $journal->publisher = strip_tags($request->publisher);
         $journal->country_of_origin = strip_tags($request->country);
         $journal->aim_and_scope = strip_tags($request->aim);
+        $journal->subject = strip_tags($request->subject);
+        $journal->format = strip_tags($request->formatOfJournal);
+        $journal->starting_year = strip_tags($request->starting_year);
         $journal->photo = strip_tags($photo);
 
         $journal->ip_address = \Request::ip();
@@ -730,7 +733,10 @@ class adminPanelController extends Controller
             'chief_editor' => $request->chief,
             'publisher' => $request->publisher,
             'country_of_origin' => $request->country,
-            'aim_and_scope' => $request->aim
+            'aim_and_scope' => $request->aim,
+            'subject' => $request->subject,
+            'format' => $request->formatOfarticle,
+            'starting_year' => $request->starting_year
 
 
         ]);

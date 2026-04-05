@@ -12,9 +12,9 @@
             <div class="p-2">
                 <a href="/journals" class="btn btn-primary w-100">Journals</a>
             </div>
-            <div class="p-2">
+            {{-- <div class="p-2">
                 <a href="#" class="btn btn-primary w-100">Books</a>
-            </div>
+            </div> --}}
             <div class="p-2">
                 <a href="/instructons-for-authors" class="btn btn-primary w-100">Author Instructions</a>
             </div>

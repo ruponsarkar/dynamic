@@ -76,7 +76,7 @@
                                 </div>
                                 <div>
 
-                                    {{-- Starting Year: {{ $journal->starting_year }} --}}
+                                    Starting Year: {{ $journal->starting_year }}
                                 </div>
 
                                 <div>
