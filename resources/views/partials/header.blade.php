@@ -17,13 +17,12 @@
                     <div class="journal-title">
                         {{-- P-Edu International Journal of Multidisciplinary Studies --}}
                         {{-- {{ $journal->j_name }} --}}
-                        International Research and Global Society
-
+                        IRGS Publisher
 
                     </div>
                     <div>
                         <b>
-                            A publisher of scholarly journals and other academic resources.
+                           International Research and Global Society
                         </b>
                     </div>
                 </div>

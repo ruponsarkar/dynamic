@@ -7,7 +7,7 @@
 
         <div class="card p-3">
 
-            {{-- <div class="card p-3">
+            <div class="card p-3">
                 <h5>Pages</h5>
                 <div class="row">
                     @foreach ($pages as $p)
@@ -16,7 +16,7 @@
                         </div>
                     @endforeach
                 </div>
-            </div> --}}
+            </div>
 
             <div class="card p-3">
                 <h5>Content</h5>

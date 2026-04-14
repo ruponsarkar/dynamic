@@ -261,6 +261,8 @@
                                 'about-us'=>'About Us',
 
                                 'instructons-for-authors'=> 'Instructions for Authors',
+                                'instructions-for-editors'=> 'Instructions for Editors',
+                                'instructions-for-reviewers'=> 'Instructions for Reviewers',
                                 'publication-ethics'=>'Publication Ethics',
                                 'review-process'=> 'Review Process',
                                 'privacy-policy'=> 'Privacy Policy',

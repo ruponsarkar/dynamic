@@ -2,7 +2,7 @@
 <div class="bg-light py-3 mt-4">
     <div class="text-center">
 
-        <a href="whatsapp://send?phone=+918638261097" class="mx-2 text-dark">
+        <a href="whatsapp://send?phone=+917002207076" class="mx-2 text-dark">
             <i class="bi bi-whatsapp"></i>
         </a>
 
@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="">
-                    © 2025 Global Scholars Academic & Scientific Research Publisher
+                    © 2026 International Research and Global Society
                 </div>
             </div>
 
@@ -81,11 +81,11 @@
                         </u>
                     </div>
                     <div style="text-align: justify;">
-                        <i class="bi bi-user"></i> Address xxxxxx
+                        <i class="bi bi-pin"></i> Ambari, Hojai, Assam, India – 782445    
                         <br>
-                        <i class="bi bi-telephone"></i> +91 8638261097
+                        <i class="bi bi-telephone"></i> +91 7002207076
                         <br>
-                        <i class="bi bi-envelope"></i> 2Q5m0@example.com
+                        <i class="bi bi-envelope"></i> office@irgspublisher.com
                         
                     </div>
                    

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'GSASR Publisher')
+@section('title', 'IRGS Publisher')
 
 {{-- <style>
     .journal-slider {
@@ -42,10 +42,10 @@
                                             <a href="#about" class="btn-get-started scrollto">Learn More</a>
                                         </div> --}}
 
-                                        <div>
+                                        {{-- <div>
                                             <h2>Welcome to <span>GSASR Publisher</span></h2>
                                             <h3>A publisher of scholarly journals and other academic resources.</h3>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -59,12 +59,12 @@
                                             <a href="#academics" class="btn-get-started scrollto">Academics</a>
                                         </div> --}}
 
-                                        <div>
+                                        {{-- <div>
                                             <h2>Submit you manuscript here</h2>
                                             <div class="text-center">
                                                 <button class="btn btn-primary">Submit Your Manuscript</button>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -113,12 +113,13 @@
                             <div class="p-3 text-center">
                                 <h2 style="color: #1976d2; font-weight: bold;">Step Into Scholarly Excellence </h2>
                                 <div>
-                                    Access all UKR Publisher services in one place—submit manuscripts, explore journals, and
+                                    Access all IRGS Publisher services in one place—submit manuscripts, explore journals,
+                                    and
                                     track your submissions.
                                 </div>
                                 <div class="mt-3">
-                                    <button class="btn btn-primary">Submit Manuscript</button>
-                                    <button class="btn btn-danger">Explore Journals</button>
+                                    <a href="/manuscript" class="btn btn-primary">Submit Manuscript</a>
+                                    <a href="/journals" class="btn btn-danger">Explore Journals</a>
                                 </div>
                             </div>
                         </div>
@@ -153,13 +154,25 @@
                                 <div class="col-md-6">
                                     <div class="p-3 text-center">
                                         <h2 style="color: #1976d2; font-weight: bold;">OUR AIMS</h2>
-                                        <div>
+
+                                        <div style="text-align: justify">
+                                            @php
+                                                $data = $contents->firstWhere('path', 'home.aim');
+                                            @endphp
+                                            @if ($data)
+                                                <b>{!! $data->page_title !!}</b>
+                                                {!! $data->data !!}
+                                            @else
+                                                <p class="text-danger">No content found for home.about</p>
+                                            @endif
+                                        </div>
+                                        {{-- <div>
                                             UKR Publisher aims to provide a high-quality, open-access platform for the
                                             global research community. We strive to advance scholarly knowledge by
                                             publishing original, peer-reviewed research across multiple disciplines. Our
                                             goal is to foster academic collaboration, encourage innovation, and ensure free
                                             and immediate access to impactful research.
-                                        </div>
+                                        </div> --}}
 
 
 
@@ -169,14 +182,26 @@
                                 <div class="col-md-6">
                                     <div class="p-3 text-center">
                                         <h2 style="color: #1976d2; font-weight: bold;">SCOPES</h2>
-                                        <div>
+                                         <div style="text-align: justify">
+                                            @php
+                                                $data = $contents->firstWhere('path', 'home.scopes');
+                                            @endphp
+                                            @if ($data)
+                                                <b>{!! $data->page_title !!}</b>
+                                                {!! $data->data !!}
+                                            @else
+                                                <p class="text-danger">No content found for home.about</p>
+                                            @endif
+                                        </div>
+                                        
+                                        {{-- <div>
                                             UKR Publisher welcomes interdisciplinary research spanning science, technology,
                                             medicine, social sciences, humanities, and applied sciences. We publish
                                             theoretical, experimental, and review articles that contribute new insights and
                                             advancements to the academic community. Our journals prioritize originality,
                                             ethical research practices, and methodological rigor to support the global
                                             exchange of knowledge.
-                                        </div>
+                                        </div> --}}
 
 
 
@@ -189,6 +214,28 @@
                     </section>
 
 
+                    <section class="py-2">
+                        <div class="card-c">
+                            <div class="p-3">
+
+
+                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">OUR MISSION</h2>
+
+                                @php
+                                    $data = $contents->firstWhere('path', 'home.mission');
+                                @endphp
+                                @if ($data)
+                                    <b>{!! $data->page_title !!}</b>
+                                    {!! $data->data !!}
+                                @else
+                                    <p class="text-danger">No content found for home.vision</p>
+                                @endif
+
+
+
+                            </div>
+                        </div>
+                    </section>
                     <section class="py-2">
                         <div class="card-c">
                             <div class="p-3">
@@ -212,23 +259,155 @@
                         </div>
                     </section>
 
-                    {{-- <section class="py-2">
-                        <div class="card-c">
-                            <div class="p-3">
+                    
+                    
+                     <section class="py-2">
+                        <div class="card-c p-2">
+                            <div class="row">
 
-                                @php
-                                    $data = $contents->firstWhere('path', 'home.mission');
-                                @endphp
-                                @if ($data)
-                                    <b>{!! $data->page_title !!}</b>
-                                    {!! $data->data !!}
-                                @else
-                                    <p class="text-danger">No content found for home.mission</p>
-                                @endif
+                                <div class="col-md-4 mb-3">
+                                    <div class="bg-light p-3 card-c">
+                                        <div class="text-center">
+                                            <div style="font-size: 34px; color: #1976d2;">
+                                                {{-- <i class="fa-book-open-reader"></i> --}}
+                                                <i class="bi bi-people"></i>
+                                            </div>
+                                            <div> <b> Peer-Reviewed Journals </b> </div>
+                                            <div>
+                                               All submitted manuscripts undergo a rigorous peer-review process to ensure research quality and academic integrity.
+
+                                               <br>
+                                               <br>
+                                               <br>
+
+                                            </div>
+
+                                            {{-- <div class="mt-3 text-end">
+                                                <button class="btn btn-primary">Read More</button>
+                                            </div> --}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="bg-light p-3 card-c">
+                                        <div class="text-center">
+
+                                            <div style="font-size: 34px; color: #1976d2;">
+                                                <i class="bi bi-unlock"></i>
+                                            </div>
+                                            <div> <b> Open Access Publishing </b> </div>
+                                            <div>
+                                               Published articles are freely accessible to readers worldwide, increasing research visibility and impact.
+
+                                                <br>
+                                                <br>
+                                                <br>
+                                            </div>
+
+                                            {{-- <div class="mt-3 text-end">
+                                                <button class="btn btn-primary">Read More</button>
+                                            </div> --}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="bg-light p-3 card-c">
+                                        <div class="text-center">
+
+                                            <div style="font-size: 34px; color: #1976d2;">
+                                                <i class="bi bi-globe2"></i>
+                                            </div>
+                                            <div> <b> Global Research Visibility </b> </div>
+                                            <div>
+                                               Our journals provide international exposure for authors from different academic and professional backgrounds.
+                                                <br>
+                                                <br>
+                                                <br>
+                                            </div>
+
+                                            {{-- <div class="mt-3 text-end">
+                                                <button class="btn btn-primary">Read More</button>
+                                            </div> --}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="bg-light p-3 card-c">
+                                        <div class="text-center">
+                                            <div style="font-size: 34px; color: #1976d2;">
+                                                <i class="bi bi-lightning-charge"></i>
+                                            </div>
+                                            <div> <b> Fast Review Process</b> </div>
+                                            <div>
+                                               Efficient editorial and peer-review procedures ensure timely publication of accepted manuscripts.
+
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <br>
+                                            </div>
+
+                                            {{-- <div class="mt-3 text-end">
+                                                <button class="btn btn-primary">Read More</button>
+                                            </div> --}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="bg-light p-3 card-c">
+                                        <div class="text-center">
+                                             <div style="font-size: 34px; color: #1976d2;">
+                                                <i class="bi bi-shield-check"></i>
+                                            </div>
+                                            <div> <b>  Ethical Publishing Standards </b> </div>
+                                            <div>
+                                               IRGS Publisher follows internationally recognized ethical guidelines in academic publishing.
+
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <br>
+
+                                            </div>
+
+                                            {{-- <div class="mt-3 text-end">
+                                                <button class="btn btn-primary">Read More</button>
+                                            </div> --}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="bg-light p-3 card-c">
+                                        <div class="text-center">
+
+                                            <div style="font-size: 34px; color: #1976d2;">
+                                                <i class="bi bi-box-seam"></i>
+                                            </div>
+                                            <div> <b> Multidisciplinary Research Coverage </b> </div>
+                                            <div>
+                                               Our journals cover a wide range of academic disciplines including science, technology, medicine, agriculture, social sciences, and business.
+
+                                                <br>
+                                                <br>
+                                                <br>
+                                            </div>
+
+                                            {{-- <div class="mt-3 text-end">
+                                                <button class="btn btn-primary">Read More</button>
+                                            </div> --}}
+                                        </div>
+
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
-                    </section> --}}
+                    </section>
 
 
 
@@ -245,132 +424,7 @@
                     </section>
 
 
-                    <section class="py-2">
-                        <div class="card-c p-2">
-                            <div class="row">
-
-                                <div class="col-md-4 mb-3">
-                                    <div class="bg-light p-3 card-c">
-                                        <div class="">
-                                            <div> <b> About UKR Publisher </b> </div>
-                                            <div>
-                                                UKR Publisher (Universal Knowledge Research) is an international online
-                                                publisher established to accelerate the dissemination of high-quality
-                                                scholarly research. We publish peer-reviewed, open access journals across
-                                                disciplines, ensuring rigorous evaluation, editorial transparency, and
-                                                global reach.
-                                            </div>
-
-                                            <div class="mt-3 text-end">
-                                                <button class="btn btn-primary">Read More</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="bg-light p-3 card-c">
-                                        <div class="">
-                                            <div> <b> Author Guidelines </b> </div>
-                                            <div>
-                                                To ensure consistent presentation and fast processing, authors should follow
-                                                our formatting templates: structured abstract, clear sections, limited
-                                                references, and ethics statement. File types: DOCX or PDF; high-resolution
-                                                figures encouraged.
-                                                <br>
-                                                <br>
-                                                <br>
-                                            </div>
-
-                                            <div class="mt-3 text-end">
-                                                <button class="btn btn-primary">Read More</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="bg-light p-3 card-c">
-                                        <div class="">
-                                            <div> <b> Publication Ethics </b> </div>
-                                            <div>
-                                                UKR Publisher enforces strict policies on plagiarism and redundant
-                                                publication. Authors must disclose conflicts, funding, and approvals.
-                                                Suspected misconduct is investigated to maintain integrity and transparency.
-                                                <br>
-                                                <br>
-                                                <br>
-                                            </div>
-
-                                            <div class="mt-3 text-end">
-                                                <button class="btn btn-primary">Read More</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="bg-light p-3 card-c">
-                                        <div class="">
-                                            <div> <b> Peer Review Process</b> </div>
-                                            <div>
-                                                Double-blind peer review ensures impartial evaluation. Editors assign expert
-                                                reviewers providing constructive feedback and timely decisions to maintain
-                                                high academic standards.
-                                                <br>
-                                                <br>
-                                                <br>
-                                            </div>
-
-                                            <div class="mt-3 text-end">
-                                                <button class="btn btn-primary">Read More</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="bg-light p-3 card-c">
-                                        <div class="">
-                                            <div> <b> For Reviewers </b> </div>
-                                            <div>
-                                                Reviewers play a crucial role in maintaining research quality. They provide
-                                                thorough, unbiased evaluations, offer constructive feedback, and uphold
-                                                ethical standards. Reviewers are recognized for their contributions and
-                                                guided through clear review workflows.
-                                            </div>
-
-                                            <div class="mt-3 text-end">
-                                                <button class="btn btn-primary">Read More</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="bg-light p-3 card-c">
-                                        <div class="">
-                                            <div> <b> Copyrights </b> </div>
-                                            <div>
-                                                Articles are under Creative Commons licenses, allowing reuse with
-                                                attribution. Authors retain copyright; the publisher holds a non-exclusive
-                                                license for distribution.
-                                                <br>
-                                                <br>
-                                                <br>
-                                            </div>
-
-                                            <div class="mt-3 text-end">
-                                                <button class="btn btn-primary">Read More</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </section>
+                   
 
 
                 </div>

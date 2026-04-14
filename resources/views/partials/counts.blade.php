@@ -4,7 +4,7 @@
         <div class="col-md-4">
             <div class="bg-light p-3">
                 <div class="text-center">
-                    <h2 class="counter" data-count="7">0</h2>
+                    <h2 class="counter" data-count="{{ $countJournal }}">0</h2>
                     <div>Journals</div>
                 </div>
             </div>
@@ -13,8 +13,8 @@
         <div class="col-md-4">
             <div class="p-3">
                 <div class="text-center">
-                    <h2 class="counter" data-count="74">0</h2>
-                    <div>Editors & Reviewers</div>
+                    <h2 class="counter" data-count="{{ $countArticle }}">0</h2>
+                    <div>Total Articles</div>
                 </div>
             </div>
         </div>
@@ -22,8 +22,8 @@
         <div class="col-md-4">
             <div class="bg-light p-3">
                 <div class="text-center">
-                    <h2 class="counter" data-count="767">0</h2>
-                    <div>Articles Published</div>
+                    <h2 class="counter" data-count="{{ $countDownload }}">0</h2>
+                    <div>Downloads</div>
                 </div>
             </div>
         </div>

@@ -26,10 +26,23 @@ class IndexController extends Controller
         ->where('status', 1)
         ->get();
 
+        $indexings = DB::table('indexing')->where('active', 1)->get();
+
         $articles = DB::table('article')->where('status', 1)->limit(5)->get();
+        
+        $countJournal = journal::where('active', 1)->count('j_id');
+        $countArticle = articles::where('status', 1)->count('id');
+        $countDownload = articles::sum('count');
 
         // return $content;
-        return view('home', ['contents' => $content, 'articles'=>$articles]);
+        return view('home', [
+            'contents' => $content, 
+            'articles'=>$articles, 
+            'indexings'=>$indexings,
+            'countJournal'=>$countJournal,
+            'countArticle'=>$countArticle,
+            'countDownload'=>$countDownload
+            ]);
     }
 
     public function custom_pages($path)
