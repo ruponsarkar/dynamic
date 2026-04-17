@@ -94,6 +94,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('add-volume', [adminPanelController::class, 'addVolume']);
     Route::post('addVolume', [adminPanelController::class, 'addVolumeData']);
+    Route::post('update-volume', [adminPanelController::class, 'updateVolume']);
     Route::get('add-issues/{id}',  [adminPanelController::class, 'addIssues']);
     Route::post('update-issues',  [adminPanelController::class, 'updateIssues']);
     Route::get('delete-issues/{id}', [adminPanelController::class,'deleteissues']);

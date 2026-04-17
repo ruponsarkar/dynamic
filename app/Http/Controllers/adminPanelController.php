@@ -492,6 +492,26 @@ class adminPanelController extends Controller
         return redirect('add-volume')->with('message', 'Added');
     }
 
+    function updateVolume(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:volume,id',
+            'name' => 'required|string|max:255',
+            'year' => 'nullable|max:50',
+        ]);
+
+        $string = str_replace(' ', '-', $request->name);
+        $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
+        $volume = volumes::find($request->id);
+        $volume->name = strip_tags($request->name);
+        $volume->year = strip_tags($request->year);
+        $volume->slug = strip_tags($slug);
+        $volume->save();
+
+        return redirect('add-volume')->with('message', 'Volume updated successfully');
+    }
+
     function addIssues(Request $request, $id)
     {
 
