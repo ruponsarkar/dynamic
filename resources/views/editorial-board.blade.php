@@ -50,7 +50,15 @@
                                         <div class="card-c h-100 p-2 flex-bottom">
 
                                             <div>
-                                                <b>{{ $editor->type }} Editor</b>
+                                                {{-- <b>{{ $editor->type }} Editor</b> --}}
+                                                @if ($editor->type === 'Chief')
+                                                    <span class="badge bg-primary">Chief Editor</span>
+                                                @elseif ($editor->type === 'Associative')
+                                                    <span class="badge bg-secondary">Associate editor</span>
+                                                @else
+                                                    <b>{{ $editor->type }} Editor</b>
+                                                @endif
+
                                                 <hr class="p-0 m-0">
                                             </div>
 
@@ -74,6 +82,7 @@
                                                 </div>
                                                 <div>
                                                     <small>
+                                                        Profile link: 
                                                         <a href="{{ $editor->profile }}" target="_blank"
                                                             style="overflow-wrap: anywhere; word-break: break-word;">
                                                             {{ $editor->profile }}
