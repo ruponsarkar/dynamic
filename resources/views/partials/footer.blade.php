@@ -81,11 +81,11 @@
                         </u>
                     </div>
                     <div style="text-align: justify;">
-                        <i class="bi bi-user"></i> Address xxxxxx
+                        <i class="bi bi-user"></i> Address: 79 Podumoni, Near Podumoni L.P School, Podumoni Hatikhali Gaon, Nagaon, Murajhar Bazar, Assam, 782439
                         <br>
-                        <i class="bi bi-telephone"></i> +91 8638261097
+                        <i class="bi bi-telephone"></i> +91 9954958398
                         <br>
-                        <i class="bi bi-envelope"></i> 2Q5m0@example.com
+                        <i class="bi bi-envelope"></i> editors@gsasrpublisher.com
                         
                     </div>
                    

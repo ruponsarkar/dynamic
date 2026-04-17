@@ -13,16 +13,19 @@
                 <b>Author(s):</b>{{ $article->aname }}
             </div>
 
-            <div>
-                <b>DOI:</b>{{ $article->doi }}
-            </div>
+            @if ($article->doi != null && $article->doi != '' && $article->doi != 'undefined')
+                <div>
+                    <b>DOI:</b>{{ $article->doi }}
+                </div>
+            @endif
+
             <div>
                 <b>Page:</b>{{ $article->page }}
             </div>
 
             <div>
-                <a href="/article/{{ $article->slug}}">View</a>
-                 <a href="/assets/articles/{{$article->file}}">Download PDF</a>
+                <a href="/article/{{ $article->slug }}">View</a>
+                <a href="/assets/articles/{{ $article->file }}">Download PDF</a>
             </div>
 
 
