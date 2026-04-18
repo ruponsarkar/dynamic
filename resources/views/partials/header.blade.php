@@ -1,8 +1,8 @@
 <div>
     <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
         <div class="text-white " style="font-size: small">
-            <i class="bi bi-telephone"></i> +91 8638261097 &nbsp; &nbsp;
-            <i class="bi bi-envelope"></i> 2Q5m0@example.com
+            <i class="bi bi-telephone"></i> +965 66089419, +91 9954958398 &nbsp; &nbsp;
+            <i class="bi bi-envelope"></i> editors@gsasrpublisher.com
         </div>
     </div>
 
