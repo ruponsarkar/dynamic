@@ -2,6 +2,11 @@
     @foreach ($articles as $article)
         <div class="card-c p-3 mb-2">
 
+            <div class="text-primary ">
+                <b> {{ $article->article_type }} | {{ \Carbon\Carbon::parse($article->published_date)->format('F d, Y') }} </b>
+                <hr class="m-0">
+            </div>
+
 
 
             <div>

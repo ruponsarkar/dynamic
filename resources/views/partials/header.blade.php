@@ -1,8 +1,21 @@
+<style>
+    .nav-item {
+        border-right: 1px solid #f2f2f2;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .navbar{
+        padding-top: 0;
+        padding-bottom : 0;
+    }
+</style>
+
+
 <div>
     <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
         <div class="text-white " style="font-size: small">
             <i class="bi bi-telephone"></i> +965 66089419, +91 9954958398 &nbsp; &nbsp;
-            <i class="bi bi-envelope"></i> editors@gsasrpublisher.com
+            <i class="bi bi-envelope"></i> submit@gsasrpublisher.com
         </div>
     </div>
 

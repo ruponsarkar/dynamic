@@ -41,6 +41,17 @@
                                     <label for="name" class="form-label">Article Name</label>
                                     <input type="text" name="name" id="" class="form-control">
                                 </div>
+                                <div class="col-md-12 pt-4">
+                                    <label for="name" class="form-label">Article Type</label>
+                                    
+                                    <select name="article_type" class="form-control" id="">
+                                        <option value="Original Research Article">Original Research Article </option>
+                                        <option value="Review Article">Review Article</option>
+                                        <option value="Case Report">Case Report</option>
+                                        <option value="Short Communication">Short Communication </option>
+                                        <option value="Letter to editor">Letter to editor</option>
+                                    </select>
+                                </div>
 
 
                                 <div class="col-md-12 pt-4">

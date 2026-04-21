@@ -621,6 +621,7 @@ class adminPanelController extends Controller
 
         $articles = new articles;
         $articles->name = $request->name;
+        $articles->article_type = $request->article_type;
 
         $articles->sr_no = $request->sr_no;
         $articles->cited_by = $request->cited_by;
@@ -693,6 +694,7 @@ class adminPanelController extends Controller
         $updateArticle = articles::find($id);
         $updateArticle->name = strip_tags($request->name);
         $updateArticle->aname = strip_tags($request->aname);
+        $updateArticle->article_type = strip_tags($request->article_type);
 
 
         $updateArticle->sr_no = $request->sr_no;
