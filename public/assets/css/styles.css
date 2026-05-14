@@ -1508,7 +1508,8 @@ Contact Form
 }
 
 .h-box{
-  background-color: black;
+  /* background-color: black; */
+  background-color: #031e87;
   text-align: center;
   color: white;
   border-top-right-radius: 4px;

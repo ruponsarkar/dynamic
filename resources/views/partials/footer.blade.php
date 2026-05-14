@@ -55,6 +55,9 @@
                         <a href="/manuscript">Submit Manuscript</a>
                     </div>
                     <div>
+                        <a href="/privacy-policy">Privacy Policy</a>
+                    </div>
+                    <div>
                         <a href="/contact-us">Contact Us</a>
                     </div>
                 </div>

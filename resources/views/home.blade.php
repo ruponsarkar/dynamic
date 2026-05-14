@@ -129,7 +129,7 @@
                             <div class="p-3 text-center">
 
 
-                                <h2 style="color: #1976d2; font-weight: bold;">Know → Who We Are?</h2>
+                                <h2 style="color: #1976d2; font-weight: bold;">About IRGS Publisher</h2>
                                 <div>
                                     @php
                                         $data = $contents->firstWhere('path', 'home.about');
@@ -151,7 +151,7 @@
                     <section class="py-2">
                         <div class="card-c py-4">
                             <div class="row">
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="p-3 text-center">
                                         <h2 style="color: #1976d2; font-weight: bold;">OUR AIMS</h2>
 
@@ -166,23 +166,13 @@
                                                 <p class="text-danger">No content found for home.about</p>
                                             @endif
                                         </div>
-                                        {{-- <div>
-                                            UKR Publisher aims to provide a high-quality, open-access platform for the
-                                            global research community. We strive to advance scholarly knowledge by
-                                            publishing original, peer-reviewed research across multiple disciplines. Our
-                                            goal is to foster academic collaboration, encourage innovation, and ensure free
-                                            and immediate access to impactful research.
-                                        </div> --}}
-
-
-
                                     </div>
 
-                                </div>
-                                <div class="col-md-6">
+                                </div> --}}
+                                <div class="col-md-12">
                                     <div class="p-3 text-center">
-                                        <h2 style="color: #1976d2; font-weight: bold;">SCOPES</h2>
-                                         <div style="text-align: justify">
+                                        <h2 style="color: #1976d2; font-weight: bold;">Our Aim & Scopes</h2>
+                                        <div style="text-align: justify">
                                             @php
                                                 $data = $contents->firstWhere('path', 'home.scopes');
                                             @endphp
@@ -193,7 +183,7 @@
                                                 <p class="text-danger">No content found for home.about</p>
                                             @endif
                                         </div>
-                                        
+
                                         {{-- <div>
                                             UKR Publisher welcomes interdisciplinary research spanning science, technology,
                                             medicine, social sciences, humanities, and applied sciences. We publish
@@ -219,7 +209,7 @@
                             <div class="p-3">
 
 
-                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">OUR MISSION</h2>
+                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">Our Mission</h2>
 
                                 @php
                                     $data = $contents->firstWhere('path', 'home.mission');
@@ -241,7 +231,7 @@
                             <div class="p-3">
 
 
-                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">OUR VISION</h2>
+                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">Our Vision</h2>
 
                                 @php
                                     $data = $contents->firstWhere('path', 'home.vision');
@@ -259,10 +249,27 @@
                         </div>
                     </section>
 
-                    
-                    
-                     <section class="py-2">
+
+
+                    <section class="py-2">
                         <div class="card-c p-2">
+
+                            <div class="p-3">
+                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">Why Publish With IRGS
+                                    Publisher</h2>
+
+                                <div
+                                    style="font-size:11.0pt;line-height: 115%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+                                        mso-fareast-theme-font:minor-fareast;mso-ansi-language:EN-US;mso-fareast-language:
+                                        EN-US;mso-bidi-language:AR-SA">
+                                    IRGS Publisher provides a professional and transparent platform for researchers and
+                                    academicians to publish their scholarly work. Our journals aim to promote high-quality
+                                    research and global knowledge sharing through open access publishing.
+                                </div>
+
+                            </div>
+
+
                             <div class="row">
 
                                 <div class="col-md-4 mb-3">
@@ -274,11 +281,12 @@
                                             </div>
                                             <div> <b> Peer-Reviewed Journals </b> </div>
                                             <div>
-                                               All submitted manuscripts undergo a rigorous peer-review process to ensure research quality and academic integrity.
+                                                All submitted manuscripts undergo a rigorous peer-review process to ensure
+                                                research quality and academic integrity.
 
-                                               <br>
-                                               <br>
-                                               <br>
+                                                <br>
+                                                <br>
+                                                <br>
 
                                             </div>
 
@@ -298,7 +306,8 @@
                                             </div>
                                             <div> <b> Open Access Publishing </b> </div>
                                             <div>
-                                               Published articles are freely accessible to readers worldwide, increasing research visibility and impact.
+                                                Published articles are freely accessible to readers worldwide, increasing
+                                                research visibility and impact.
 
                                                 <br>
                                                 <br>
@@ -321,7 +330,8 @@
                                             </div>
                                             <div> <b> Global Research Visibility </b> </div>
                                             <div>
-                                               Our journals provide international exposure for authors from different academic and professional backgrounds.
+                                                Our journals provide international exposure for authors from different
+                                                academic and professional backgrounds.
                                                 <br>
                                                 <br>
                                                 <br>
@@ -342,7 +352,8 @@
                                             </div>
                                             <div> <b> Fast Review Process</b> </div>
                                             <div>
-                                               Efficient editorial and peer-review procedures ensure timely publication of accepted manuscripts.
+                                                Efficient editorial and peer-review procedures ensure timely publication of
+                                                accepted manuscripts.
 
                                                 <br>
                                                 <br>
@@ -360,12 +371,13 @@
                                 <div class="col-md-4 mb-3">
                                     <div class="bg-light p-3 card-c">
                                         <div class="text-center">
-                                             <div style="font-size: 34px; color: #1976d2;">
+                                            <div style="font-size: 34px; color: #1976d2;">
                                                 <i class="bi bi-shield-check"></i>
                                             </div>
-                                            <div> <b>  Ethical Publishing Standards </b> </div>
+                                            <div> <b> Ethical Publishing Standards </b> </div>
                                             <div>
-                                               IRGS Publisher follows internationally recognized ethical guidelines in academic publishing.
+                                                IRGS Publisher follows internationally recognized ethical guidelines in
+                                                academic publishing.
 
                                                 <br>
                                                 <br>
@@ -390,7 +402,8 @@
                                             </div>
                                             <div> <b> Multidisciplinary Research Coverage </b> </div>
                                             <div>
-                                               Our journals cover a wide range of academic disciplines including science, technology, medicine, agriculture, social sciences, and business.
+                                                Our journals cover a wide range of academic disciplines including science,
+                                                technology, medicine, agriculture, social sciences, and business.
 
                                                 <br>
                                                 <br>
@@ -420,11 +433,11 @@
                     </section>
 
                     <section class="py-2">
-                        @include('partials.counts')
+                        {{-- @include('partials.counts') --}}
                     </section>
 
 
-                   
+
 
 
                 </div>
