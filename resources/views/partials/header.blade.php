@@ -271,8 +271,8 @@
                             href="/archives">ARCHIVES</a></li> --}}
                 {{-- <li class="nav-item"><a class="nav-link {{ request()->is('conference') ? 'active' : '' }}"
                             href="/conference">CONFERENCE PROCEEDING</a></li> --}}
-                <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
-                        href="#">PAYMENTS</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->is('payments') ? 'active' : '' }}"
+                        href="/payments">PAYMENTS</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
                         href="/contact-us">CONTACT US</a></li>
 

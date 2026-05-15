@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\adminPanelController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\PaypalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,10 @@ Route::get('/', [IndexController::class, 'index']);
 
 
 Route::get('manuscript', [IndexController::class, 'manuscript']);
+Route::get('payments', [IndexController::class, 'payments']);
 Route::post('submit_manuscript', [FormController::class, 'submit_manuscript']);
+Route::post('paypal/orders', [PaypalController::class, 'createOrder']);
+Route::post('paypal/orders/{paypalOrderId}/capture', [PaypalController::class, 'captureOrder']);
 Route::get('archives/{slug}', [IndexController::class, 'archives']);
 Route::get('archives/{slug}/{v_slug}/{i_slug}', [IndexController::class, 'articles']);
 Route::get('journals', [IndexController::class, 'allJournals']);

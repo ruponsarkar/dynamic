@@ -22,7 +22,7 @@
                 <a href="/manuscript" class="btn btn-primary w-100">Submit Manuscript</a>
             </div>
             <div class="p-2">
-                <a href="#" class="btn btn-primary w-100">Payments</a>
+                <a href="/payments" class="btn btn-primary w-100">Payments</a>
             </div>
             <div class="p-2">
                 <a href="contact-us" class="btn btn-primary w-100">Contact Us</a>

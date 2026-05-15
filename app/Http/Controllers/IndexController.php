@@ -67,6 +67,14 @@ class IndexController extends Controller
         return view('manuscript', ['journals' => $journals]);
     }
 
+    function payments()
+    {
+        return view('payments', [
+            'paymentConfig' => config('payments'),
+            'paypalConfig' => config('services.paypal'),
+        ]);
+    }
+
 
     function archives($slug)
     {
