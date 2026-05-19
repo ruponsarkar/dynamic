@@ -36,6 +36,7 @@ Route::get('journals', [IndexController::class, 'allJournals']);
 Route::get('journal/{slug}', [IndexController::class, 'journal']);
 Route::get('article/{slug}', [IndexController::class, 'article']);
 Route::get('indexings/{slug}', [IndexController::class, 'indexings']);
+Route::get('certificates/{slug}', [IndexController::class, 'certificates']);
 Route::get('current-issue', [IndexController::class, 'currentIssue']);
 
 
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', [adminPanelController::class, 'login']);
     Route::get('admin_index', [adminPanelController::class, 'adminIndex']);
     Route::get('add-indexing' , [adminPanelController::class,'addIndexingPage']);
+    Route::get('add-certificate' , [adminPanelController::class,'addCertificatePage']);
 
     Route::get('all-manuscript', [adminPanelController::class, 'allManuscript']);
     Route::get('receive-editors', [adminPanelController::class, 'allEditorsRequest']);
@@ -79,6 +81,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('indexingList/{id}', [adminPanelController::class, 'indexingList']);
     Route::post('UpdateIndexing', [adminPanelController::class, 'UpdateIndexing']);
     Route::get('DeleteIndexing/{id}', [adminPanelController::class, 'DeleteIndexing']);
+    Route::post('addCertificate', [adminPanelController::class, 'addCertificate']);
+    Route::get('certificateList/{id}', [adminPanelController::class, 'certificateList']);
+    Route::post('UpdateCertificate', [adminPanelController::class, 'UpdateCertificate']);
+    Route::get('DeleteCertificate/{id}', [adminPanelController::class, 'DeleteCertificate']);
     
     Route::get('add-conference', [adminPanelController::class,'addconference']);
     

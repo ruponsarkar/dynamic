@@ -22,6 +22,9 @@
                 <a href="/indexings/{{ $journal->slug }}" class="btn btn-primary w-100">Indexing</a>
             </div>
             <div class="p-2">
+                <a href="/certificates/{{ $journal->slug }}" class="btn btn-primary w-100">Certificates</a>
+            </div>
+            <div class="p-2">
                 <a href="/manuscript" class="btn btn-primary w-100">Submit Manuscript</a>
             </div>
             <div class="p-2">

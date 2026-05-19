@@ -214,6 +214,25 @@
                         </ul>
                     </li>
 
+                    <li
+                        class="nav-item has-treeview {{ request()->is('add-certificate') || request()->is('certificateList/*') ? 'menu-is-opening menu-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-certificate"></i>
+                            <p>
+                                Certificate
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ URL('add-certificate') }}"
+                                    class="nav-link {{ request()->is('add-certificate') || request()->is('certificateList/*') ? 'active' : '' }}">
+                                    <p class="p-4"><i class="fas fa-arrow-right"></i> Add Certificate</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
 
                         {{-- <li class="nav-item">
               <a href="{{URL('home-article')}}" class="nav-link {{ request()->is('home-article') ? 'active' : ''}}">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\manuscripts;
 use App\Models\journal;
 use App\Models\indexings;
+use App\Models\certificates;
 use App\Models\admins;
 use App\Models\reviewer;
 use App\Models\editor_data;
@@ -273,6 +274,40 @@ class adminPanelController extends Controller
         $indexing->save();
 
         $request->photo->move(base_path('public/assets/indexing/img'), $photo);
+
+        return back()->with('message', 'Your request Submitted successfully');
+    }
+
+    function addCertificatePage()
+    {
+        $journals = journal::get();
+        $certificates = certificates::join("journals", "journals.j_id", "=", "certificates.j_id")->get();
+        return view('adminpanel.SelectCertificate', ['journals' => $journals, 'certificates' => $certificates]);
+    }
+
+    function addCertificate(Request $request)
+    {
+        $request->validate([
+            'journal' => 'required',
+            'title' => 'nullable|max:255',
+            'photo' => 'required|mimes:jpeg,jpg,png,webp',
+        ]);
+
+        $photo = time() . '.' . $request->photo->getClientOriginalName();
+        $directory = base_path('public/assets/certificates/img');
+
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $certificate = new certificates;
+        $certificate->j_id = strip_tags($request->journal);
+        $certificate->title = strip_tags($request->title);
+        $certificate->img = strip_tags($photo);
+        $certificate->ip_address = \Request::ip();
+        $certificate->save();
+
+        $request->photo->move($directory, $photo);
 
         return back()->with('message', 'Your request Submitted successfully');
     }
@@ -811,6 +846,13 @@ class adminPanelController extends Controller
         // return $indexing;
     }
 
+    function certificateList($id)
+    {
+        $certificates = certificates::where('j_id', $id)->where('active', 1)->get();
+        $journals = journal::where('j_id', $id)->where('active', 1)->get();
+        return view('adminpanel.certificates', ['journals' => $journals, 'certificates' => $certificates]);
+    }
+
     function UpdateIndexing(Request $request)
     {
 
@@ -842,6 +884,46 @@ class adminPanelController extends Controller
     function DeleteIndexing($id)
     {
         $indexing = indexings::find($id)->update([
+            'active' => 0
+        ]);
+        return redirect()->back()->with('message', 'Deleted');
+    }
+
+    function UpdateCertificate(Request $request)
+    {
+        if ($request->title !== null) {
+            certificates::find($request->id)->update([
+                'title' => strip_tags($request->title)
+            ]);
+
+            return redirect()->back()->with('message', 'Updated');
+        }
+
+        if ($request->photo) {
+            $request->validate([
+                'photo' => 'required|mimes:jpeg,jpg,png,webp',
+            ]);
+
+            $photo = time() . '.' . $request->photo->extension();
+            $directory = base_path('public/assets/certificates/img');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            certificates::find($request->id)->update([
+                'img' => $photo
+            ]);
+
+            $request->photo->move($directory, $photo);
+
+            return redirect()->back()->with('message', 'Updated');
+        }
+    }
+
+    function DeleteCertificate($id)
+    {
+        certificates::find($id)->update([
             'active' => 0
         ]);
         return redirect()->back()->with('message', 'Deleted');

@@ -237,6 +237,33 @@
                             </div>
                         </div>
                     </section>
+
+                    <section class="jd-section mt-3">
+                        <h2 class="jd-section-head">Certificates</h2>
+                        <div class="jd-section-body">
+                            <div class="row g-3">
+                                @forelse ($certificates as $certificate)
+                                    <div class="col-md-4">
+                                        <div class="jd-articles h-100">
+                                            <img class="img-fluid rounded"
+                                                src="{{ url('assets/certificates/img/' . $certificate->img) }}"
+                                                alt="{{ $certificate->title ?: 'Certificate' }}"
+                                                style="width: 100%; object-fit: contain;">
+                                            @if ($certificate->title)
+                                                <div class="text-center mt-2">
+                                                    <small><b>{{ $certificate->title }}</b></small>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="col-12">
+                                        <p class="mb-0">No certificates available for this journal.</p>
+                                    </div>
+                                @endforelse
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
