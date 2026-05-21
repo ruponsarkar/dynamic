@@ -6,6 +6,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\adminPanelController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\RazorpayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::get('payments', [IndexController::class, 'payments']);
 Route::post('submit_manuscript', [FormController::class, 'submit_manuscript']);
 Route::post('paypal/orders', [PaypalController::class, 'createOrder']);
 Route::post('paypal/orders/{paypalOrderId}/capture', [PaypalController::class, 'captureOrder']);
+Route::post('razorpay/orders', [RazorpayController::class, 'createOrder']);
+Route::post('razorpay/verify', [RazorpayController::class, 'verifyPayment']);
 Route::get('archives/{slug}', [IndexController::class, 'archives']);
 Route::get('archives/{slug}/{v_slug}/{i_slug}', [IndexController::class, 'articles']);
 Route::get('journals', [IndexController::class, 'allJournals']);

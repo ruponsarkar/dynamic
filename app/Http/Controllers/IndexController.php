@@ -74,6 +74,7 @@ class IndexController extends Controller
         return view('payments', [
             'paymentConfig' => config('payments'),
             'paypalConfig' => config('services.paypal'),
+            'razorpayConfig' => config('services.razorpay'),
         ]);
     }
 

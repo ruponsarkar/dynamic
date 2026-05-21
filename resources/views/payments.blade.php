@@ -75,6 +75,10 @@
             background: linear-gradient(135deg, #7c3aed, #2563eb);
         }
 
+        .payment-icon-razorpay {
+            background: linear-gradient(135deg, #1a4fff, #4f7cff);
+        }
+
         .payment-qr-box {
             min-height: 240px;
             border: 2px dashed #b7cdfd;
@@ -187,11 +191,32 @@
             color: #0f172a;
         }
 
+        .payment-input {
+            border: 1px solid #cfe0ff;
+            border-radius: 14px;
+            padding: 12px 14px;
+            background: #fff;
+        }
+
+        .payment-action {
+            border: 0;
+            border-radius: 14px;
+            padding: 13px 18px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #1a4fff, #0d3b8e);
+            width: 100%;
+        }
+
+        .payment-action:disabled {
+            opacity: 0.65;
+        }
+
         #paypal-button-container {
             min-height: 46px;
         }
 
-        .paypal-status {
+        .gateway-status {
             display: none;
             margin-top: 14px;
             border-radius: 12px;
@@ -199,16 +224,22 @@
             font-weight: 600;
         }
 
-        .paypal-status.is-success {
+        .gateway-status.is-success {
             display: block;
             background: #eafaf0;
             color: #166534;
         }
 
-        .paypal-status.is-error {
+        .gateway-status.is-error {
             display: block;
             background: #fef2f2;
             color: #b91c1c;
+        }
+
+        .gateway-status.is-info {
+            display: block;
+            background: #eff6ff;
+            color: #1d4ed8;
         }
 
         @media (max-width: 767px) {
@@ -276,6 +307,69 @@
                         <div class="col-lg-6">
                             <div class="payment-card">
                                 <div class="payment-card-title">
+                                    <span class="payment-card-icon payment-icon-razorpay">
+                                        <i class="bi bi-phone"></i>
+                                    </span>
+                                    <span>Pay Online with Razorpay</span>
+                                </div>
+
+                                <p class="text-muted">
+                                    Indian authors can also pay securely using Razorpay with UPI, cards, net banking, and wallets.
+                                </p>
+
+                                <div class="payment-select mb-3">
+                                    <label class="payment-select-label" for="razorpay-currency-option">Select currency</label>
+                                    <select class="form-select" id="razorpay-currency-option">
+                                        @foreach ($paymentConfig['razorpay_supported_currencies'] ?? [] as $currencyOption)
+                                            <option value="{{ $currencyOption['key'] }}" @selected(($currencyOption['key'] ?? '') === 'USD')>
+                                                {{ $currencyOption['label'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="payment-select mb-3">
+                                    <label class="payment-select-label" for="razorpay-amount-option">Select payment amount</label>
+                                    <select class="form-select" id="razorpay-amount-option">
+                                        @foreach (($paymentConfig['razorpay_amount_options']['USD'] ?? []) as $option)
+                                            <option value="{{ $option['key'] }}">
+                                                {{ $option['label'] }} - {{ $option['amount'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="small text-muted mt-2" id="razorpay-amount-description">
+                                        {{ $paymentConfig['razorpay_amount_options']['USD'][0]['description'] ?? '' }}
+                                    </div>
+                                </div>
+
+                                @if (!empty($razorpayConfig['key_id']))
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control payment-input" id="razorpay-name" placeholder="Full name">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="email" class="form-control payment-input" id="razorpay-email" placeholder="Email address">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control payment-input" id="razorpay-phone" placeholder="Phone number">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="button" class="payment-action" id="razorpay-pay-button">Pay with Razorpay</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="razorpay-status" class="gateway-status"></div>
+                                @else
+                                    <div class="payment-note">
+                                        Add <code>RAZORPAY_KEY_ID</code> and <code>RAZORPAY_KEY_SECRET</code> in your environment to enable the live Razorpay checkout on this page.
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="payment-card">
+                                <div class="payment-card-title">
                                     <span class="payment-card-icon payment-icon-paypal">
                                         <i class="bi bi-globe2"></i>
                                     </span>
@@ -302,7 +396,7 @@
 
                                 @if (!empty($paypalConfig['client_id']))
                                     <div id="paypal-button-container"></div>
-                                    <div id="paypal-status" class="paypal-status"></div>
+                                    <div id="paypal-status" class="gateway-status"></div>
                                 @else
                                     <div class="payment-note">
                                         Add <code>PAYPAL_CLIENT_ID</code> and <code>PAYPAL_CLIENT_SECRET</code> in your environment to enable the live PayPal button on this page.
@@ -410,6 +504,204 @@
         </div>
     </div>
 
+    <script>
+        function updateGatewayStatus(element, message, type) {
+            if (!element) {
+                return;
+            }
+
+            element.textContent = message;
+            element.className = 'gateway-status' + (type ? ' ' + type : '');
+        }
+    </script>
+
+    @if (!empty($razorpayConfig['key_id']))
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script>
+            const razorpayStatus = document.getElementById('razorpay-status');
+            const razorpayCurrencySelect = document.getElementById('razorpay-currency-option');
+            const razorpayAmountSelect = document.getElementById('razorpay-amount-option');
+            const razorpayAmountDescription = document.getElementById('razorpay-amount-description');
+            const razorpayAmountOptions = @json($paymentConfig['razorpay_amount_options'] ?? []);
+            const razorpaySupportedCurrencies = @json($paymentConfig['razorpay_supported_currencies'] ?? []);
+            const razorpayPayButton = document.getElementById('razorpay-pay-button');
+            const razorpayName = document.getElementById('razorpay-name');
+            const razorpayEmail = document.getElementById('razorpay-email');
+            const razorpayPhone = document.getElementById('razorpay-phone');
+
+            function getSelectedRazorpayCurrency() {
+                if (!razorpayCurrencySelect) {
+                    return 'USD';
+                }
+
+                return razorpayCurrencySelect.value || 'USD';
+            }
+
+            function getSelectedRazorpayCurrencyLabel() {
+                const selectedCurrency = razorpaySupportedCurrencies.find(function(currencyOption) {
+                    return currencyOption.key === getSelectedRazorpayCurrency();
+                });
+
+                return selectedCurrency && selectedCurrency.symbol ? selectedCurrency.symbol : getSelectedRazorpayCurrency();
+            }
+
+            function getRazorpayOptionsForCurrency() {
+                return razorpayAmountOptions[getSelectedRazorpayCurrency()] || [];
+            }
+
+            function rebuildRazorpayAmountOptions() {
+                if (!razorpayAmountSelect) {
+                    return;
+                }
+
+                const options = getRazorpayOptionsForCurrency();
+                razorpayAmountSelect.innerHTML = '';
+
+                options.forEach(function(option) {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option.key;
+                    optionElement.textContent = option.label + ' - ' + option.amount;
+                    razorpayAmountSelect.appendChild(optionElement);
+                });
+            }
+
+            function updateRazorpayDescription() {
+                if (!razorpayAmountSelect || !razorpayAmountDescription) {
+                    return;
+                }
+
+                const selectedOption = getRazorpayOptionsForCurrency().find(function(option) {
+                    return option.key === razorpayAmountSelect.value;
+                });
+
+                if (!selectedOption) {
+                    razorpayAmountDescription.textContent = '';
+                    return;
+                }
+
+                const currencyLabel = getSelectedRazorpayCurrencyLabel();
+                const description = selectedOption.description ? selectedOption.description + '. ' : '';
+                razorpayAmountDescription.textContent = description + 'Selected amount: ' + currencyLabel + ' ' + selectedOption.amount;
+            }
+
+            function setRazorpayButtonLoading(isLoading) {
+                if (!razorpayPayButton) {
+                    return;
+                }
+
+                razorpayPayButton.disabled = isLoading;
+                razorpayPayButton.textContent = isLoading ? 'Processing...' : 'Pay with Razorpay';
+            }
+
+            if (razorpayPayButton) {
+                razorpayPayButton.addEventListener('click', function() {
+                    updateGatewayStatus(razorpayStatus, '', '');
+
+                    if (!razorpayName.value.trim() || !razorpayEmail.value.trim()) {
+                        updateGatewayStatus(razorpayStatus, 'Name and email are required to continue with Razorpay.', 'is-error');
+                        return;
+                    }
+
+                    setRazorpayButtonLoading(true);
+                    updateGatewayStatus(razorpayStatus, 'Creating Razorpay order...', 'is-info');
+
+                    fetch('/razorpay/orders', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            amount_option: razorpayAmountSelect ? razorpayAmountSelect.value : null,
+                            currency: getSelectedRazorpayCurrency(),
+                            name: razorpayName.value.trim(),
+                            email: razorpayEmail.value.trim(),
+                            phone: razorpayPhone ? razorpayPhone.value.trim() : ''
+                        })
+                    }).then(function(response) {
+                        return response.json().then(function(payload) {
+                            if (!response.ok) {
+                                throw new Error(payload.message || 'Unable to create Razorpay order.');
+                            }
+
+                            return payload;
+                        });
+                    }).then(function(payload) {
+                        const razorpay = new Razorpay({
+                            key: '{{ $razorpayConfig['key_id'] }}',
+                            amount: payload.amount,
+                            currency: payload.currency,
+                            name: payload.name,
+                            description: payload.description,
+                            order_id: payload.id,
+                            handler: function(response) {
+                                updateGatewayStatus(razorpayStatus, 'Verifying Razorpay payment...', 'is-info');
+
+                                fetch('/razorpay/verify', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'Accept': 'application/json'
+                                    },
+                                    body: JSON.stringify(response)
+                                }).then(function(verifyResponse) {
+                                    return verifyResponse.json().then(function(verifyPayload) {
+                                        if (!verifyResponse.ok) {
+                                            throw new Error(verifyPayload.message || 'Unable to verify Razorpay payment.');
+                                        }
+
+                                        return verifyPayload;
+                                    });
+                                }).then(function(verifyPayload) {
+                                    const paymentId = verifyPayload.order && verifyPayload.order.razorpay_payment_id ? verifyPayload.order.razorpay_payment_id : '';
+                                    const message = 'Payment completed successfully' + (paymentId ? ' (Payment ID: ' + paymentId + ')' : '.');
+                                    updateGatewayStatus(razorpayStatus, message, 'is-success');
+                                }).catch(function(error) {
+                                    updateGatewayStatus(razorpayStatus, error && error.message ? error.message : 'Razorpay payment verification failed.', 'is-error');
+                                }).finally(function() {
+                                    setRazorpayButtonLoading(false);
+                                });
+                            },
+                            prefill: payload.prefill || {},
+                            theme: {
+                                color: '{{ $razorpayConfig['theme_color'] ?? '#0d3b8e' }}'
+                            },
+                            modal: {
+                                ondismiss: function() {
+                                    updateGatewayStatus(razorpayStatus, 'Razorpay checkout was closed before payment completion.', 'is-error');
+                                    setRazorpayButtonLoading(false);
+                                }
+                            }
+                        });
+
+                        razorpay.open();
+                    }).catch(function(error) {
+                        updateGatewayStatus(razorpayStatus, error && error.message ? error.message : 'Razorpay payment could not be started. Please try again.', 'is-error');
+                        setRazorpayButtonLoading(false);
+                    });
+                });
+            }
+
+            updateRazorpayDescription();
+
+            if (razorpayAmountSelect) {
+                razorpayAmountSelect.addEventListener('change', updateRazorpayDescription);
+            }
+
+            if (razorpayCurrencySelect) {
+                razorpayCurrencySelect.addEventListener('change', function() {
+                    rebuildRazorpayAmountOptions();
+                    updateRazorpayDescription();
+                });
+            }
+
+            rebuildRazorpayAmountOptions();
+            updateRazorpayDescription();
+        </script>
+    @endif
+
     @if (!empty($paypalConfig['client_id']))
         <script src="https://www.paypal.com/sdk/js?client-id={{ urlencode($paypalConfig['client_id']) }}&currency={{ urlencode($paypalConfig['currency'] ?? 'USD') }}&intent={{ urlencode(strtolower($paypalConfig['intent'] ?? 'CAPTURE')) }}"></script>
         <script>
@@ -417,15 +709,6 @@
             const amountSelect = document.getElementById('paypal-amount-option');
             const amountDescription = document.getElementById('paypal-amount-description');
             const amountOptions = @json($paymentConfig['paypal_amount_options'] ?? []);
-
-            function updatePaypalStatus(message, type) {
-                if (!paypalStatus) {
-                    return;
-                }
-
-                paypalStatus.textContent = message;
-                paypalStatus.className = 'paypal-status ' + type;
-            }
 
             function updateAmountDescription() {
                 if (!amountSelect || !amountDescription) {
@@ -448,7 +731,7 @@
                         label: 'paypal'
                     },
                     createOrder: function() {
-                        updatePaypalStatus('', '');
+                        updateGatewayStatus(paypalStatus, '', '');
 
                         return fetch('/paypal/orders', {
                             method: 'POST',
@@ -486,12 +769,12 @@
                                 const payerName = payload.order && payload.order.payer_name ? payload.order.payer_name : 'Customer';
                                 const transactionId = payload.order && payload.order.paypal_capture_id ? payload.order.paypal_capture_id : '';
                                 const message = 'Payment completed successfully for ' + payerName + (transactionId ? ' (Transaction ID: ' + transactionId + ')' : '.');
-                                updatePaypalStatus(message, 'is-success');
+                                updateGatewayStatus(paypalStatus, message, 'is-success');
                             });
                         });
                     },
                     onError: function(error) {
-                        updatePaypalStatus(error && error.message ? error.message : 'PayPal payment could not be completed. Please try again.', 'is-error');
+                        updateGatewayStatus(paypalStatus, error && error.message ? error.message : 'PayPal payment could not be completed. Please try again.', 'is-error');
                     }
                 }).render('#paypal-button-container');
             }
