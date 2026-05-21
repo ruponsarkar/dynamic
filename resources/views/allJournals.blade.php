@@ -68,7 +68,7 @@
                                                 </div>
 
                                                 <div>
-                                                    <button class="btn btn-secondary btn-sm">View Journal</button>
+                                                    <button class="btn btn-primary btn-sm">View Journal</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -58,6 +58,15 @@
                         <a href="/privacy-policy">Privacy Policy</a>
                     </div>
                     <div>
+                        <a href="/terms-and-conditions">Terms and Conditions</a>
+                    </div>
+                    <div>
+                        <a href="/refund-policy">Refund Policy</a>
+                    </div>
+                    <div>
+                        <a href="/cancellation-policy">Cancellation Policy</a>
+                    </div>
+                    <div>
                         <a href="/contact-us">Contact Us</a>
                     </div>
                 </div>
@@ -95,6 +104,7 @@
                 </div>
             </div>
         </div>
+        <br>
     </div>
 
 </div>
