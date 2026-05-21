@@ -121,6 +121,9 @@ class adminPanelController extends Controller
             'abbr' => 'max:1000',
             'issn' => 'max:1000',
             'frequency' => 'max:1000',
+            'subject' => 'nullable|max:1000',
+            'format' => 'nullable|max:1000',
+            'starting_year' => 'nullable|max:1000',
             'language' => 'max:1000',
             'chief' => 'max:1000',
             'publisher' => 'max:1000',
@@ -147,6 +150,9 @@ class adminPanelController extends Controller
         $journal->abbr_title = strip_tags($request->abbr);
         $journal->issn = strip_tags($request->issn);
         $journal->frequency = strip_tags($request->frequency);
+        $journal->subject = strip_tags($request->subject);
+        $journal->format = strip_tags($request->format);
+        $journal->starting_year = strip_tags($request->starting_year);
         $journal->language = strip_tags($request->language);
         $journal->chief_editor = strip_tags($request->chief);
         $journal->publisher = strip_tags($request->publisher);
@@ -761,6 +767,9 @@ class adminPanelController extends Controller
             'abbr_title' => $request->abbr,
             'issn' => $request->issn,
             'frequency' => $request->frequency,
+            'subject' => $request->subject,
+            'format' => $request->format,
+            'starting_year' => $request->starting_year,
             'language' => $request->language,
             'chief_editor' => $request->chief,
             'publisher' => $request->publisher,

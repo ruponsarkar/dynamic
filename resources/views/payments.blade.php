@@ -384,8 +384,9 @@
                                 <ul class="payment-list">
                                     <li>Submission of manuscripts is completely free of charge.</li>
                                     <li>The publication fee is non-refundable once the article enters the production stage.</li>
-                                    <li>Payment of the processing fee does not guarantee acceptance of the manuscript.</li>
+                                    {{-- <li>Payment of the processing fee does not guarantee acceptance of the manuscript.</li> --}}
                                     <li>All manuscripts undergo a strict peer-review process before acceptance.</li>
+                                    <li>Additional processing charges may apply for lengthy manuscripts.</li>
                                 </ul>
                             </div>
                         </div>
