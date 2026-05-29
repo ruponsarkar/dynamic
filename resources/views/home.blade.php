@@ -111,11 +111,9 @@
                     <section class="py-2">
                         <div class="card-c py-4">
                             <div class="p-3 text-center">
-                                <h2 style="color: #1976d2; font-weight: bold;">Step Into Scholarly Excellence </h2>
+                                <h2 style="color: #1976d2; font-weight: bold;">Advancing Research Worldwide</h2>
                                 <div>
-                                    Access all IRGS Publisher services in one place—submit manuscripts, explore journals,
-                                    and
-                                    track your submissions.
+                                    Submit your research, explore journals, and publish with confidence.
                                 </div>
                                 <div class="mt-3">
                                     <a href="/manuscript" class="btn btn-primary">Submit Manuscript</a>

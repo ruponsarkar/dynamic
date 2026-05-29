@@ -55,6 +55,18 @@
         <input type="text" class="form-control" id="details" name="frequency" value="{{$journal->frequency}}">
       </div>
       <div class="pb-3">
+        <label for="subject">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject" value="{{$journal->subject}}">
+      </div>
+      <div class="pb-3">
+        <label for="format">Format</label>
+        <input type="text" class="form-control" id="format" name="format" value="{{$journal->format}}">
+      </div>
+      <div class="pb-3">
+        <label for="starting_year">Starting Year</label>
+        <input type="text" class="form-control" id="starting_year" name="starting_year" value="{{$journal->starting_year}}">
+      </div>
+      <div class="pb-3">
         <label for="phone">Language</label>
         <input type="text" class="form-control" id="type" name="language" value="{{$journal->language}}">
       </div>

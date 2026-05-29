@@ -30,4 +30,21 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paypal' => [
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+        'client_secret' => env('PAYPAL_CLIENT_SECRET'),
+        'base_url' => env('PAYPAL_BASE_URL', 'https://api-m.sandbox.paypal.com'),
+        'currency' => env('PAYPAL_CURRENCY', 'USD'),
+        'intent' => env('PAYPAL_INTENT', 'CAPTURE'),
+    ],
+
+    'razorpay' => [
+        'key_id' => env('RAZORPAY_KEY_ID'),
+        'key_secret' => env('RAZORPAY_KEY_SECRET'),
+        'base_url' => env('RAZORPAY_BASE_URL', 'https://api.razorpay.com'),
+        'currency' => env('RAZORPAY_CURRENCY', 'INR'),
+        'company_name' => env('RAZORPAY_COMPANY_NAME', 'IRGS Publisher'),
+        'theme_color' => env('RAZORPAY_THEME_COLOR', '#0d3b8e'),
+    ],
+
 ];

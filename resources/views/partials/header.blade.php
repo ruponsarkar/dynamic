@@ -2,8 +2,10 @@
     <style>
         .floating-submit-btn {
             position: fixed;
-            top: 18px;
-            right: 18px;
+            bottom: 18px;
+            left: 18px;
+            /* top: 18px;
+            right: 18px; */
             z-index: 1055;
             gap: 8px;
             display: inline-flex;
@@ -29,10 +31,30 @@
 
         @media (max-width: 576px) {
             .floating-submit-btn {
-                top: 12px;
-                right: 12px;
+                inset: auto 12px 12px auto;
                 padding: 8px 14px;
                 font-size: 12px;
+                width: auto;
+                max-width: calc(100vw - 24px);
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            body.mobile-webview #navMenu {
+                display: block !important;
+            }
+
+            body.mobile-webview .navbar-toggler {
+                display: none;
+            }
+
+            body.mobile-webview .navbar-nav {
+                align-items: flex-start !important;
+            }
+
+            body.mobile-webview .navbar-nav .nav-link,
+            body.mobile-webview .navbar-nav .dropdown-item {
+                white-space: normal;
             }
         }
     </style>
@@ -41,6 +63,24 @@
         <i class="bi bi-upload"></i>
         <span>Submit Manuscript</span>
     </a>
+
+    <script>
+        (function() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+            var hasTouch = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+            var smallScreen = Math.min(window.screen.width || 0, window.screen.height || 0) <= 1024;
+            var isWebView = /(wv|WebView|Instagram|FBAN|FBAV|Line\/|; wv\)|Version\/[\d.]+.*Chrome|GSA|MiuiBrowser|DuckDuckGo|YaBrowser)/i.test(ua)
+                || !!window.ReactNativeWebView
+                || !!(window.webkit && window.webkit.messageHandlers)
+                || document.referrer.indexOf('android-app://') === 0;
+
+            if (isWebView && hasTouch && smallScreen) {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('mobile-webview');
+                });
+            }
+        })();
+    </script>
 
     {{-- <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
         <div class="text-white " style="font-size: small">
@@ -271,8 +311,8 @@
                             href="/archives">ARCHIVES</a></li> --}}
                 {{-- <li class="nav-item"><a class="nav-link {{ request()->is('conference') ? 'active' : '' }}"
                             href="/conference">CONFERENCE PROCEEDING</a></li> --}}
-                <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
-                        href="#">PAYMENTS</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->is('payments') ? 'active' : '' }}"
+                        href="/payments">PAYMENTS</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
                         href="/contact-us">CONTACT US</a></li>
 

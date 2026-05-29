@@ -27,6 +27,7 @@ class IndexController extends Controller
         ->get();
 
         $indexings = DB::table('indexing')->where('active', 1)->get();
+        $certificates = DB::table('certificates')->where('active', 1)->get();
 
         $articles = DB::table('article')->where('status', 1)->limit(5)->get();
         
@@ -39,6 +40,7 @@ class IndexController extends Controller
             'contents' => $content, 
             'articles'=>$articles, 
             'indexings'=>$indexings,
+            'certificates'=>$certificates,
             'countJournal'=>$countJournal,
             'countArticle'=>$countArticle,
             'countDownload'=>$countDownload
@@ -65,6 +67,15 @@ class IndexController extends Controller
     {
         $journals = journal::get();
         return view('manuscript', ['journals' => $journals]);
+    }
+
+    function payments()
+    {
+        return view('payments', [
+            'paymentConfig' => config('payments'),
+            'paypalConfig' => config('services.paypal'),
+            'razorpayConfig' => config('services.razorpay'),
+        ]);
     }
 
 
@@ -119,7 +130,8 @@ class IndexController extends Controller
 
         $journal = DB::table('journals')->where('slug', $slug)->first();
         $recent = DB::table('article')->where('j_id', '=', $journal->j_id)->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
-        return view('details', ['journal' => $journal, 'articles' => $recent]);
+        $certificates = DB::table('certificates')->where('j_id', $journal->j_id)->where('active', 1)->orderBy('id', 'desc')->get();
+        return view('details', ['journal' => $journal, 'articles' => $recent, 'certificates' => $certificates]);
     }
 
     function article($slug){
@@ -135,7 +147,14 @@ class IndexController extends Controller
 
         // return $data;
 
-        return view('indexings', ['indexings' => $data]);
+        return view('indexings', ['indexings' => $data, 'journal' => $journal]);
+    }
+
+    function certificates($slug){
+        $journal = DB::table('journals')->where('slug', $slug)->first();
+        $data = DB::table('certificates')->where('j_id', $journal->j_id)->where('active', 1)->orderBy('id', 'desc')->get();
+
+        return view('certificates', ['journal' => $journal, 'certificates' => $data]);
     }
 
 

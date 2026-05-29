@@ -6,19 +6,19 @@
             <i class="bi bi-whatsapp"></i>
         </a>
 
-        <a href="https://facebook.com" class="mx-2 text-dark">
+        <a href="https://www.facebook.com/share/15mpNfjkmR7/?mibextid=wwXIfr" class="mx-2 text-dark">
             <i class="bi bi-facebook"></i>
         </a>
 
-        <a href="https://twitter.com" class="mx-2 text-dark">
+        {{-- <a href="https://twitter.com" class="mx-2 text-dark">
             <i class="bi bi-twitter-x"></i>
         </a>
-        {{-- <a href="https://linkedin.com" class="mx-2 text-dark">
+        <a href="https://linkedin.com" class="mx-2 text-dark">
             <i class="bi bi-linkedin"></i>
-        </a>
-        <a href="https://instagram.com" class="mx-2 text-dark">
-            <i class="bi bi-instagram"></i>
         </a> --}}
+        <a href="https://www.instagram.com/irgs_publisher?igsh=NXZ4d3RreW96MWlt&utm_source=qr" class="mx-2 text-dark">
+            <i class="bi bi-instagram"></i>
+        </a>
 
     </div>
 </div>
@@ -58,6 +58,15 @@
                         <a href="/privacy-policy">Privacy Policy</a>
                     </div>
                     <div>
+                        <a href="/terms-and-conditions">Terms and Conditions</a>
+                    </div>
+                    <div>
+                        <a href="/refund-policy">Refund Policy</a>
+                    </div>
+                    <div>
+                        <a href="/cancellation-policy">Cancellation Policy</a>
+                    </div>
+                    <div>
                         <a href="/contact-us">Contact Us</a>
                     </div>
                 </div>
@@ -95,6 +104,7 @@
                 </div>
             </div>
         </div>
+        <br>
     </div>
 
 </div>

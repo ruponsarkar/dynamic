@@ -140,10 +140,31 @@
       heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
   });
 
+  const initSwiperGroup = (selector, config) => {
+    const sliders = select(selector, true)
+
+    if (!sliders || !sliders.length) {
+      return
+    }
+
+    sliders.forEach((slider) => {
+      const slideCount = slider.querySelectorAll('.swiper-slide').length
+
+      if (!slideCount) {
+        return
+      }
+
+      new Swiper(slider, {
+        ...config,
+        loop: !!config.loop && slideCount > 1
+      })
+    })
+  }
+
   /**
    * latest article Slider
    */
-  new Swiper('.latest-slider', {
+  initSwiperGroup('.latest-slider', {
     speed: 400,
     loop: true,
     autoplay: {
@@ -181,7 +202,7 @@
     /**
    * journal Slider
    */
-    new Swiper('.journal-slider', {
+    initSwiperGroup('.journal-slider', {
       speed: 400,
       loop: true,
       autoplay: {
@@ -221,7 +242,7 @@
   /**
    * indexing Slider
    */
-  new Swiper('.indexing-slider', {
+  initSwiperGroup('.indexing-slider', {
     speed: 400,
     loop: true,
     autoplay: {
@@ -257,7 +278,7 @@
   /**
    * article Slider
    */
-  new Swiper('.article-slider', {
+  initSwiperGroup('.article-slider', {
     speed: 400,
     loop: true,
     autoplay: {

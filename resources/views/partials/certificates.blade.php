@@ -13,12 +13,16 @@
             <div class="indexing-slider swiper">
                 <div class="swiper-wrapper align-items-center">
 
-                    @foreach ($journals as $journal)
+                    @foreach ($certificates as $certificate)
                         <div class="swiper-slide">
                             <img class="img-fluid"
-                                src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
+                                src="{{ url('assets/certificates/img/' . $certificate->img) }}"
+                                alt="{{ $certificate->title ?: 'Certificate' }}"
                                 style=" width: 100%; object-fit: contain;"
                                 >
+                            @if ($certificate->title)
+                                <div class="text-center mt-2 small">{{ $certificate->title }}</div>
+                            @endif
                         </div>
                     @endforeach
                 </div>

@@ -5,6 +5,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\adminPanelController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\RazorpayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +27,19 @@ Route::get('/', [IndexController::class, 'index']);
 
 
 Route::get('manuscript', [IndexController::class, 'manuscript']);
+Route::get('payments', [IndexController::class, 'payments']);
 Route::post('submit_manuscript', [FormController::class, 'submit_manuscript']);
+Route::post('paypal/orders', [PaypalController::class, 'createOrder']);
+Route::post('paypal/orders/{paypalOrderId}/capture', [PaypalController::class, 'captureOrder']);
+Route::post('razorpay/orders', [RazorpayController::class, 'createOrder']);
+Route::post('razorpay/verify', [RazorpayController::class, 'verifyPayment']);
 Route::get('archives/{slug}', [IndexController::class, 'archives']);
 Route::get('archives/{slug}/{v_slug}/{i_slug}', [IndexController::class, 'articles']);
 Route::get('journals', [IndexController::class, 'allJournals']);
 Route::get('journal/{slug}', [IndexController::class, 'journal']);
 Route::get('article/{slug}', [IndexController::class, 'article']);
 Route::get('indexings/{slug}', [IndexController::class, 'indexings']);
+Route::get('certificates/{slug}', [IndexController::class, 'certificates']);
 Route::get('current-issue', [IndexController::class, 'currentIssue']);
 
 
@@ -63,6 +71,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('login', [adminPanelController::class, 'login']);
     Route::get('admin_index', [adminPanelController::class, 'adminIndex']);
     Route::get('add-indexing' , [adminPanelController::class,'addIndexingPage']);
+    Route::get('add-certificate' , [adminPanelController::class,'addCertificatePage']);
 
     Route::get('all-manuscript', [adminPanelController::class, 'allManuscript']);
     Route::get('receive-editors', [adminPanelController::class, 'allEditorsRequest']);
@@ -75,6 +84,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('indexingList/{id}', [adminPanelController::class, 'indexingList']);
     Route::post('UpdateIndexing', [adminPanelController::class, 'UpdateIndexing']);
     Route::get('DeleteIndexing/{id}', [adminPanelController::class, 'DeleteIndexing']);
+    Route::post('addCertificate', [adminPanelController::class, 'addCertificate']);
+    Route::get('certificateList/{id}', [adminPanelController::class, 'certificateList']);
+    Route::post('UpdateCertificate', [adminPanelController::class, 'UpdateCertificate']);
+    Route::get('DeleteCertificate/{id}', [adminPanelController::class, 'DeleteCertificate']);
     
     Route::get('add-conference', [adminPanelController::class,'addconference']);
     
