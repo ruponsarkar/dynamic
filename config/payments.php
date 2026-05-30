@@ -212,8 +212,8 @@ return [
         ],
         [
             'key' => 'INR',
-            'label' => 'Rs',
-            'symbol' => 'Rs',
+            'label' => 'INR',
+            'symbol' => 'INR',
         ],
     ],
 

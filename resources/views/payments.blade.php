@@ -314,7 +314,7 @@
                                 </div>
 
                                 <p class="text-muted">
-                                    Indian authors can also pay securely using Razorpay with UPI, cards, net banking, and wallets.
+                                    Indian and international authors can pay securely using Razorpay. INR and USD payments are supported.
                                 </p>
 
                                 <div class="payment-select mb-3">

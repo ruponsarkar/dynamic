@@ -57,13 +57,13 @@
                                                 <div>
                                                     <small>
 
-                                                        Publishers:: {{ $journal->publisher }}
+                                                        Publisher: {{ $journal->publisher }}
                                                     </small>
                                                 </div>
                                                 <div>
                                                     <small>
 
-                                                        Country of Origin:: {{ $journal->country_of_origin }}
+                                                        Country of Origin: {{ $journal->country_of_origin }}
                                                     </small>
                                                 </div>
 
