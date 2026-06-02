@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-        <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Add Journals</a>
+        {{-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Add Journals</a> --}}
 
       </div>
       <br>
@@ -156,7 +156,7 @@
                   <th>Chief Editors</th>
 
                   <th>Edit</th>
-                  <th>Delete</th>
+                  {{-- <th>Delete</th> --}}
                 </tr>
               </thead>
               <tbody>
@@ -177,7 +177,7 @@
 
                   <td class="text-center"><a href="{{URL('update-journals/'.$data->j_id)}}"><i class="far fa-edit"></i></a></td>
 
-                  <td class="text-center"><a class="confirmation" href="{{URL('delete-journals/'.$data->j_id)}}"><i class="fas fa-trash-alt text-danger"></i></a></td>
+                  {{-- <td class="text-center"><a class="confirmation" href="{{URL('delete-journals/'.$data->j_id)}}"><i class="fas fa-trash-alt text-danger"></i></a></td> --}}
 
                 </tr>
                 @endforeach

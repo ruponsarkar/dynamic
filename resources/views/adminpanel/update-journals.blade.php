@@ -86,13 +86,10 @@
         <input type="text" class="form-control" id="type" name="country" value="{{$journal->country_of_origin}}">
       </div>
 
-      <div class="pb-3">
+      {{-- <div class="pb-3">
         <label for="phone">Aim and Scope</label>
-
-        {{-- <textarea name="aim" id="aim" cols="30" rows="20">{{$journal->aim_and_scope}}</textarea> --}}
         <textarea class="form-control summernote" name="aim" placeholder=""> {{$journal->aim_and_scope}}</textarea>
-
-      </div>
+      </div> --}}
 
 
       <div class="pb-3">

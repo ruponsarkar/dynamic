@@ -12,7 +12,7 @@
                             style="width: 100%; object-fit: contain;">
                     </div>
 
-                    @include('partials.quicklinks2')
+                    @include('partials.quicklinks1')
                 </div>
 
                 <div class="col-md-9">

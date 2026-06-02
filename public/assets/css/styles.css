@@ -602,7 +602,7 @@ text-decoration: none;
 .effect01 {
 color: #FFF;
 border: 4px solid #155574;
-box-shadow:0px 0px 0px 1px #155574; inset;
+box-shadow:0px 0px 0px 1px #155574 inset;
 background-color: #155574;
 overflow: hidden;
 position: relative;
@@ -611,7 +611,7 @@ position: relative;
 .effect01:hover {
 border: 4px solid #155574;
 background-color: #155574;
-box-shadow:0px 0px 0px 4px #155574; inset;
+box-shadow:0px 0px 0px 4px #155574 inset;
 }
 
 /*btn_text*/
@@ -1509,11 +1509,12 @@ Contact Form
 
 .h-box{
   /* background-color: black; */
-  background-color: #031e87;
+  /* background-color: #031e87; */
   text-align: center;
-  color: white;
+  /* color: white; */
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+  border-bottom: 1px solid #efb1b1;
 }
 
 .h-box-text{

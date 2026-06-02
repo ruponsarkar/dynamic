@@ -198,7 +198,7 @@
                             <img class="jd-cover" src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="{{ $journal->j_name }} cover image">
                         </div>
 
-                        @include('partials.quicklinks2')
+                        @include('partials.quicklinks1')
                     </aside>
                 </div>
 

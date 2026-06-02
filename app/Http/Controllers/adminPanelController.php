@@ -1095,7 +1095,13 @@ class adminPanelController extends Controller
         ->orderBy('id', 'desc')
         ->get();
 
-        return view('adminpanel.custom_pages.manegePages', ['pages' => $pages, 'content' => $content]);
+        $useful_links = DB::table('custom_pages')
+        ->where('type', 'useful_links')
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        return view('adminpanel.custom_pages.manegePages', ['pages' => $pages, 'content' => $content, 'useful_links' => $useful_links]);
     }
 
 

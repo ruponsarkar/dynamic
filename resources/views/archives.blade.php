@@ -18,7 +18,7 @@
                                 >
                     </div>
 
-                    @include('partials.quicklinks2')
+                    @include('partials.quicklinks1')
                 </div>
 
                 <!-- LEFT SECTION -->

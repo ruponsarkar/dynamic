@@ -16,7 +16,7 @@
         <a href="https://linkedin.com" class="mx-2 text-dark">
             <i class="bi bi-linkedin"></i>
         </a> --}}
-        <a href="https://www.instagram.com/irgs_publisher?igsh=NXZ4d3RreW96MWlt&utm_source=qr" class="mx-2 text-dark">
+        <a href="https://www.instagram.com/RJMS_publisher?igsh=NXZ4d3RreW96MWlt&utm_source=qr" class="mx-2 text-dark">
             <i class="bi bi-instagram"></i>
         </a>
 
@@ -45,7 +45,7 @@
                     <div>
                         <a href="/">Home</a>
                     </div>
-                    <div>
+                    {{-- <div>
                         <a href="/journals">Journals</a>
                     </div>
                     <div>
@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <a href="/cancellation-policy">Cancellation Policy</a>
-                    </div>
+                    </div> --}}
                     <div>
                         <a href="/contact-us">Contact Us</a>
                     </div>
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="">
-                    © 2026 International Research and Global Society
+                    © 2026 Research Journal of Medical Science
                 </div>
             </div>
 
@@ -93,11 +93,11 @@
                         </u>
                     </div>
                     <div style="text-align: justify;">
-                        <i class="bi bi-pin"></i> Ambari, Hojai, Assam, India – 782445    
+                        <i class="bi bi-pin"></i> xxxx, Hojai, Assam, India – 782445    
                         <br>
-                        <i class="bi bi-telephone"></i> +91 7002207076
+                        <i class="bi bi-telephone"></i> +91 700000000
                         <br>
-                        <i class="bi bi-envelope"></i> office@irgspublisher.com
+                        <i class="bi bi-envelope"></i> office@RJMSpublisher.com
                         
                     </div>
                    

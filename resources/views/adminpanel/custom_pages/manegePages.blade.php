@@ -29,6 +29,16 @@
                 </div>
             </div>
 
+             <div class="card p-3">
+                <h5>Useful Links</h5>
+                <div class="row">
+                    @foreach ($useful_links as $c)
+                        <div class="col p-4 border">
+                            <a class="py-2" href="/custom_pages/{{ $c->path }}">{{ $c->page_title }}</a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
             <a href="/add-custom">...</a>
 

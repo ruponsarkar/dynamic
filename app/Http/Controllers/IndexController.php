@@ -26,10 +26,11 @@ class IndexController extends Controller
         ->where('status', 1)
         ->get();
 
+
         $indexings = DB::table('indexing')->where('active', 1)->get();
         $certificates = DB::table('certificates')->where('active', 1)->get();
 
-        $articles = DB::table('article')->where('status', 1)->limit(5)->get();
+        $articles = DB::table('article')->where('status', 1)->limit(6)->get();
         
         $countJournal = journal::where('active', 1)->count('j_id');
         $countArticle = articles::where('status', 1)->count('id');

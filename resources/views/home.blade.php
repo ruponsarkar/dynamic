@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'IRGS Publisher')
+@section('title', 'RJMS Publisher')
 
-{{-- <style>
-    .journal-slider {
-    visibility: hidden;
-}
-
-.journal-slider.swiper-initialized {
-    visibility: visible;
-}
-</style> --}}
+<style>
+    .sidebar-btn {
+        background: #004d4f;
+        color: white !important;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: opacity 0.3s;
+    }
+</style>
 
 @section('content')
 
@@ -30,21 +30,49 @@
 
                     <div>
                         <div class="mt-3">
-                            <a href="/manuscript" class="btn btn-primary w-100">Submit Manuscript</a>
+                            <a href="/manuscript" class="sidebar-btn py-3 text-center d-block mb-2 shadow-sm">
+                                <i class="bi bi-upload"></i> Submit Manuscript
+                            </a>
                         </div>
                     </div>
 
 
-                    <section class="mb-3">
+                    <div class="card-c mt-2">
+                        <section id="indexing" class="indexing">
+                            <div class="h-box">
+                                <div class="h-box-text p-2">
+                                    Journal Catalog
+                                </div>
+                            </div>
+                            <div class="container p-2">
+                                <div class="indexing-slider swiper">
+                                    <div class="swiper-wrapper align-items-center" style="height: auto;">
+
+                                        @foreach ($journals as $journal)
+                                            <div class="swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
+                                                    style=" width: 100%; object-fit: contain;">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+
+
+                    {{-- <section class="mb-3">
                         @include('partials.top_editors')
                     </section>
 
                     <section class="mb-3">
                         @include('partials.certificates')
-                    </section>
+                    </section> --}}
 
 
-                    <section class="mb-3">
+                    {{-- <section class="mb-3">
                         <div class="card-c">
                             <div>
                                 <div class="card-header">
@@ -57,8 +85,11 @@
                             </div>
                             @include('partials.articles')
                         </div>
+                    </section> --}}
+
+                    <section class="pt-2">
+                        @include('partials.quicklinks1')
                     </section>
-                    @include('partials.quicklinks1')
                 </div>
 
 
@@ -81,13 +112,87 @@
                         </div>
                     </section> --}}
 
-
                     <section class="py-2">
+                        <div class="card-c py-4">
+                            <div class="p-3">
+
+
+                                <h2 style="color: #1976d2; font-weight: bold;">Journal Overview</h2>
+                                <div>
+                                    @php
+                                        $data = $contents->firstWhere('path', 'home.Journal-Overview');
+                                    @endphp
+                                    @if ($data)
+                                        {{-- <b>{!! $data->page_title !!}</b> --}}
+                                        {!! $data->data !!}
+                                    @else
+                                        <p class="text-danger">No content found for home.about</p>
+                                    @endif
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <section class="mb-3">
+                        <div class="card-c">
+                            <div>
+                                <div class="card-header">
+                                    <div class="h-box">
+                                        <div class="h-box-text p-2">
+                                            Recent Articles
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row p-2">
+                                    @foreach ($articles as $article)
+                                        <div class="col-md-4">
+                                            <div class="card-c p-3 mb-2 article-card-wrap" style="word-break: break-word;">
+                                                <div>
+                                                    <b>
+                                                        {{ $article->name }}
+                                                    </b>
+                                                </div>
+                                                <div>
+                                                    <b>Author(s):</b>{{ $article->aname }}
+                                                </div>
+
+                                                <div>
+                                                    <b>DOI:</b>{{ $article->doi }}
+                                                </div>
+                                                <div>
+                                                    <b>Page:</b>{{ $article->page }}
+                                                </div>
+
+                                                <div class="article-card-links">
+                                                    <a href="/article/{{ $article->slug }}">View</a>
+                                                    <a href="/assets/articles/{{ $article->file }}">Download PDF</a>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+                    {{-- <section class="py-2">
                         <div class="card-c py-4">
                             <div class="p-3 text-center">
 
 
-                                <h2 style="color: #1976d2; font-weight: bold;">About IRGS Publisher</h2>
+                                <h2 style="color: #1976d2; font-weight: bold;">About RJMS Publisher</h2>
                                 <div>
                                     @php
                                         $data = $contents->firstWhere('path', 'home.about');
@@ -104,29 +209,11 @@
 
                             </div>
                         </div>
-                    </section>
+                    </section> --}}
 
-                    <section class="py-2">
+                    {{-- <section class="py-2">
                         <div class="card-c py-4">
                             <div class="row">
-                                {{-- <div class="col-md-6">
-                                    <div class="p-3 text-center">
-                                        <h2 style="color: #1976d2; font-weight: bold;">OUR AIMS</h2>
-
-                                        <div style="text-align: justify">
-                                            @php
-                                                $data = $contents->firstWhere('path', 'home.aim');
-                                            @endphp
-                                            @if ($data)
-                                                <b>{!! $data->page_title !!}</b>
-                                                {!! $data->data !!}
-                                            @else
-                                                <p class="text-danger">No content found for home.about</p>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="p-3 text-center">
                                         <h2 style="color: #1976d2; font-weight: bold;">Our Aim & Scopes</h2>
@@ -141,28 +228,16 @@
                                                 <p class="text-danger">No content found for home.about</p>
                                             @endif
                                         </div>
-
-                                        {{-- <div>
-                                            UKR Publisher welcomes interdisciplinary research spanning science, technology,
-                                            medicine, social sciences, humanities, and applied sciences. We publish
-                                            theoretical, experimental, and review articles that contribute new insights and
-                                            advancements to the academic community. Our journals prioritize originality,
-                                            ethical research practices, and methodological rigor to support the global
-                                            exchange of knowledge.
-                                        </div> --}}
-
-
-
                                     </div>
 
                                 </div>
                             </div>
 
                         </div>
-                    </section>
+                    </section> --}}
 
 
-                    <section class="py-2">
+                    {{-- <section class="py-2">
                         <div class="card-c">
                             <div class="p-3">
 
@@ -183,8 +258,10 @@
 
                             </div>
                         </div>
-                    </section>
-                    <section class="py-2">
+                    </section> --}}
+
+
+                    {{-- <section class="py-2">
                         <div class="card-c">
                             <div class="p-3">
 
@@ -205,7 +282,7 @@
 
                             </div>
                         </div>
-                    </section>
+                    </section> --}}
 
 
 
@@ -213,14 +290,14 @@
                         <div class="card-c p-2">
 
                             <div class="p-3">
-                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">Why Publish With IRGS
+                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">Why Publish With RJMS
                                     Publisher</h2>
 
                                 <div
                                     style="font-size:11.0pt;line-height: 115%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
                                         mso-fareast-theme-font:minor-fareast;mso-ansi-language:EN-US;mso-fareast-language:
                                         EN-US;mso-bidi-language:AR-SA">
-                                    IRGS Publisher provides a professional and transparent platform for researchers and
+                                    RJMS Publisher provides a professional and transparent platform for researchers and
                                     academicians to publish their scholarly work. Our journals aim to promote high-quality
                                     research and global knowledge sharing through open access publishing.
                                 </div>
@@ -334,7 +411,7 @@
                                             </div>
                                             <div> <b> Ethical Publishing Standards </b> </div>
                                             <div>
-                                                IRGS Publisher follows internationally recognized ethical guidelines in
+                                                RJMS Publisher follows internationally recognized ethical guidelines in
                                                 academic publishing.
 
                                                 <br>
@@ -386,9 +463,7 @@
 
 
 
-                    {{-- <section class="py-2">
-                        @include('partials.indexings')
-                    </section> --}}
+
 
                     <section class="py-2">
                         {{-- @include('partials.counts') --}}
@@ -409,6 +484,10 @@
 
 
             </div>
+
+            <section class="py-2">
+                @include('partials.indexings')
+            </section>
 
 
 

@@ -23,6 +23,7 @@
                 <select name="type" id="" required class="form-select">
                     <option value="page">Page</option>
                     <option value="content">Content</option>
+                    <option value="useful_links">Useful Links</option>
                 </select>
             </div>
 
