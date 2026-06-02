@@ -57,6 +57,26 @@
                 white-space: normal;
             }
         }
+
+        .header-search-form {
+            width: 260px;
+        }
+
+        .header-search-form .form-control {
+            min-height: 36px;
+            font-size: 14px;
+        }
+
+        .header-search-form .btn {
+            min-width: 42px;
+        }
+
+        @media (max-width: 991.98px) {
+            .header-search-form {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
     </style>
 
     <a href="/manuscript" class="floating-submit-btn">
@@ -300,6 +320,13 @@
                         href="/contact-us">Contact Us</a></li>
 
             </ul>
+            <form class="header-search-form d-flex ms-lg-3" action="{{ route('article.search') }}" method="GET" role="search">
+                <input class="form-control form-control-sm" type="search" name="q" value="{{ request('q') }}"
+                    placeholder="Search articles" aria-label="Search articles">
+                <button class="btn btn-sm btn-light ms-1" type="submit" aria-label="Search">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
         </div>
 
     </div>

@@ -26,6 +26,7 @@ use App\Http\Controllers\RazorpayController;
 Route::get('/', [IndexController::class, 'index']);
 
 
+Route::get('search', [IndexController::class, 'search'])->name('article.search');
 Route::get('manuscript', [IndexController::class, 'manuscript']);
 Route::get('payments', [IndexController::class, 'payments']);
 Route::post('submit_manuscript', [FormController::class, 'submit_manuscript']);

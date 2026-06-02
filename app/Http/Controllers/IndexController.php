@@ -63,6 +63,40 @@ class IndexController extends Controller
         return view('custom_page', ['data' => $data]);
     }
 
+    public function search(Request $request)
+    {
+        $searchTerm = trim($request->query('q', ''));
+
+        $query = DB::table('article')
+            ->where('status', 1)
+            ->when($searchTerm !== '', function ($query) use ($searchTerm) {
+                $query->where(function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('aname', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('doi', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('keywords', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('abstract', 'like', '%' . $searchTerm . '%');
+                });
+            })
+            ->orderBy('id', 'desc');
+
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json([
+                'query' => $searchTerm,
+                'articles' => $searchTerm === '' ? [] : $query->limit(10)->get(),
+            ]);
+        }
+
+        $articles = $searchTerm === ''
+            ? collect()
+            : $query->paginate(10)->withQueryString();
+
+        return view('search', [
+            'articles' => $articles,
+            'query' => $searchTerm,
+        ]);
+    }
+
 
     function manuscript()
     {
