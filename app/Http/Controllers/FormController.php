@@ -9,6 +9,8 @@ use App\Models\manuscripts;
 use App\Models\reviewer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Author;
+
 class FormController extends Controller
 {
     //for editor form
@@ -74,15 +76,21 @@ class FormController extends Controller
 
     function submit_manuscript(Request $request)
     {
+        $authorAccount = Author::find(session('AuthorLoggedUser'));
+
+        if (!$authorAccount) {
+            return redirect()->route('author.login')->with('message', 'Please login as an author to submit manuscript.');
+        }
+
         $request->validate([
-            'mode' => 'required|regex:/(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/',
-            'type' => 'required|regex:/(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/',
+            'mode' => 'required|string|max:50',
+            'type' => 'required|string|max:80',
             'journal' => 'required|numeric',
-            'author' => 'required|regex:/(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/',
-            'affiliation' => 'required|regex:/^([A-Za-z0-9]\s?)+([,]\s?([A-Za-z0-9]\s?)+)*$/',
+            'author' => 'required|string|max:120',
+            'affiliation' => 'required|string|max:500',
             'mail' => 'required|email',
-            'mobile' => 'required|numeric',
-            'manuscript' => 'required',
+            'mobile' => 'required|string|max:30',
+            'manuscript' => 'required|string|max:500',
             'file' => 'required|mimes:pdf,docx',
         ]);
 
@@ -98,6 +106,7 @@ class FormController extends Controller
 
         $manuscript = new manuscripts;
         $manuscript->muuid = strip_tags('IJPSM/'.$year.'/'.$month.'/'.$count);
+        $manuscript->author_id = $authorAccount->id;
         $manuscript->mode = strip_tags($request->mode);
         $manuscript->type = strip_tags($request->type);
         $manuscript->journal = $j_name->j_name;

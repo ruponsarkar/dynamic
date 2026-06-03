@@ -11,6 +11,7 @@ use App\Models\indexings;
 use App\Models\home_asset;
 use App\Models\manuscripts;
 use App\Models\manuscript_status;
+use App\Models\Author;
 use DB;
 
 
@@ -100,8 +101,14 @@ class IndexController extends Controller
 
     function manuscript()
     {
+        $author = Author::find(session('AuthorLoggedUser'));
+
+        if (!$author) {
+            return redirect()->route('author.login')->with('message', 'Please login as an author to submit manuscript.');
+        }
+
         $journals = journal::get();
-        return view('manuscript', ['journals' => $journals]);
+        return view('manuscript', ['journals' => $journals, 'author' => $author]);
     }
 
     function payments()

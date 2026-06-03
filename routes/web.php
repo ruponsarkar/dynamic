@@ -7,6 +7,7 @@ use App\Http\Controllers\adminPanelController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\RazorpayController;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,12 @@ Route::get('/', [IndexController::class, 'index']);
 
 
 Route::get('search', [IndexController::class, 'search'])->name('article.search');
+Route::get('author/login', [AuthorController::class, 'login'])->name('author.login');
+Route::post('author/login', [AuthorController::class, 'authenticate'])->name('author.login.submit');
+Route::get('author/register', [AuthorController::class, 'register'])->name('author.register');
+Route::post('author/register', [AuthorController::class, 'store'])->name('author.register.submit');
+Route::get('author/dashboard', [AuthorController::class, 'dashboard'])->name('author.dashboard');
+Route::post('author/logout', [AuthorController::class, 'logout'])->name('author.logout');
 Route::get('manuscript', [IndexController::class, 'manuscript']);
 Route::get('payments', [IndexController::class, 'payments']);
 Route::post('submit_manuscript', [FormController::class, 'submit_manuscript']);

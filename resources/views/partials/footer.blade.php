@@ -45,6 +45,9 @@
                     <div>
                         <a href="/">Home</a>
                     </div>
+                     <div>
+                        <a href="/privacy-policy">Privacy Policy</a>
+                    </div>
                     {{-- <div>
                         <a href="/journals">Journals</a>
                     </div>
@@ -54,9 +57,7 @@
                     <div>
                         <a href="/manuscript">Submit Manuscript</a>
                     </div>
-                    <div>
-                        <a href="/privacy-policy">Privacy Policy</a>
-                    </div>
+                   
                     <div>
                         <a href="/terms-and-conditions">Terms and Conditions</a>
                     </div>

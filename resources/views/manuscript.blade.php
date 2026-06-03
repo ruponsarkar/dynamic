@@ -43,9 +43,9 @@
                                 <label for="Select Mode" class="col-sm-4 col-form-label">Select Mode</label>
                                 <div class="col-sm-8">
                                     <select class="form-select" id="specificSizeSelect" name="mode">
-                                        <option selected>Select</option>
-                                        <option value="Normal Mode">Normal Mode</option>
-                                        <option value="Fast Track Mode">Fast Track Mode</option>
+                                        <option value="">Select</option>
+                                        <option value="Normal Mode" {{ old('mode') == 'Normal Mode' ? 'selected' : '' }}>Normal Mode</option>
+                                        <option value="Fast Track Mode" {{ old('mode') == 'Fast Track Mode' ? 'selected' : '' }}>Fast Track Mode</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,11 +55,11 @@
                                 <div class="col-sm-8">
                                     <select class="form-select" id="specificSizeSelect" name="type">
                                         <option value="">Select</option>
-                                        <option value="Research article">Research article</option>
-                                        <option value="Review article">Review article</option>
-                                        <option value="Short Communication">Short Communication</option>
-                                        <option value="Case Report">Case Report</option>
-                                        <option value="Letter to editor">Letter to editor</option>
+                                        <option value="Research article" {{ old('type') == 'Research article' ? 'selected' : '' }}>Research article</option>
+                                        <option value="Review article" {{ old('type') == 'Review article' ? 'selected' : '' }}>Review article</option>
+                                        <option value="Short Communication" {{ old('type') == 'Short Communication' ? 'selected' : '' }}>Short Communication</option>
+                                        <option value="Case Report" {{ old('type') == 'Case Report' ? 'selected' : '' }}>Case Report</option>
+                                        <option value="Letter to editor" {{ old('type') == 'Letter to editor' ? 'selected' : '' }}>Letter to editor</option>
                                     </select>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                     <select class="form-select" id="specificSizeSelect" name="journal">
                                         <option value="">Select</option>
                                         @foreach ($journals as $data)
-                                            <option value="{{ $data->j_id }}"> {{ $data->j_name }}</option>
+                                            <option value="{{ $data->j_id }}" {{ old('journal') == $data->j_id ? 'selected' : '' }}> {{ $data->j_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -79,21 +79,23 @@
                             <div class="row mb-3">
                                 <label for="Corresponding Author" class="col-sm-4 col-form-label">Corresponding Author</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="author" class="form-control" placeholder="Full Name">
+                                    <input type="text" name="author" class="form-control" placeholder="Full Name"
+                                        value="{{ old('author', $author->name ?? '') }}">
                                 </div>
                             </div>
         
                             <div class="row mb-3">
                                 <label for="Full Affiliation" class="col-sm-4 col-form-label">Full Affiliation</label>
                                 <div class="col-sm-8">
-                                    <textarea type="text" name="affiliation" class="form-control" placeholder="Affiliation"></textarea>
+                                    <textarea type="text" name="affiliation" class="form-control" placeholder="Affiliation">{{ old('affiliation', $author->affiliation ?? '') }}</textarea>
                                 </div>
                             </div>
         
                             <div class="row mb-3">
                                 <label for="Email" class="col-sm-4 col-form-label">Email</label>
                                 <div class="col-sm-8">
-                                    <input type="email" name="mail" class="form-control" placeholder="Email">
+                                    <input type="email" name="mail" class="form-control" placeholder="Email"
+                                        value="{{ old('mail', $author->email ?? '') }}">
                                 </div>
                             </div>
                             {{-- <div class="row mb-3">
@@ -106,15 +108,17 @@
                             <div class="row mb-3">
                                 <label for="Mobile" class="col-sm-4 col-form-label">Mobile</label>
                                 <div class="col-sm-8">
-                                    <input type="number" name="mobile" class="form-control"
-                                        placeholder="Mobile Number (Country code mandatory)">
+                                    <input type="text" name="mobile" class="form-control"
+                                        placeholder="Mobile Number (Country code mandatory)"
+                                        value="{{ old('mobile', $author->mobile ?? '') }}">
                                 </div>
                             </div>
         
                             <div class="row mb-3">
                                 <label for="Manuscript Title" class="col-sm-4 col-form-label">Manuscript Title</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="manuscript" class="form-control" placeholder="Manuscript Title">
+                                    <input type="text" name="manuscript" class="form-control" placeholder="Manuscript Title"
+                                        value="{{ old('manuscript') }}">
                                 </div>
                             </div>
         

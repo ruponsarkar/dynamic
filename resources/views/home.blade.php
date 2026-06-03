@@ -33,6 +33,10 @@
                             <a href="/manuscript" class="sidebar-btn py-3 text-center d-block mb-2 shadow-sm">
                                 <i class="bi bi-upload"></i> Submit Manuscript
                             </a>
+                            <a href="{{ session()->has('AuthorLoggedUser') ? route('author.dashboard') : route('author.login') }}"
+                                class="sidebar-btn py-3 text-center d-block mb-2 shadow-sm">
+                                <i class="bi bi-person-circle"></i> Author Login
+                            </a>
                         </div>
                     </div>
 
@@ -152,30 +156,29 @@
                             <div>
                                 <div class="row p-2">
                                     @foreach ($articles as $article)
-                                        <div class="col-md-4">
-                                            <div class="card-c p-3 mb-2 article-card-wrap" style="word-break: break-word;">
+                                        <div class="col-md-6 mb-3 d-flex">
+                                            <div class="card-c p-3 article-card-wrap w-100 d-flex flex-column"
+                                                style="word-break: break-word;">
                                                 <div>
-                                                    <b>
-                                                        {{ $article->name }}
-                                                    </b>
-                                                </div>
-                                                <div>
-                                                    <b>Author(s):</b>{{ $article->aname }}
+                                                    <b>{{ $article->name }}</b>
                                                 </div>
 
                                                 <div>
-                                                    <b>DOI:</b>{{ $article->doi }}
-                                                </div>
-                                                <div>
-                                                    <b>Page:</b>{{ $article->page }}
+                                                    <b>Author(s):</b> {{ $article->aname }}
                                                 </div>
 
-                                                <div class="article-card-links">
+                                                <div>
+                                                    <b>DOI:</b> {{ $article->doi }}
+                                                </div>
+
+                                                <div>
+                                                    <b>Page:</b> {{ $article->page }}
+                                                </div>
+
+                                                <div class="article-card-links mt-auto">
                                                     <a href="/article/{{ $article->slug }}">View</a>
                                                     <a href="/assets/articles/{{ $article->file }}">Download PDF</a>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     @endforeach
@@ -290,7 +293,7 @@
                         <div class="card-c p-2">
 
                             <div class="p-3">
-                                <h2 class="text-center" style="color: #1976d2; font-weight: bold;">Why Publish With RJMS
+                                <h2 class="" style="color: #1976d2; font-weight: bold;">Why Publish With RJMS
                                     Publisher</h2>
 
                                 <div

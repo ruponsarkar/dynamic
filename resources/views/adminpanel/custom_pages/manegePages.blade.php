@@ -12,7 +12,7 @@
                 <div class="row">
                     @foreach ($pages as $p)
                         <div class="col-3 p-4 border">
-                            <a class="py-2" href="/custom_pages/{{ $p->path }}">{{ $p->path }}</a>
+                            <a class="py-2" href="/custom_pages/{{ $p->path }}">{{ $p->page_title }}</a>
                         </div>
                     @endforeach
                 </div>
@@ -23,7 +23,7 @@
                 <div class="row">
                     @foreach ($content as $c)
                         <div class="col p-4 border">
-                            <a class="py-2" href="/custom_pages/{{ $c->path }}">{{ $c->path }}</a>
+                            <a class="py-2" href="/custom_pages/{{ $c->path }}">{{ $c->page_title }}</a>
                         </div>
                     @endforeach
                 </div>

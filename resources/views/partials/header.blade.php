@@ -60,6 +60,7 @@
 
         .header-search-form {
             width: 260px;
+            padding-top: 5px;
         }
 
         .header-search-form .form-control {
@@ -150,7 +151,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #031e87; border-top: 4px solid #207daf;">
+<nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #01654e; border-top: 4px solid #f66b08;">
 
     <div class="container">
 
@@ -158,7 +159,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button> --}}
 
-        <div class="collapse navbar-collapse" id="navMenu">
+        <div class="collapse navbar-collapse" id="navMenu" style="font-weight: bold;">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                 <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
@@ -183,8 +184,8 @@
                     <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
                         <li>
                             <a class="dropdown-item 
-                                                {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
-                                href="/instructons-for-authors">
+                                                {{ request()->is('aim-and-scope') ? 'active' : '' }}"
+                                href="/aim-and-scope">
                                 Aim and Scope
                             </a>
                         </li>
