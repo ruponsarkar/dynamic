@@ -59,8 +59,11 @@
         }
 
         .header-search-form {
-            width: 260px;
-            padding-top: 5px;
+            width: 220px;
+            padding-top: 0;
+            flex-shrink: 0;
+            margin-bottom: 0;
+            align-items: center;
         }
 
         .header-search-form .form-control {
@@ -70,9 +73,95 @@
 
         .header-search-form .btn {
             min-width: 42px;
+            width: 42px;
+            height: 36px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .header-search-form .btn i {
+            line-height: 1;
+        }
+
+        .site-navbar .container {
+            gap: 1rem;
+        }
+
+        .site-navbar .navbar-collapse {
+            min-height: 56px;
+            align-items: center;
+        }
+
+        .site-navbar .navbar-nav {
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .site-navbar .nav-link {
+            padding: 0.75rem 0.7rem;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .site-navbar .dropdown-toggle {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-banner {
+            padding: 12px 0;
+        }
+
+        .top-banner .container > .d-flex {
+            align-items: center;
+            gap: 1.5rem;
+            min-height: 110px;
+        }
+
+        .top-banner .logo {
+            max-height: 84px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .top-banner .journal-meta {
+            text-align: left;
+            line-height: 1.4;
         }
 
         @media (max-width: 991.98px) {
+            .top-banner .container > .d-flex {
+                min-height: auto;
+                gap: 1rem;
+            }
+
+            .top-banner .logo {
+                max-height: 72px;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .site-navbar .container {
+                gap: 0;
+            }
+
+            .site-navbar .navbar-collapse {
+                min-height: auto;
+            }
+
+            .site-navbar .navbar-nav {
+                flex-wrap: wrap;
+            }
+
+            .site-navbar .nav-link {
+                white-space: normal;
+                padding: 0.65rem 0;
+            }
+
             .header-search-form {
                 width: 100%;
                 margin-top: 10px;
@@ -119,7 +208,7 @@
             <div class="d-flex align-items-center gap-4">
 
                 <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" class="logo" alt="">
-                <div style="text-align: left;">
+                <div class="journal-meta">
 
                     <div class="journal-title">
                         {{-- Research Journal of Medical Science --}}
@@ -151,7 +240,8 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #01654e; border-top: 4px solid #f66b08;">
+<nav class="navbar navbar-expand-lg shadow-sm site-navbar" 
+style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !important;">
 
     <div class="container">
 
