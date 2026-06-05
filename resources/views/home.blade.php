@@ -30,7 +30,7 @@
 
                     <div>
                         <div class="mt-3">
-                            <a href="/manuscript" class="sidebar-btn py-3 text-center d-block mb-2 shadow-sm">
+                            <a href="/submit-article" class="sidebar-btn py-3 text-center d-block mb-2 shadow-sm">
                                 <i class="bi bi-upload"></i> Submit Manuscript
                             </a>
                             <a href="{{ session()->has('AuthorLoggedUser') ? route('author.dashboard') : route('author.login') }}"

@@ -13,7 +13,7 @@
             justify-content: center;
             padding: 10px 18px;
             border-radius: 999px;
-            background-color: #dc3545;
+            background-color: #00664f;
             color: #fff;
             border: 2px solid #ffffff;
             font-size: 14px;
@@ -115,7 +115,7 @@
             padding: 12px 0;
         }
 
-        .top-banner .container > .d-flex {
+        .top-banner .container>.d-flex {
             align-items: center;
             gap: 1.5rem;
             min-height: 110px;
@@ -134,7 +134,7 @@
         }
 
         @media (max-width: 991.98px) {
-            .top-banner .container > .d-flex {
+            .top-banner .container>.d-flex {
                 min-height: auto;
                 gap: 1rem;
             }
@@ -169,7 +169,28 @@
         }
     </style>
 
-    <a href="/manuscript" class="floating-submit-btn">
+    <style>
+        .impact {
+            background: orange;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .impact-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+
+
+    <a href="/submit-article" class="floating-submit-btn">
         <i class="bi bi-upload"></i>
         <span>Submit Manuscript</span>
     </a>
@@ -205,10 +226,10 @@
     <div class="top-banner ">
         <div class="container">
             {{-- <div class="d-flex align-items-center justify-content-between"> --}}
-            <div class="d-flex align-items-center gap-4">
+            <div class="d-flex align-items-center gap-4 justify-content-between">
 
                 <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" class="logo" alt="">
-                <div class="journal-meta">
+                <div class="journal-meta  text-center text-md-start">
 
                     <div class="journal-title">
                         {{-- Research Journal of Medical Science --}}
@@ -229,6 +250,21 @@
                 </div>
 
 
+                <div class="d-none d-sm-block">
+                    <div class="impact  text-center text-md-start">
+                        {{-- Impact Factor: <span class="badge bg-success">7.1</span> --}}
+                        <div class="impact-text">
+                            <div>
+                                Impact:
+                            </div>
+                            <div>
+                                0.0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -240,8 +276,8 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg shadow-sm site-navbar" 
-style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !important;">
+<nav class="navbar navbar-expand-lg shadow-sm site-navbar"
+    style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !important;">
 
     <div class="container">
 
@@ -300,7 +336,7 @@ style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !i
                                 Announcements
                             </a>
                         </li>
-                         <li>
+                        <li>
                             <a class="dropdown-item {{ request()->is('indexings/*') ? 'active' : '' }}"
                                 href="{{ url('indexings/' . $journal->slug) }}">
                                 Indexings
@@ -390,6 +426,12 @@ style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !i
                                 Archives
                             </a>
                         </li>
+                        <li>
+                            <a class="dropdown-item {{ request()->is('archives/*') ? 'active' : '' }}"
+                                href="{{ url('archives/' . $journal->slug) }}">
+                                Current Issue
+                            </a>
+                        </li>
                         {{-- <li>
                             <a class="dropdown-item 
                                                 {{ request()->is('copyrights') ? 'active' : '' }}"
@@ -411,7 +453,8 @@ style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !i
                         href="/contact-us">Contact Us</a></li>
 
             </ul>
-            <form class="header-search-form d-flex ms-lg-3" action="{{ route('article.search') }}" method="GET" role="search">
+            <form class="header-search-form d-flex ms-lg-3" action="{{ route('article.search') }}" method="GET"
+                role="search">
                 <input class="form-control form-control-sm" type="search" name="q" value="{{ request('q') }}"
                     placeholder="Search articles" aria-label="Search articles">
                 <button class="btn btn-sm btn-light ms-1" type="submit" aria-label="Search">
