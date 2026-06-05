@@ -30,6 +30,7 @@ Route::get('archives', [IndexController::class, 'archives']);
 Route::get('archives/{v_slug}/{i_slug}', [IndexController::class, 'articles']);
 Route::get('journal/{slug}', [IndexController::class, 'journal']);
 Route::get('current-issue', [IndexController::class, 'currentIssue']);
+Route::get('sitemap.xml', [IndexController::class, 'sitemap']);
 
 
 Route::get('conference' , [adminPanelController::class,'conference']);

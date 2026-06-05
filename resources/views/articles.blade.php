@@ -21,7 +21,7 @@
                             @foreach ($articles as $a)
                                 <div class="border border-dark rounded p-2 m-2">
                                     <h5>
-                                        <a href="#">{{ $a->name }}</a>
+                                        <a href="/journal/{{ $a->slug }}">{{ $a->name }}</a>
                                     </h5>
 
                                     <div>
@@ -44,7 +44,8 @@
                                     @endif
 
                                     <div>
-                                        <a href="/journal/{{ $a->slug }}">Read More »</a>
+                                        <a class="btn btn-outline-primary btn-sm" href="/assets/articles/{{ $a->file }}">PDF </a> |
+                                        <a class="btn btn-outline-primary btn-sm" href="/journal/{{ $a->slug }}">Read More »</a>
 
                                     </div>
 

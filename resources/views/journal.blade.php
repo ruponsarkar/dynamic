@@ -2,6 +2,16 @@
 
 @section('title', $article->name )
 
+@section('citation')
+    <meta name="citation_title" content="{{ $article->name }}">
+    <meta name="citation_author" content="{{ $article->aname }}">
+    <meta name="citation_publication_date" content="{{ $article->published_date }}">
+    <meta name="citation_journal_title" content="{{ $journal->j_name }}">
+    <meta name="citation_volume" content="{{ $volume->name ?? '' }}">
+    <meta name="citation_issue" content="{{ $issue->name ?? '' }}">
+    <meta name="citation_doi" content="{{ $article->doi }}">
+@endsection
+
 @section('content')
 
     <div>
@@ -19,7 +29,7 @@
 
                         <div class="pb-2">
                             <div>
-                                <b>Abstract</b>
+                                <b>Abstractu</b>
                             </div>
                             {!! $article->abstract !!}
                         </div>
@@ -56,6 +66,12 @@
                                 </div>
                             </div>
                         @endif
+
+
+
+                        <div>
+                            <a class="btn btn-outline-primary btn-sm" href="/assets/articles/{{ $article->file }}">Download PDF </a>
+                        </div>
 
                     </div>
 
