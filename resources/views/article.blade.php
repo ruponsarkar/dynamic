@@ -43,20 +43,39 @@
 
                             <div class="pb-2">
                                 <div>
+                                    <b>Author(s):</b>{{ $article->aname }}
+                                </div>
+                            </div>
+
+
+                            <div class="pb-2">
+                                <div>
+                                    <b>Received:</b> {{ \Carbon\Carbon::parse($article->received)->format('F j, Y') }}
+                                    |
+                                    <b>Accepted:</b> {{ \Carbon\Carbon::parse($article->accepted)->format('F j, Y') }}
+                                    |
+                                    <b>Published:</b>
+                                    {{ \Carbon\Carbon::parse($article->published_date)->format('F j, Y') }}
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="pb-2">
+                                <div>
                                     <b>Abstract</b>
                                 </div>
                                 {!! $article->abstract !!}
                             </div>
+
+                            <br>
+
                             <div class="pb-2">
                                 <div>
-                                    <b>Keywords:</b>{{ $article->keywords }}
+                                    <b>Keywords: </b> {{ $article->keywords }}
                                 </div>
                             </div>
-                            <div class="pb-2">
-                                <div>
-                                    <b>Author(s):</b>{{ $article->aname }}
-                                </div>
-                            </div>
+                            <br>
 
                             @if ($article->email)
                                 <div class="pb-2">
@@ -65,14 +84,16 @@
                                     </div>
                                 </div>
                             @endif
-
+                            <br>
                             @if ($article->doi)
                                 <div class="pb-2">
                                     <div>
-                                        <b>DOI:</b>{{ $article->doi }}
+                                        <b>DOI:</b> <a class="text-dark" href="{{ $article->doi }}"
+                                            target="_blank">{{ $article->doi }}</a>
                                     </div>
                                 </div>
                             @endif
+                            <br>
                             @if ($article->orcid_id)
                                 <div class="pb-2">
                                     <div>
@@ -80,6 +101,13 @@
                                     </div>
                                 </div>
                             @endif
+
+                            <br>
+                            <div class="pb-2">
+                                <div>
+                                     <a class="btn btn-primary btn-sm" href="{{ url('assets/articles/' . $article->file) }}"
+                                        target="_blank">Download PDF</a>
+                                </div>
 
                         </div>
 

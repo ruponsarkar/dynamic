@@ -160,16 +160,20 @@
                                             <div class="card-c p-3 article-card-wrap w-100 d-flex flex-column"
                                                 style="word-break: break-word;">
                                                 <div>
-                                                    <b>{{ $article->name }}</b>
+                                                    <b><a class="text-dark"
+                                                            href="/article/{{ $article->slug }}">{{ $article->name }}</a></b>
                                                 </div>
 
                                                 <div>
                                                     <b>Author(s):</b> {{ $article->aname }}
                                                 </div>
 
-                                                <div>
-                                                    <b>DOI:</b> {{ $article->doi }}
-                                                </div>
+                                                @if ($article->doi)
+                                                    <div>
+                                                        <b>DOI:</b> <a class="text-dark" href="{{ $article->doi }}"
+                                                            target="_blank">{{ $article->doi }}</a>
+                                                    </div>
+                                                @endif
 
                                                 <div>
                                                     <b>Page:</b> {{ $article->page }}
