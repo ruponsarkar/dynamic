@@ -200,24 +200,28 @@ class IndexController extends Controller
     }
 
 
-    function currentIssue()
+    function currentIssue($slug)
     {
-        $v = DB::table('volume')->orderBy('id', 'desc')->first();
-        $i = DB::table('issues')->orderBy('id', 'desc')->first();
-        
-        if (!$v || !$i) {
-            abort(404, 'Volume or Issue not found');
+        $journal = DB::table('journals')->where('slug', $slug)->first();
+
+        if (!$journal) {
+            abort(404, 'Journal not found');
         }
 
+        $latestIssue = DB::table('issues')
+            ->join('volume', 'issues.v_id', '=', 'volume.id')
+            ->select('issues.id', 'issues.slug', 'volume.id as volume_id', 'volume.slug as volume_slug')
+            ->where('volume.j_id', $journal->j_id)
+            ->orderBy('volume.year', 'desc')
+            ->orderBy('volume.id', 'desc')
+            ->orderBy('issues.id', 'desc')
+            ->first();
 
-        $articles = DB::table('article')
-            ->where('i_id', $i->id)
-            ->where('status', 1)
-            ->orderBy('id', 'desc')
-            ->get();
+        if (!$latestIssue) {
+            return redirect(url('archives/' . $journal->slug));
+        }
 
-        // return $articles;
-        return view('articles', ['articles' => $articles, 'volume' => $v, 'issue' => $i]);
+        return redirect(url('archives/' . $journal->slug . '/' . $latestIssue->volume_slug . '/' . $latestIssue->slug . '?i=' . $latestIssue->id . '&v=' . $latestIssue->volume_id));
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'RJMS Publisher')
+@section('title', 'Research Journal of Medical Science')
 
 <style>
     .sidebar-btn {

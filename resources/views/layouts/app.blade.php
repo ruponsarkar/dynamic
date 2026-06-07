@@ -4,13 +4,59 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @php
+        $metaTitle = trim($__env->yieldContent('title', 'Research Journal of Medical Science'));
+        $metaDescription = trim($__env->yieldContent(
+            'description',
+            'IRGS Publisher is a leading academic publisher specializing in high-quality journals across various disciplines. We are committed to advancing research and knowledge dissemination through our rigorous peer-review process and open access policies.',
+        ));
+        $metaImage = trim($__env->yieldContent('meta_image', asset('fav/android-icon-192x192.png')));
+        $metaType = trim($__env->yieldContent('meta_type', 'website'));
+        $metaRobots = trim($__env->yieldContent('meta_robots', 'index,follow'));
+        $canonicalUrl = url()->current();
+    @endphp
 
-    <title>@yield('title', 'IRGS Publisher')</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/favicon-16x16.png') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/favicon/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('assets/favicon/apple-touch-icon.png') }}">
-    <link rel="manifest" href="{{ asset('assets/favicon/site.webmanifest') }}">
+    <title>{{ $metaTitle }}</title>
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta name="robots" content="{{ $metaRobots }}">
+    <meta name="author" content="IRGS Publisher">
+    <meta name="theme-color" content="#0056a3">
+    <meta name="msapplication-TileColor" content="#0056a3">
+    <meta name="msapplication-config" content="{{ asset('fav/browserconfig.xml') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="{{ $metaTitle }}">
+
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('fav/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('fav/favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('fav/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('fav/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('fav/favicon-96x96.png') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('fav/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('fav/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('fav/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('fav/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('fav/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('fav/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('fav/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('fav/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('fav/apple-icon-180x180.png') }}">
+    <link rel="manifest" href="{{ asset('fav/manifest.json') }}">
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="{{ $metaType }}">
+    <meta property="og:title" content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:site_name" content="Research Journal of Medical Science">
+    <meta property="og:image" content="{{ $metaImage }}">
+    <meta property="og:image:alt" content="{{ $metaTitle }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+    <meta name="twitter:image" content="{{ $metaImage }}">
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

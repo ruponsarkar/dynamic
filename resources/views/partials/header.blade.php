@@ -421,14 +421,16 @@
                     <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
 
                         <li>
-                            <a class="dropdown-item {{ request()->is('archives/*') ? 'active' : '' }}"
+                            {{-- <a class="dropdown-item {{ request()->is('archives/*') ? 'active' : '' }}" --}}
+                            <a class="dropdown-item "
                                 href="{{ url('archives/' . $journal->slug) }}">
                                 Archives
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item {{ request()->is('archives/*') ? 'active' : '' }}"
-                                href="{{ url('archives/' . $journal->slug) }}">
+                            {{-- <a class="dropdown-item {{ request()->is('current-issue/*') ? 'active' : '' }}" --}}
+                            <a class="dropdown-item"
+                                href="{{ url('current-issue/' . $journal->slug) }}">
                                 Current Issue
                             </a>
                         </li>

@@ -48,7 +48,7 @@ Route::get('journal/{slug}', [IndexController::class, 'journal']);
 Route::get('article/{slug}', [IndexController::class, 'article']);
 Route::get('indexings/{slug}', [IndexController::class, 'indexings']);
 Route::get('certificates/{slug}', [IndexController::class, 'certificates']);
-Route::get('current-issue', [IndexController::class, 'currentIssue']);
+Route::get('current-issue/{slug}', [IndexController::class, 'currentIssue']);
 
 
 Route::get('conference' , [adminPanelController::class,'conference']);
