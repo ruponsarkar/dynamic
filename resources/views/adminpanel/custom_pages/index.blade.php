@@ -20,9 +20,9 @@
 
             <textarea class="form-control summernote" name="data" placeholder=""> {{ $data->data }} </textarea>
 
-            @if ($data->type == 'page')
+            {{-- @if ($data->type == 'page' || $data->type == 'useful_links') --}}
                 <div class="mb-3">
-                    <label for="meta_title">Page Title</label>
+                    <label for="meta_title">Title</label>
                     <input type="text" class="form-control" name="page_title" value="{{ $data->page_title }}"
                         id="">
                 </div>
@@ -37,7 +37,7 @@
                     <input type="text" class="form-control" name="meta_description" value="{{ $data->meta_description }}"
                         id="">
                 </div>
-            @endif
+            {{-- @endif --}}
             <button class="btn btn-primary">Save</button>
         </form>
     </div>
