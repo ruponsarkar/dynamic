@@ -658,6 +658,8 @@ class adminPanelController extends Controller
         $articles->fileOriginalName = $fileOriginalName;
         $articles->designation = strip_tags($request->designation);
         $articles->doi = strip_tags($request->doi);
+        $articles->doi_link = strip_tags($request->doi_link);
+        $articles->article_type = strip_tags($request->article_type);
         $articles->email = strip_tags($request->email);
         $articles->orcid_id = strip_tags($request->orcid_id);
         $articles->page = strip_tags($request->page);
@@ -729,7 +731,8 @@ class adminPanelController extends Controller
         $updateArticle->published_date = $request->published_date;
         $updateArticle->googleScholar = $request->googleScholar;
         $updateArticle->keywords = $request->keywords;
-        $updateArticle->doi = strip_tags($request->doi);
+        $updateArticle->doi_link = strip_tags($request->doi_link);
+        $updateArticle->article_type = strip_tags($request->article_type);
         $updateArticle->page = strip_tags($request->page);
         if ($request->file) {
             $updateArticle->file = strip_tags($file);
@@ -962,6 +965,12 @@ class adminPanelController extends Controller
                 'banner' => $photo
             ]);
             $request->banner->move(base_path('public/assets/homeAssets'), $photo);
+            return redirect()->back()->with('message', 'Updated');
+        }
+        if ($request->impact_factor) {
+            $impact_factor = home_asset::find($id)->update([
+                'impact_factor' => $request->impact_factor
+            ]);
             return redirect()->back()->with('message', 'Updated');
         }
     }

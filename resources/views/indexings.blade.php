@@ -50,9 +50,10 @@
                                         <div class="card-c h-100 p-2 flex-bottom">
 
 
-
-                                            <img class="img-fluid" src="{{ url('/assets/indexing/img/' . $i->img) }}"
-                                                alt="Image" style=" width: 100%; object-fit: contain;">
+                                            <a href="{{ $i->link }}" target="_blank">
+                                                <img class="img-fluid" src="{{ url('/assets/indexing/img/' . $i->img) }}"
+                                                    alt="Image" style=" width: 100%; object-fit: contain;">
+                                            </a>
 
                                             {{-- <div class="text-center"> 
                                             <div>

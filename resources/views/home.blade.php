@@ -159,6 +159,12 @@
                                         <div class="col-md-6 mb-3 d-flex">
                                             <div class="card-c p-3 article-card-wrap w-100 d-flex flex-column"
                                                 style="word-break: break-word;">
+
+                                                <div class="text-muted">
+                                                    <b> <small>{{ $article->article_type }}</small></b>
+                                                </div>
+                                                <hr class="p-1 m-0">
+
                                                 <div>
                                                     <b><a class="text-dark"
                                                             href="/article/{{ $article->slug }}">{{ $article->name }}</a></b>
@@ -170,7 +176,7 @@
 
                                                 @if ($article->doi)
                                                     <div>
-                                                        <b>DOI:</b> <a class="text-dark" href="{{ $article->doi }}"
+                                                        <b>DOI:</b> <a class="text-dark" href="{{ $article->doi_link }}"
                                                             target="_blank">{{ $article->doi }}</a>
                                                     </div>
                                                 @endif

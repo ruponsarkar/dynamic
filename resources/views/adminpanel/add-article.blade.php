@@ -53,9 +53,27 @@
                                     <label class="form-label" for="name">Author Designation</label>
                                     <input type="text" name="designation" id="" class="form-control">
                                 </div>
-                                <div class="col-md-12 pt-4">
+                                <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Email</label>
                                     <input type="text" name="email" id="" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 pt-4">
+                                    <label class="form-label" for="name">Article Type</label>
+                                    <select name="article_type" id="article_type" class="form-control">
+                                        <option value="">Select Article Type</option>
+                                        <option value="Research Article">Research Article</option>
+                                        <option value="Review Article">Review Article</option>
+                                        <option value="Case Study">Case Study</option>
+                                        <option value="Short Communication">Short Communication</option>
+                                        <option value="Letter to the Editor">Letter to the Editor</option>
+                                        <option value="Editorial">Editorial</option>
+                                        <option value="Conference Paper">Conference Paper</option>
+                                        <option value="Book Review">Book Review</option>
+                                        <option value="Case Presentation">Case Presentation</option>
+                                        <option value="Case Report">Case Report</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                 </div>
 
 
@@ -75,10 +93,10 @@
                                     <label class="form-label" for="name">Language</label>
                                     <input type="text" name="language" id="language" class="form-control">
                                 </div>
-                                <div class="col-md-6 pt-4">
+                                {{-- <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Licence</label>
                                     <input type="text" name="licence" id="licence" class="form-control">
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Received</label>
@@ -102,6 +120,10 @@
                                     <label class="form-label" for="name">DOI</label>
                                     <input type="text" name="doi" id="doi" class="form-control">
                                 </div>
+                                <div class="col-md-6 pt-4">
+                                    <label class="form-label" for="name">DOI Link</label>
+                                    <input type="text" name="doi_link" id="doi_link" class="form-control">
+                                </div>
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Page No</label>
@@ -109,12 +131,12 @@
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Orcid-id</label>
-                                    <input type="text" name="orcid_id" id="page" class="form-control">
+                                    <input type="text" name="orcid_id" id="orcid_id" class="form-control">
                                 </div>
 
                                 <div class="col-md-12 pt-4">
                                     <label class="form-label" for="name">Keywords</label>
-                                    <input type="text" name="keywords" id="" class="form-control">
+                                    <input type="text" name="keywords" id="keywords" class="form-control">
                                 </div>
 
                                 <div class="one pt-4">

@@ -25,6 +25,7 @@ use App\Http\Controllers\AuthorController;
 // });
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('archives/6/14/', [IndexController::class, 'index']);
 
 
 Route::get('search', [IndexController::class, 'search'])->name('article.search');

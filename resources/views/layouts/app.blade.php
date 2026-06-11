@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
         $metaTitle = trim($__env->yieldContent('title', 'Research Journal of Medical Science'));
-        $metaDescription = trim($__env->yieldContent(
-            'description',
-            'IRGS Publisher is a leading academic publisher specializing in high-quality journals across various disciplines. We are committed to advancing research and knowledge dissemination through our rigorous peer-review process and open access policies.',
-        ));
+        $metaDescription = trim(
+            $__env->yieldContent(
+                'description',
+                'IRGS Publisher is a leading academic publisher specializing in high-quality journals across various disciplines. We are committed to advancing research and knowledge dissemination through our rigorous peer-review process and open access policies.',
+            ),
+        );
         $metaImage = trim($__env->yieldContent('meta_image', asset('fav/android-icon-192x192.png')));
         $metaType = trim($__env->yieldContent('meta_type', 'website'));
         $metaRobots = trim($__env->yieldContent('meta_robots', 'index,follow'));
@@ -150,6 +152,10 @@
             padding: 15px;
             /* text-align: center; */
             /* margin-top: 40px; */
+        }
+
+        a.text-dark:hover {
+            text-decoration: underline;
         }
     </style>
 </head>

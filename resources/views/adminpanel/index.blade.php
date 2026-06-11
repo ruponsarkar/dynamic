@@ -85,7 +85,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-xl-12">
+            <div class="col-md-6 col-xl-6">
                 <div class="card daily-sales">
                     <div class="card-block">
                         <h6 class="mb-4">Change Logo</h6>
@@ -99,7 +99,9 @@
                                 <input class="form-control" type="file"  name="logo" accept=".jpg,.jpeg,.png" id="formFile" required>
                             </div>
                             <div class="col-12 pt-2">
-                                <input class="form-control btn btn-primary btn-sm" type="submit"  name="" value="Change Logo">
+                                <div>
+                                    <input class="form-control btn btn-primary btn-sm" type="submit"  name="" value="Change Logo">
+                                </div>
                             </div>
                         </form>
                             
@@ -108,6 +110,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6 col-xl-6">
+                <div class="card daily-sales">
+                    <div class="card-block">
+                        <h6 class="mb-4">Impact factor</h6>
+                        <div class="row d-flex align-items-center">
+                            <form action="changeHomeAsset" method="post">
+                                @csrf
+                            <div class="col-12">
+                                <input class="form-control" type="text" value="{{$HomeAssets->impact_factor}}"  name="impact_factor" id="impact_factor" required>
+                            </div>
+                            <div class="col-12 pt-2">
+                                <div>
+                                    <input class="form-control btn btn-primary btn-sm" type="submit"  name="" value="Change Impact Factor">
+                                </div>
+                            </div>
+                        </form>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             {{-- <div class="col-md-6 col-xl-6">
                 <div class="card daily-sales">
                     <div class="card-block">

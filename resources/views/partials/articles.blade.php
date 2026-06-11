@@ -14,7 +14,10 @@
     @foreach ($articles as $article)
         <div class="card-c p-3 mb-2 article-card-wrap">
 
-
+            <div class="text-muted">
+                  <b> <small>{{ $article->article_type }}</small></b>
+            </div>
+            <hr class="p-1 m-0">
 
             <div>
                 {{-- <b>
@@ -24,7 +27,7 @@
                 <b><a class="text-dark" href="/article/{{ $article->slug }}">{{ $article->name }}</a></b>
             </div>
             <div>
-                <b>Author(s):</b>{{ $article->aname }}
+                <b class="text-muted">Author(s):</b>{{ $article->aname }}
             </div>
 
             {{-- <div>
@@ -32,11 +35,11 @@
             </div> --}}
             @if ($article->doi)
                 <div>
-                    <b>DOI:</b> <a class="text-dark" href="{{ $article->doi }}" target="_blank">{{ $article->doi }}</a>
+                    <b class="text-muted">DOI:</b> <a class="text-dark" href="{{ $article->doi_link }}" target="_blank">{{ $article->doi }}</a>
                 </div>
             @endif
             <div>
-                <b>Page:</b>{{ $article->page }}
+                <b class="text-muted">Page:</b>{{ $article->page }}
             </div>
 
             <div class="article-card-links">
