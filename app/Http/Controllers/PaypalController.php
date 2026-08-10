@@ -23,6 +23,8 @@ class PaypalController extends Controller
             ], 422);
         }
 
+        $amount = $this->calculateTotalAmount($option);
+
         $accessToken = $this->getAccessToken();
 
         if (!$accessToken) {
@@ -41,7 +43,7 @@ class PaypalController extends Controller
                         'description' => $option['label'],
                         'amount' => [
                             'currency_code' => $option['currency'],
-                            'value' => $option['amount'],
+                            'value' => $amount,
                         ],
                     ],
                 ],
@@ -61,7 +63,7 @@ class PaypalController extends Controller
             'status' => $payload['status'] ?? 'CREATED',
             'intent' => config('services.paypal.intent', 'CAPTURE'),
             'currency_code' => $option['currency'],
-            'amount_value' => $option['amount'],
+            'amount_value' => $amount,
             'amount_option_key' => $option['key'],
             'amount_option_label' => $option['label'],
             'amount_option_description' => $option['description'] ?? null,
@@ -178,5 +180,28 @@ class PaypalController extends Controller
     protected function paypalBaseUrl()
     {
         return rtrim(config('services.paypal.base_url', 'https://api-m.sandbox.paypal.com'), '/');
+    }
+
+    protected function calculateTotalAmount(array $option)
+    {
+        $taxConfig = config('payments.tax', []);
+        $isEnabled = (bool) ($taxConfig['enabled'] ?? false);
+        $amount = (float) ($option['amount'] ?? 0);
+
+        if (!$isEnabled) {
+            return number_format($amount, 2, '.', '');
+        }
+
+        $tax = $option['tax'] ?? [];
+        $taxType = strtolower((string) ($tax['type'] ?? ''));
+        $taxValue = (float) ($tax['value'] ?? 0);
+
+        if ($taxType === 'percentage') {
+            $amount += ($amount * $taxValue) / 100;
+        } elseif ($taxType === 'fixed') {
+            $amount += $taxValue;
+        }
+
+        return number_format($amount, 2, '.', '');
     }
 }

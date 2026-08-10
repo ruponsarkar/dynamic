@@ -1,3 +1,4 @@
+<!--modified -->
 @extends('layouts.app')
 
 @section('title', 'Payments')
@@ -242,6 +243,73 @@
             color: #1d4ed8;
         }
 
+        .payment-tax-note {
+            margin-top: 10px;
+            color: #475569;
+            font-size: 0.92rem;
+        }
+
+        .payment-tax-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.55);
+            z-index: 1055;
+        }
+
+        .payment-tax-modal.is-visible {
+            display: flex;
+        }
+
+        .payment-tax-dialog {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+        }
+
+        .payment-tax-breakdown {
+            margin: 18px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .payment-tax-breakdown li {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        .payment-tax-breakdown li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .payment-tax-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .payment-secondary-action {
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 13px 18px;
+            font-weight: 700;
+            color: #0f172a;
+            background: #fff;
+            width: 100%;
+        }
+
         @media (max-width: 767px) {
             .payments-hero {
                 padding: 24px;
@@ -270,8 +338,7 @@
                         </div>
                         <h1 class="mt-3 mb-2 fw-bold">Payment Information</h1>
                         <p class="mb-0">
-                            Choose the payment method that works best for you. Indian authors can pay by QR code,
-                            international authors can use PayPal, and bank transfer details are listed below.
+                            Choose the payment method that works best for you. Indian authors can make payments via UPI QR Code, Direct Bank Transfer, or Razorpay by selecting INR (₹). International authors can pay through Bank Transfer (SWIFT), Razorpay by selecting USD ($), or PayPal. All payment details are provided below for your convenience. 
                         </p>
                     </div>
 
@@ -311,7 +378,12 @@
                                         <i class="bi bi-phone"></i>
                                     </span>
                                     <span>Pay Online with Razorpay</span>
+                                    
                                 </div>
+                                <div>
+                                    (For Indian & International Authors)
+                                </div>
+                                
 
                                 <p class="text-muted">
                                     Indian and international authors can pay securely using Razorpay. INR and USD payments are supported.
@@ -340,6 +412,7 @@
                                     <div class="small text-muted mt-2" id="razorpay-amount-description">
                                         {{ $paymentConfig['razorpay_amount_options']['USD'][0]['description'] ?? '' }}
                                     </div>
+                                    <div class="payment-tax-note" id="razorpay-tax-note"></div>
                                 </div>
 
                                 @if (!empty($razorpayConfig['key_id']))
@@ -392,10 +465,11 @@
                                     <div class="small text-muted mt-2" id="paypal-amount-description">
                                         {{ $paymentConfig['paypal_amount_options'][0]['description'] ?? '' }}
                                     </div>
+                                    <div class="payment-tax-note" id="paypal-tax-note"></div>
                                 </div>
 
                                 @if (!empty($paypalConfig['client_id']))
-                                    <div id="paypal-button-container"></div>
+                                    <button type="button" class="payment-action" id="paypal-open-modal-button">Review Total & PayPal</button>
                                     <div id="paypal-status" class="gateway-status"></div>
                                 @else
                                     <div class="payment-note">
@@ -504,6 +578,21 @@
         </div>
     </div>
 
+    <div class="payment-tax-modal" id="payment-tax-modal" aria-hidden="true">
+        <div class="payment-tax-dialog" role="dialog" aria-modal="true" aria-labelledby="payment-tax-modal-title">
+            <h3 class="fw-bold mb-2" id="payment-tax-modal-title">Confirm payment total</h3>
+            <p class="text-muted mb-0" id="payment-tax-modal-message"></p>
+            <ul class="payment-tax-breakdown" id="payment-tax-breakdown"></ul>
+            <div class="payment-tax-actions">
+                <button type="button" class="payment-secondary-action" id="payment-tax-cancel-button">Cancel</button>
+                <button type="button" class="payment-action" id="payment-tax-confirm-button">Continue to payment</button>
+            </div>
+            <div id="payment-tax-paypal-wrap" style="display: none; margin-top: 14px;">
+                <div id="payment-tax-paypal-container"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function updateGatewayStatus(element, message, type) {
             if (!element) {
@@ -512,6 +601,169 @@
 
             element.textContent = message;
             element.className = 'gateway-status' + (type ? ' ' + type : '');
+        }
+
+        const paymentTaxConfig = @json($paymentConfig['tax'] ?? []);
+        const paymentTaxModal = document.getElementById('payment-tax-modal');
+        const paymentTaxModalMessage = document.getElementById('payment-tax-modal-message');
+        const paymentTaxBreakdown = document.getElementById('payment-tax-breakdown');
+        const paymentTaxCancelButton = document.getElementById('payment-tax-cancel-button');
+        const paymentTaxConfirmButton = document.getElementById('payment-tax-confirm-button');
+        const paymentTaxPaypalWrap = document.getElementById('payment-tax-paypal-wrap');
+        let pendingPaymentConfirmation = null;
+        let paymentTaxModalMode = 'confirm';
+
+        function formatPaymentAmount(amount, currency) {
+            const numericAmount = Number(amount || 0);
+
+            return numericAmount.toLocaleString(undefined, {
+                style: 'currency',
+                currency: currency || 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function calculatePaymentTotals(option) {
+            const amount = option && option.amount ? option.amount : 0;
+            const baseAmount = Number(amount || 0);
+            const tax = option && option.tax ? option.tax : {};
+            const isTaxEnabled = !paymentTaxConfig || paymentTaxConfig.enabled !== false;
+            const taxType = String(tax.type || '').toLowerCase();
+            const taxValue = Number(tax.value || 0);
+            let taxAmount = 0;
+
+            if (isTaxEnabled && taxType === 'percentage') {
+                taxAmount = Number((baseAmount * taxValue / 100).toFixed(2));
+            } else if (isTaxEnabled && taxType === 'fixed') {
+                taxAmount = Number(taxValue.toFixed(2));
+            }
+
+            const totalAmount = Number((baseAmount + taxAmount).toFixed(2));
+            let taxText = paymentTaxConfig.label || 'Tax';
+
+            if (taxAmount > 0 && taxType === 'percentage') {
+                taxText += ' (' + taxValue + '%)';
+            } else if (taxAmount > 0 && taxType === 'fixed') {
+                taxText += ' (Fixed)';
+            }
+
+            return {
+                baseAmount: baseAmount,
+                taxType: taxType,
+                taxValue: taxValue,
+                taxAmount: taxAmount,
+                totalAmount: totalAmount,
+                taxLabel: taxText
+            };
+        }
+
+        function renderTaxNote(element, option, currency) {
+            if (!element) {
+                return;
+            }
+
+            const totals = calculatePaymentTotals(option || {});
+
+            if (totals.taxAmount <= 0) {
+                element.textContent = 'Total payable: ' + formatPaymentAmount(totals.totalAmount, currency);
+                return;
+            }
+
+            element.textContent = totals.taxLabel + ': ' + formatPaymentAmount(totals.taxAmount, currency) + '. Total payable: ' + formatPaymentAmount(totals.totalAmount, currency);
+        }
+
+        function hidePaymentTaxModal() {
+            if (!paymentTaxModal) {
+                return;
+            }
+
+            paymentTaxModal.classList.remove('is-visible');
+            paymentTaxModal.setAttribute('aria-hidden', 'true');
+            pendingPaymentConfirmation = null;
+            paymentTaxModalMode = 'confirm';
+
+            if (paymentTaxConfirmButton) {
+                paymentTaxConfirmButton.style.display = '';
+            }
+
+            if (paymentTaxPaypalWrap) {
+                paymentTaxPaypalWrap.style.display = 'none';
+            }
+        }
+
+        function showPaymentTaxModal(config) {
+            if (!paymentTaxModal || !paymentTaxModalMessage || !paymentTaxBreakdown || !paymentTaxConfirmButton) {
+                return Promise.resolve(true);
+            }
+
+            pendingPaymentConfirmation = null;
+            paymentTaxModalMode = config.mode || 'confirm';
+
+            paymentTaxModalMessage.textContent = config.message;
+            paymentTaxBreakdown.innerHTML = '';
+
+            config.rows.forEach(function(row) {
+                const rowElement = document.createElement('li');
+                const labelElement = document.createElement('span');
+                const valueElement = document.createElement('span');
+
+                labelElement.textContent = row.label;
+                valueElement.textContent = row.value;
+
+                rowElement.appendChild(labelElement);
+                rowElement.appendChild(valueElement);
+                paymentTaxBreakdown.appendChild(rowElement);
+            });
+
+            paymentTaxConfirmButton.style.display = paymentTaxModalMode === 'paypal' ? 'none' : '';
+
+            if (paymentTaxPaypalWrap) {
+                paymentTaxPaypalWrap.style.display = paymentTaxModalMode === 'paypal' ? 'block' : 'none';
+            }
+
+            paymentTaxModal.classList.add('is-visible');
+            paymentTaxModal.setAttribute('aria-hidden', 'false');
+
+            if (paymentTaxModalMode === 'paypal') {
+                return Promise.resolve(true);
+            }
+
+            return new Promise(function(resolve) {
+                pendingPaymentConfirmation = resolve;
+            });
+        }
+
+        if (paymentTaxCancelButton) {
+            paymentTaxCancelButton.addEventListener('click', function() {
+                if (pendingPaymentConfirmation) {
+                    pendingPaymentConfirmation(false);
+                }
+
+                hidePaymentTaxModal();
+            });
+        }
+
+        if (paymentTaxConfirmButton) {
+            paymentTaxConfirmButton.addEventListener('click', function() {
+                if (pendingPaymentConfirmation) {
+                    pendingPaymentConfirmation(true);
+                }
+
+                hidePaymentTaxModal();
+            });
+        }
+
+        if (paymentTaxModal) {
+            paymentTaxModal.addEventListener('click', function(event) {
+                if (event.target === paymentTaxModal) {
+                    if (pendingPaymentConfirmation) {
+                        pendingPaymentConfirmation(false);
+                    }
+
+                    hidePaymentTaxModal();
+                }
+            });
         }
     </script>
 
@@ -528,6 +780,7 @@
             const razorpayName = document.getElementById('razorpay-name');
             const razorpayEmail = document.getElementById('razorpay-email');
             const razorpayPhone = document.getElementById('razorpay-phone');
+            const razorpayTaxNote = document.getElementById('razorpay-tax-note');
 
             function getSelectedRazorpayCurrency() {
                 if (!razorpayCurrencySelect) {
@@ -582,6 +835,13 @@
                 const currencyLabel = getSelectedRazorpayCurrencyLabel();
                 const description = selectedOption.description ? selectedOption.description + '. ' : '';
                 razorpayAmountDescription.textContent = description + 'Selected amount: ' + currencyLabel + ' ' + selectedOption.amount;
+                renderTaxNote(razorpayTaxNote, selectedOption, getSelectedRazorpayCurrency());
+            }
+
+            function getSelectedRazorpayOption() {
+                return getRazorpayOptionsForCurrency().find(function(option) {
+                    return option.key === (razorpayAmountSelect ? razorpayAmountSelect.value : '');
+                });
             }
 
             function setRazorpayButtonLoading(isLoading) {
@@ -594,11 +854,32 @@
             }
 
             if (razorpayPayButton) {
-                razorpayPayButton.addEventListener('click', function() {
+                razorpayPayButton.addEventListener('click', async function() {
                     updateGatewayStatus(razorpayStatus, '', '');
 
                     if (!razorpayName.value.trim() || !razorpayEmail.value.trim()) {
                         updateGatewayStatus(razorpayStatus, 'Name and email are required to continue with Razorpay.', 'is-error');
+                        return;
+                    }
+
+                    const selectedOption = getSelectedRazorpayOption();
+
+                    if (!selectedOption) {
+                        updateGatewayStatus(razorpayStatus, 'Please select a valid payment amount to continue.', 'is-error');
+                        return;
+                    }
+
+                    const totals = calculatePaymentTotals(selectedOption);
+                    const shouldContinue = await showPaymentTaxModal({
+                        message: 'Please review the payable amount before opening Razorpay checkout.',
+                        rows: [
+                            { label: 'Base amount', value: formatPaymentAmount(totals.baseAmount, getSelectedRazorpayCurrency()) },
+                            { label: totals.taxLabel, value: formatPaymentAmount(totals.taxAmount, getSelectedRazorpayCurrency()) },
+                            { label: 'Total payable', value: formatPaymentAmount(totals.totalAmount, getSelectedRazorpayCurrency()) }
+                        ]
+                    });
+
+                    if (!shouldContinue) {
                         return;
                     }
 
@@ -709,6 +990,8 @@
             const amountSelect = document.getElementById('paypal-amount-option');
             const amountDescription = document.getElementById('paypal-amount-description');
             const amountOptions = @json($paymentConfig['paypal_amount_options'] ?? []);
+            const paypalTaxNote = document.getElementById('paypal-tax-note');
+            const paypalOpenModalButton = document.getElementById('paypal-open-modal-button');
 
             function updateAmountDescription() {
                 if (!amountSelect || !amountDescription) {
@@ -720,6 +1003,7 @@
                 });
 
                 amountDescription.textContent = selectedOption && selectedOption.description ? selectedOption.description : '';
+                renderTaxNote(paypalTaxNote, selectedOption || {}, selectedOption ? selectedOption.currency : 'USD');
             }
 
             if (window.paypal) {
@@ -776,7 +1060,33 @@
                     onError: function(error) {
                         updateGatewayStatus(paypalStatus, error && error.message ? error.message : 'PayPal payment could not be completed. Please try again.', 'is-error');
                     }
-                }).render('#paypal-button-container');
+                }).render('#payment-tax-paypal-container');
+            }
+
+            if (paypalOpenModalButton) {
+                paypalOpenModalButton.addEventListener('click', function() {
+                    updateGatewayStatus(paypalStatus, '', '');
+
+                    const selectedOption = amountOptions.find(function(option) {
+                        return option.key === (amountSelect ? amountSelect.value : '');
+                    });
+
+                    if (!selectedOption) {
+                        updateGatewayStatus(paypalStatus, 'Please select a valid PayPal payment amount.', 'is-error');
+                        return;
+                    }
+
+                    const totals = calculatePaymentTotals(selectedOption);
+                    showPaymentTaxModal({
+                        mode: 'paypal',
+                        message: 'Please review the payable amount, then click the PayPal button below.',
+                        rows: [
+                            { label: 'Base amount', value: formatPaymentAmount(totals.baseAmount, selectedOption.currency) },
+                            { label: totals.taxLabel, value: formatPaymentAmount(totals.taxAmount, selectedOption.currency) },
+                            { label: 'Total payable', value: formatPaymentAmount(totals.totalAmount, selectedOption.currency) }
+                        ]
+                    });
+                });
             }
 
             updateAmountDescription();

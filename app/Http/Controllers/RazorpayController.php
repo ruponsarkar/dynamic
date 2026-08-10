@@ -37,7 +37,8 @@ class RazorpayController extends Controller
             ], 500);
         }
 
-        $amountInSubunits = $this->convertToSubunits($option['amount']);
+        $amount = $this->calculateTotalAmount($option);
+        $amountInSubunits = $this->convertToSubunits($amount);
         $receipt = 'irgs_' . now()->format('YmdHis') . '_' . str_pad((string) random_int(1, 999999), 6, '0', STR_PAD_LEFT);
 
         $response = Http::withBasicAuth($keyId, $keySecret)
@@ -70,7 +71,7 @@ class RazorpayController extends Controller
             'receipt' => $payload['receipt'] ?? $receipt,
             'status' => $payload['status'] ?? 'created',
             'currency_code' => $currency,
-            'amount_value' => $option['amount'],
+            'amount_value' => $amount,
             'amount_in_subunits' => $amountInSubunits,
             'amount_option_key' => $option['key'],
             'amount_option_label' => $option['label'],
@@ -223,5 +224,28 @@ class RazorpayController extends Controller
     protected function razorpayBaseUrl()
     {
         return rtrim(config('services.razorpay.base_url', 'https://api.razorpay.com'), '/');
+    }
+
+    protected function calculateTotalAmount(array $option)
+    {
+        $taxConfig = config('payments.tax', []);
+        $isEnabled = (bool) ($taxConfig['enabled'] ?? false);
+        $amount = (float) ($option['amount'] ?? 0);
+
+        if (!$isEnabled) {
+            return number_format($amount, 2, '.', '');
+        }
+
+        $tax = $option['tax'] ?? [];
+        $taxType = strtolower((string) ($tax['type'] ?? ''));
+        $taxValue = (float) ($tax['value'] ?? 0);
+
+        if ($taxType === 'percentage') {
+            $amount += ($amount * $taxValue) / 100;
+        } elseif ($taxType === 'fixed') {
+            $amount += $taxValue;
+        }
+
+        return number_format($amount, 2, '.', '');
     }
 }
