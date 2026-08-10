@@ -25,7 +25,7 @@
 
                                 <!-- Slide 1 -->
                                 <div class="carousel-item active"
-                                    style="background: url('{{ asset('assets/banner/j.jpg') }}') center center;">
+                                    style="background: url('{{ asset('assets/banner/b1.webp') }}') center center;">
                                     <div class="carousel-container">
                                         {{-- <div class="container text-center">
                                             <h2>Welcome to <span>Your School Name</span></h2>
@@ -42,7 +42,26 @@
 
                                 <!-- Slide 2 -->
                                 <div class="carousel-item"
-                                    style="background: url('{{ asset('assets/banner/j2.jpg') }}') center center;">
+                                    style="background: url('{{ asset('assets/banner/b2.jpg') }}') center center;">
+                                    <div class="carousel-container">
+                                        {{-- <div class="container text-center">
+                                            <h2>Smart Classrooms</h2>
+                                            <p>Interactive smart learning for a brighter future.</p>
+                                            <a href="#academics" class="btn-get-started scrollto">Academics</a>
+                                        </div> --}}
+
+                                        <div>
+                                            <h2>Submit your manuscript here</h2>
+                                            <div class="text-center">
+                                                <button class="btn btn-primary">Submit Your Manuscript</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 3 -->
+                                 <div class="carousel-item"
+                                    style="background: url('{{ asset('assets/banner/b3.webp') }}') center center;">
                                     <div class="carousel-container">
                                         {{-- <div class="container text-center">
                                             <h2>Smart Classrooms</h2>
@@ -131,11 +150,13 @@
                             </div>
                         </div>
                     </section>
+                    
+                     @include('partials.home_indexings')
 
 
 
                     <section>
-                        @include('partials.counts')
+                        <!--@include('partials.counts')-->
                     </section>
 
 

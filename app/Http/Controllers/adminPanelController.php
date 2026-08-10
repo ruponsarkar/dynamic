@@ -271,6 +271,7 @@ class adminPanelController extends Controller
         $indexing->j_id = strip_tags($request->journal);
         $indexing->link = strip_tags($request->link);
         $indexing->img = strip_tags($photo);
+        $indexing->isShowOnHome = $request->has('isShowOnHome') ? 1 : 0;
         $indexing->ip_address = \Request::ip();
 
         $indexing->save();
@@ -841,27 +842,27 @@ class adminPanelController extends Controller
 
     function UpdateIndexing(Request $request)
     {
+        $indexing = indexings::findOrFail($request->id);
 
-        // return $request->id;
-        if ($request->link) {
-            $indexing = indexings::find($request->id)->update([
-                'link' => $request->link
-            ]);
+        if ($request->has('link')) {
+            $indexing->link = $request->link;
+            $indexing->isShowOnHome = $request->has('isShowOnHome') ? 1 : 0;
+            $indexing->save();
 
             return redirect()->back()->with('message', 'Updated');
         }
 
         if ($request->photo) {
-
             $photo = time() . '.' . $request->photo->extension();
-            $indexing = indexings::find($request->id)->update([
-                'img' => $photo
-            ]);
+            $indexing->img = $photo;
+            $indexing->save();
 
             $request->photo->move(base_path('public/assets/indexing/img'), $photo);
 
             return redirect()->back()->with('message', 'Updated');
         }
+
+        return redirect()->back()->with('message', 'No changes submitted');
     }
 
 

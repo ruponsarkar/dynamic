@@ -26,8 +26,17 @@ class IndexController extends Controller
         ->where('status', 1)
         ->get();
 
+        $homeIndexings = DB::table('indexing')
+            ->where('active', 1)
+            ->where('isShowOnHome', 1)
+            ->orderBy('id', 'desc')
+            ->get();
+
         // return $content;
-        return view('home', ['contents' => $content]);
+        return view('home', [
+            'contents' => $content,
+            'homeIndexings' => $homeIndexings,
+        ]);
     }
 
     public function custom_pages($path)
@@ -116,11 +125,14 @@ class IndexController extends Controller
     function indexings($slug){
         $journal = DB::table('journals')->where('slug', $slug)->first();
 
-        $data = DB::table('indexing')->where('j_id', $journal->j_id)->get();
+        $data = DB::table('indexing')
+            ->where('j_id', $journal->j_id)
+            ->where('active', 1)
+            ->get();
 
         // return $data;
 
-        return view('indexings', ['indexings' => $data]);
+        return view('indexings', ['indexings' => $data, 'journal' => $journal]);
     }
 
 

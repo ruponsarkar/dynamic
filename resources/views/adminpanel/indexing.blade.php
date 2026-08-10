@@ -54,6 +54,14 @@
                                         <input type="file" class="form-control" name="photo" id="">
                                     </div>
 
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" name="isShowOnHome"
+                                            id="isShowOnHomeAdd" value="1">
+                                        <label class="form-check-label" for="isShowOnHomeAdd">
+                                            Show on Home
+                                        </label>
+                                    </div>
+
                                     <div class="one p-2">
                                         <input type="submit" class="btn btn-success" name="add-indexing" value="Save" id="">
                                     </div>
@@ -86,6 +94,7 @@
                                     <th>SL</th>
                                     <th>Link</th>
                                     <th>Indexing</th>
+                                    <th>Show On Home</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -99,6 +108,9 @@
                                     <td> <a href="{{$data->link}}"> {{$data->link}}</a></td>
                                     <td class="text-center">
                                         <img src="{{url('assets/indexing/img/'.$data->img)}}" alt="No Image" width="200">
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $data->isShowOnHome ? 'Yes' : 'No' }}
                                     </td>
                                     <td class="text-center">
 
@@ -157,6 +169,16 @@
                                                     <div class="one">
                                                         <label for="jname">Index link </label>
                                                         <input type="text" value="{{$data->link}}" class="form-control" name="link" id="">
+                                                    </div>
+
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="isShowOnHome" id="isShowOnHome{{$data->id}}"
+                                                            value="1" {{ $data->isShowOnHome ? 'checked' : '' }}>
+                                                        <label class="form-check-label"
+                                                            for="isShowOnHome{{$data->id}}">
+                                                            Show on Home
+                                                        </label>
                                                     </div>
 
                                                     <a class="form-control btn btn-warning btn-sm mt-2" data-bs-toggle="modal" href="#updateImage{{$data->id}}" role="button">Change Image</a>
