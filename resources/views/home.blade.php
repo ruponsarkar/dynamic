@@ -151,7 +151,7 @@
                         </div>
                     </section>
                     
-                     @include('partials.home_indexings')
+                     @include('partials.indexings')
 
 
 

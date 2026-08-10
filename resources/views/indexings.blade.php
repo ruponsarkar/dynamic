@@ -31,8 +31,9 @@
                     <div>
 
 
+                         @include('partials.indexings')
 
-                        <div class="card-c">
+                        {{-- <div class="card-c">
 
                             <div class="card-header">
                                 <div class="h-box">
@@ -54,17 +55,7 @@
                                             <img class="img-fluid" src="{{ url('/assets/indexing/img/' . $i->img) }}"
                                                 alt="Image" style=" width: 100%; object-fit: contain;">
 
-                                            {{-- <div class="text-center"> 
-                                            <div>
-                                               <small> <b>{{ $editor->name }}</b> </small>
-                                            </div>
-                                            <div>
-                                            <small> <i> {{ $editor->university }} </i> </small>
-                                            </div>
-                                            <div>
-                                            <small>  {{ $editor->details }} </small>
-                                            </div>
-                                        </div> --}}
+                                           
                                         </div>
                                     </div>
                                 @endforeach
@@ -78,7 +69,7 @@
 
 
 
-                        </div>
+                        </div> --}}
 
                     </div>
 

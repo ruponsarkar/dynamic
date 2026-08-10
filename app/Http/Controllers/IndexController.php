@@ -35,7 +35,7 @@ class IndexController extends Controller
         // return $content;
         return view('home', [
             'contents' => $content,
-            'homeIndexings' => $homeIndexings,
+            'indexings' => $homeIndexings,
         ]);
     }
 
@@ -113,7 +113,11 @@ class IndexController extends Controller
 
         $journal = DB::table('journals')->where('slug', $slug)->first();
         $recent = DB::table('article')->where('j_id', '=', $journal->j_id)->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
-        return view('details', ['journal' => $journal, 'articles' => $recent]);
+        $indexings = DB::table('indexing')
+            ->where('j_id', $journal->j_id)
+            ->where('active', 1)
+            ->get();
+        return view('details', ['journal' => $journal, 'articles' => $recent, 'indexings' => $indexings]);
     }
 
     function article($slug){

@@ -1,4 +1,4 @@
-@if (isset($homeIndexings) && $homeIndexings->count())
+@if (isset($indexings) && $indexings->count())
     <section class="py-2">
         <div class="card-c">
             <div class="card-header">
@@ -11,7 +11,7 @@
 
             <div class="container p-3">
                 <div class="row g-3">
-                    @foreach ($homeIndexings as $indexing)
+                    @foreach ($indexings as $indexing)
                         <div class="col-6 col-md-3">
                             <div class="card-c h-100 p-2 text-center" style="border: 0; display: flex; border-radius: 10px; align-content: center; align-items: center;">
                                 <a href="{{ $indexing->link }}" target="_blank" rel="noopener noreferrer">

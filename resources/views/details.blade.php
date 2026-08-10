@@ -108,7 +108,6 @@
 
 
 
-
                         <div class="card-c mt-3">
 
                             <div class="card-header">
@@ -155,6 +154,8 @@
                             </div> --}}
 
                         </div>
+
+                        @include('partials.indexings')
 
                     </div>
 
