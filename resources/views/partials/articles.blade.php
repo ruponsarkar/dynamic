@@ -20,7 +20,7 @@
 
             @if ($article->doi != null && $article->doi != '' && $article->doi != 'undefined')
                 <div>
-                    <b>DOI:</b>{{ $article->doi }}
+                    <b>DOI:</b> <a href="{{ $article->doi }}" target="_blank">{{ $article->doi }}</a> 
                 </div>
             @endif
 

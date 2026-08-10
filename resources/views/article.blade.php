@@ -69,7 +69,7 @@
                             @if ($article->doi)
                                 <div class="pb-2">
                                     <div>
-                                        <b>DOI:</b>{{ $article->doi }}
+                                        <b>DOI:</b> <a href="{{ $article->doi }}" target="_blank">{{ $article->doi }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -81,6 +81,9 @@
                                 </div>
                             @endif
 
+                            <div class="pt-3">
+                                <a href="/assets/articles/{{ $article->file }}" class="btn btn-primary">Download PDF</a>
+                            </div>
                         </div>
 
                     </div>
