@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="">
-                    © 2026 Research Journal of Medical Science
+                    © 2026 Research Journal of Medical science
                 </div>
             </div>
 
@@ -94,11 +94,11 @@
                         </u>
                     </div>
                     <div style="text-align: justify;">
-                        <i class="bi bi-pin"></i> xxxx, Hojai, Assam, India – 782445    
+                        <i class="bi bi-pin"></i> Ngong Road, Upperhill, PO Box-206, Kenya. Post code 20100.    
                         <br>
-                        <i class="bi bi-telephone"></i> +91 700000000
-                        <br>
-                        <i class="bi bi-envelope"></i> office@RJMSpublisher.com
+                        <!--<i class="bi bi-telephone"></i> +91 700000000-->
+                        <!--<br>-->
+                        <i class="bi bi-envelope"></i> editor@rjmsonline.com
                         
                     </div>
                    

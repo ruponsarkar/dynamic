@@ -45,7 +45,7 @@
                                     <div>
                                         <div class="btn btn-primary disabled w-100 text-center mb-2">
                                             <b>
-                                                {{ $issues[0]->volume_name }}
+                                                {{ $issues[0]->volume_name }} ({{ $issues[0]->year }}) 
                                             </b>
                                         </div>
                                         <div class="row gap-4">

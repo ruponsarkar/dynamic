@@ -4,14 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @php
+    
+     @php
         $metaTitle = trim($__env->yieldContent('title', 'Research Journal of Medical Science'));
-        $metaDescription = trim(
-            $__env->yieldContent(
-                'description',
-                'IRGS Publisher is a leading academic publisher specializing in high-quality journals across various disciplines. We are committed to advancing research and knowledge dissemination through our rigorous peer-review process and open access policies.',
-            ),
-        );
+        $metaDescription = trim($__env->yieldContent(
+            'description',
+            'The Research Journal of Medical Sciences (RJMS) is an international, peer-reviewed, open-access scholarly journal dedicated to publishing Half-Yearly research in the fields of medical, pharmaceutical, and allied health sciences. The journal serves as a global platform for researchers, clinicians, academicians, and healthcare professionals to disseminate innovative scientific findings and contribute to the advancement of healthcare knowledge and practice.
+
+',
+        ));
         $metaImage = trim($__env->yieldContent('meta_image', asset('fav/android-icon-192x192.png')));
         $metaType = trim($__env->yieldContent('meta_type', 'website'));
         $metaRobots = trim($__env->yieldContent('meta_robots', 'index,follow'));
@@ -59,7 +60,15 @@
     <meta name="twitter:title" content="{{ $metaTitle }}">
     <meta name="twitter:description" content="{{ $metaDescription }}">
     <meta name="twitter:image" content="{{ $metaImage }}">
-    @yield('meta_tags')
+
+
+
+    <!--<title>@yield('title', 'IRGS Publisher')</title>-->
+    <!--<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon/favicon-32x32.png') }}">-->
+    <!--<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/favicon-16x16.png') }}">-->
+    <!--<link rel="shortcut icon" href="{{ asset('assets/favicon/favicon.ico') }}">-->
+    <!--<link rel="apple-touch-icon" href="{{ asset('assets/favicon/apple-touch-icon.png') }}">-->
+    <!--<link rel="manifest" href="{{ asset('assets/favicon/site.webmanifest') }}">-->
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -153,10 +162,12 @@
             /* text-align: center; */
             /* margin-top: 40px; */
         }
-
+        
+        
         a.text-dark:hover {
             text-decoration: underline;
         }
+        
     </style>
 </head>
 

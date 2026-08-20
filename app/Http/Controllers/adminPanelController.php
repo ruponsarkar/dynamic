@@ -165,7 +165,7 @@ class adminPanelController extends Controller
         $journal->save();
 
 
-        $request->photo->move(base_path('public/assets/journals/img'), $photo);
+        $request->photo->move(base_path('public_html/assets/journals/img'), $photo);
 
 
         return redirect('journalForm')->with('message', 'Your request Submitted successfully');
@@ -194,12 +194,12 @@ class adminPanelController extends Controller
             'title' => $request->title,
             'file' => $file
         ]);
-        $request->file->move(base_path('public/assets/conference'), $file);
+        $request->file->move(base_path('public_html/assets/conference'), $file);
         return redirect('add-conference')->with('message', 'Your request Submitted successfully');
     }
     function updateconference(Request $request, $id)
     {
-        $conference = conference::find($id);
+        $conference = conference::where('id', $id)->first();
         return view('adminpanel.update-conference', ['conference' => $conference]);
     }
     function updateconferenceData(Request $request, $id)
@@ -215,7 +215,7 @@ class adminPanelController extends Controller
 
         $file = time() . '.' . $request->file->extension();
 
-        $conference = conference::find($id);
+        $conference = conference::where('id', $id)->first();
         $conference->title = strip_tags($request->title);
         $conference->file = $file;
         $conference->update();
@@ -279,7 +279,7 @@ class adminPanelController extends Controller
 
         $indexing->save();
 
-        $request->photo->move(base_path('public/assets/indexing/img'), $photo);
+        $request->photo->move(base_path('public_html/assets/indexing/img'), $photo);
 
         return back()->with('message', 'Your request Submitted successfully');
     }
@@ -300,7 +300,7 @@ class adminPanelController extends Controller
         ]);
 
         $photo = time() . '.' . $request->photo->getClientOriginalName();
-        $directory = base_path('public/assets/certificates/img');
+        $directory = base_path('public_html/assets/certificates/img');
 
         if (!file_exists($directory)) {
             mkdir($directory, 0755, true);
@@ -417,7 +417,7 @@ class adminPanelController extends Controller
         $editor->ip_address = \Request::ip();
 
         $editor->save();
-        $request->photo->move(base_path('public/assets/img/editor-img'), $photo);
+        $request->photo->move(base_path('public_html/assets/img/editor-img'), $photo);
 
 
 
@@ -473,7 +473,7 @@ class adminPanelController extends Controller
 
         $editor->update();
         if($request->file('photo')){
-           $request->photo->move(base_path('public/assets/img/editor-img'), $photo);
+           $request->photo->move(base_path('public_html/assets/img/editor-img'), $photo);
         }
 
         return redirect('addEditors')->with('message', 'Your request Submitted successfully');
@@ -671,7 +671,7 @@ class adminPanelController extends Controller
         $articles->ip_address = \Request::ip();
 
         $articles->save();
-        $request->file->move(base_path('public/assets/articles/'), $file);
+        $request->file->move(base_path('public_html/assets/articles/'), $file);
 
 
         return back()->with('message', 'Added');
@@ -742,7 +742,7 @@ class adminPanelController extends Controller
 
         $updateArticle->update();
         if ($request->file) {
-            $request->file->move(base_path('public/assets/articles/'), $file);
+            $request->file->move(base_path('public_html/assets/articles/'), $file);
         }
         return back()->with('message', 'Your request Submitted successfully');
         // return dd($request->all());
@@ -812,7 +812,7 @@ class adminPanelController extends Controller
         $book->ip_address = \Request::ip();
 
         $book->save();
-        $request->photo->move(base_path('public/assets/img/books'), $photo);
+        $request->photo->move(base_path('public_html/assets/img/books'), $photo);
 
 
         return back()->with('message', 'Added');
@@ -823,7 +823,7 @@ class adminPanelController extends Controller
 
         $photo = time() . '.' . $request->photo->extension();
 
-        $request->photo->move(base_path('public/assets/journals/img'), $photo);
+        $request->photo->move(base_path('public_html/assets/journals/img'), $photo);
 
         $journal = journal::where('j_id', '=', $request->id)->update([
             'photo' => $photo,
@@ -884,7 +884,7 @@ class adminPanelController extends Controller
                 'img' => $photo
             ]);
 
-            $request->photo->move(base_path('public/assets/indexing/img'), $photo);
+            $request->photo->move(base_path('public_html/assets/indexing/img'), $photo);
 
             return redirect()->back()->with('message', 'Updated');
         }
@@ -895,7 +895,7 @@ class adminPanelController extends Controller
 
     function DeleteIndexing($id)
     {
-        $indexing = indexings::find($id)->update([
+        $indexing = indexings::where('id', $id)->update([
             'active' => 0
         ]);
         return redirect()->back()->with('message', 'Deleted');
@@ -904,7 +904,7 @@ class adminPanelController extends Controller
     function UpdateCertificate(Request $request)
     {
         if ($request->title !== null) {
-            certificates::find($request->id)->update([
+            certificates::where('id', $request->id)->update([
                 'title' => strip_tags($request->title)
             ]);
 
@@ -917,13 +917,13 @@ class adminPanelController extends Controller
             ]);
 
             $photo = time() . '.' . $request->photo->extension();
-            $directory = base_path('public/assets/certificates/img');
+            $directory = base_path('public_html/assets/certificates/img');
 
             if (!file_exists($directory)) {
                 mkdir($directory, 0755, true);
             }
 
-            certificates::find($request->id)->update([
+            certificates::where('id', $request->id)->update([
                 'img' => $photo
             ]);
 
@@ -935,7 +935,7 @@ class adminPanelController extends Controller
 
     function DeleteCertificate($id)
     {
-        certificates::find($id)->update([
+        certificates::where('id', $id)->update([
             'active' => 0
         ]);
         return redirect()->back()->with('message', 'Deleted');
@@ -951,24 +951,24 @@ class adminPanelController extends Controller
 
             $photo = time() . '.' . $request->logo->extension();
             // $photo = logo.png;
-            $logo = home_asset::find($id)->update([
+            $logo = home_asset::where('id', $id)->update([
                 'logo' => $photo
             ]);
-            $request->logo->move(base_path('public/assets/homeAssets'), $photo);
+            $request->logo->move(base_path('public_html/assets/homeAssets'), $photo);
             return redirect()->back()->with('message', 'Updated');
         }
         if ($request->banner) {
 
             $photo = time() . '.' . $request->banner->extension();
             // $photo = banner.jpg;
-            $banner = home_asset::find($id)->update([
+            $banner = home_asset::where('id', $id)->update([
                 'banner' => $photo
             ]);
-            $request->banner->move(base_path('public/assets/homeAssets'), $photo);
+            $request->banner->move(base_path('public_html/assets/homeAssets'), $photo);
             return redirect()->back()->with('message', 'Updated');
         }
         if ($request->impact_factor) {
-            $impact_factor = home_asset::find($id)->update([
+            $impact_factor = home_asset::where('id', $id)->update([
                 'impact_factor' => $request->impact_factor
             ]);
             return redirect()->back()->with('message', 'Updated');

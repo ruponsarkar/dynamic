@@ -218,7 +218,7 @@
     <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
         <div class="text-white " style="font-size: small">
             <!--<i class="bi bi-telephone"></i> +91 8638261097 &nbsp; &nbsp;-->
-            <i class="bi bi-envelope"></i> editor.rjmsonline@gmail.com
+            <i class="bi bi-envelope"></i> editor@rjmsonline.com
         </div>
     </div>
 
@@ -252,8 +252,7 @@
 
 
                 <div class="d-none d-sm-block">
-                    <div class="impact  text-center text-md-start">
-                        {{-- Impact Factor: <span class="badge bg-success">7.1</span> --}}
+                    {{-- <div class="impact  text-center text-md-start">
                         <div class="impact-text">
                             <div>
                                 Impact:
@@ -262,7 +261,7 @@
                                 {{ $assets->impact_factor }}
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
 
