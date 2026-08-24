@@ -153,14 +153,19 @@
                     class="form-control">
             </div>
             <div class="one pt-3">
-                <label for="abbr">University Name</label>
+                <label for="abbr">Department Name</label>
                 <input type="text" name="university" value="{{ $editors->university }}" id=""
                     class="form-control">
             </div>
 
             <div class="one pt-3">
-                <label for="issn">Details (*Optional)</label>
+                <label for="issn">Address (*Optional)</label>
                 <input type="text" name="details" value="{{ $editors->details }}" id="" class="form-control">
+            </div>
+
+            <div class="one pt-3">
+                <label for="issn">Official Email address</label>
+                <input type="text" name="email" value="{{ $editors->email }}" id="" class="form-control">
             </div>
 
             <div class="one pt-3">

@@ -61,9 +61,15 @@
                     </div>
                   </div>
                   <div class="form-group row p-1">
-                    <label class="col-sm-4 col-form-label">Details (*Optional):</label>
+                    <label class="col-sm-4 col-form-label">Address:</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="details"  placeholder="Details (*Optional)">
+                      <input type="text" class="form-control" name="details"  placeholder="Address (*Optional)">
+                    </div>
+                  </div>
+                   <div class="form-group row p-1">
+                    <label class="col-sm-4 col-form-label">Official Email address:</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="email"  placeholder="Email">
                     </div>
                   </div>
                   <div class="form-group row p-1">

@@ -129,7 +129,11 @@ body {
         <input type="text" id="university" name="university" value="<?php echo $row['university'];  ?>">
       </li>
       <li>
-        <label for="email">Details</label>
+        <label for="last-name">Email</label>
+        <input type="text" id="university" name="email" value="<?php echo $row['email'];  ?>">
+      </li>
+      <li>
+        <label for="email">Address</label>
         <input type="text" id="details" name="details" value="<?php echo $row['details']; ?>">
       </li>
 
