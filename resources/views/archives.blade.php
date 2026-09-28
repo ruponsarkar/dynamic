@@ -52,7 +52,7 @@
                                         @foreach ($issues as $issue)
 
                                             <div class="col-md-3 text-center">
-                                                    <a href="/archives/{{ $journal->slug }}/{{ $issue->volume_slug }}/{{ $issue->slug }}?i={{ $issue->id }}&v={{ $issue->v_id }}" class="btn btn-primary w-100">
+                                                    <a href="/archives/{{ $journal->slug }}/{{ $issue->volume_slug }}/{{ $issue->slug }}" class="btn btn-primary w-100">
                                                         {{ $issue->name }}
                                                     </a>
                                                     

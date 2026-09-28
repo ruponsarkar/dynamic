@@ -38,7 +38,13 @@
 
 
 
-                            <h4>{{ $article->name }}</h4>
+                            <h1 class="h4">{{ $article->name }}</h1>
+                            @if ($article->published_date)
+                                <p><b>Published:</b> {{ $article->published_date }}</p>
+                            @endif
+                            @if ($article->file)
+                                <p><a href="{{ url('assets/articles/' . $article->file) }}">Download full text</a></p>
+                            @endif
                             <br>
 
                             <div class="pb-2">

@@ -46,6 +46,7 @@
                                 <div class="col-md-12 pt-4">
                                     <label class="form-label" for="name">Corresponding Author</label>
                                     <input type="text" name="aname" id="" class="form-control">
+        <small>Separate authors with semicolons (e.g. Jane Smith; Doe, John) for citation indexing.</small>
                                 </div>
 
 

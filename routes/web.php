@@ -19,9 +19,8 @@ use App\Http\Controllers\RazorpayController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
+Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap']);
+Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots']);
 
 Route::get('/', [IndexController::class, 'index']);
 
