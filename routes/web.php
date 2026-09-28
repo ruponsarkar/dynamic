@@ -24,6 +24,10 @@ use App\Http\Controllers\AuthorController;
 //     return view('index');
 // });
 
+Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap']);
+Route::get('sitemaps/{section}/{page}.xml', [\App\Http\Controllers\SeoController::class, 'section'])->where('section', 'general|journals|articles|issues|pages')->where('page', '[0-9]+');
+Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots']);
+
 Route::get('/', [IndexController::class, 'index']);
 Route::get('archives/6/14/', [IndexController::class, 'index']);
 

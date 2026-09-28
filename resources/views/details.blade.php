@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $journal->j_name)
+@section('description', \Illuminate\Support\Str::limit(\App\Support\ScholarlyMetadata::text($journal->aim_and_scope ?? ''), 200))
 
 @section('content')
     <style>

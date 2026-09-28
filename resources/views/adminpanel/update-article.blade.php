@@ -87,23 +87,21 @@
 
         <form action="update-article-data/{{ $articles->id }}" method="post" enctype="multipart/form-data">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
+            @endif
             <ul class="flex-outer">
                 <li>
                     <label for="first-name">Corresponding Article </label>
-                    <input type="text" id="name" name="name" value="{{ $articles->name }}">
+                    <input type="text" id="name" name="name" value="{{ old('name', $articles->name) }}">
                 </li>
                 <li>
-                    <label for="last-name">Author Name</label>
-                    <input type="text" id="aname" name="aname" value="{{ $articles->aname }}">
-                </li>
-                <li>
-                    <label for="email">Author Designation</label>
-                    <input type="text" id="designation" name="designation" value="{{ $articles->designation }}">
+                    @include('adminpanel.partials.article-authors', ['editingArticle' => $articles])
                 </li>
 
                 <li>
                     <label class="form-label" for="name">Published</label>
-                    <input type="text" name="published_date" id="published_date" value="{{ $articles->published_date }}">
+                    <input type="text" name="published_date" id="published_date" value="{{ old('published_date', $articles->published_date) }}">
                 </li>
 
                 <li>
@@ -135,31 +133,31 @@
                 </li>
                 <li>
                     <label for="email">DOI</label>
-                    <input type="text" id="doi" name="doi" value="{{ $articles->doi }}">
+                    <input type="text" id="doi" name="doi" value="{{ old('doi', $articles->doi) }}">
                 </li>
                 <li>
                     <label for="email">DOI Link</label>
-                    <input type="text" id="doi_link" name="doi_link" value="{{ $articles->doi_link }}">
+                    <input type="text" id="doi_link" name="doi_link" value="{{ old('doi_link', $articles->doi_link) }}">
                 </li>
 
                 <li>
                     <label for="email">Page No</label>
-                    <input type="text" id="page" name="page" value="{{ $articles->page }}">
+                    <input type="text" id="page" name="page" value="{{ old('page', $articles->page) }}">
                 </li>
 
                 {{-- ************************** --}}
 
                 <li>
                     <label for="email">SL No</label>
-                    <input type="text" id="sr_no" name="sr_no" value="{{ $articles->sr_no }}">
+                    <input type="text" id="sr_no" name="sr_no" value="{{ old('sr_no', $articles->sr_no) }}">
                 </li>
                 <li>
                     <label for="email">Cited by</label>
-                    <input type="text" id="cited_by" name="cited_by" value="{{ $articles->cited_by }}">
+                    <input type="text" id="cited_by" name="cited_by" value="{{ old('cited_by', $articles->cited_by) }}">
                 </li>
                 <li>
                     <label for="email">language </label>
-                    <input type="text" id="language" name="language" value="{{ $articles->language }}">
+                    <input type="text" id="language" name="language" value="{{ old('language', $articles->language) }}">
                 </li>
                 {{-- <li>
         <label for="email">licence </label>
@@ -167,24 +165,24 @@
       </li> --}}
                 <li>
                     <label for="email">received </label>
-                    <input type="text" id="received" name="received" value="{{ $articles->received }}">
+                    <input type="text" id="received" name="received" value="{{ old('received', $articles->received) }}">
                 </li>
                 <li>
                     <label for="email">revised </label>
-                    <input type="text" id="revised" name="revised" value="{{ $articles->revised }}">
+                    <input type="text" id="revised" name="revised" value="{{ old('revised', $articles->revised) }}">
                 </li>
                 <li>
                     <label for="email">accepted </label>
-                    <input type="text" id="accepted" name="accepted" value="{{ $articles->accepted }}">
+                    <input type="text" id="accepted" name="accepted" value="{{ old('accepted', $articles->accepted) }}">
                 </li>
                 <li>
                     <label for="email">keywords </label>
-                    <input type="text" id="keywords" name="keywords" value="{{ $articles->keywords }}">
+                    <input type="text" id="keywords" name="keywords" value="{{ old('keywords', $articles->keywords) }}">
                 </li>
                 <li>
                     <label for="email">abstract </label>
                     {{-- <textarea name="abstract" id="" cols="30" rows="10" class="form-control">{{$articles->abstract}}</textarea> --}}
-                    <textarea class="form-control summernote" name="abstract" placeholder=""> {{ $articles->abstract }} </textarea>
+                    <textarea class="form-control summernote" name="abstract" placeholder=""> {{ old('abstract', $articles->abstract) }} </textarea>
                 </li>
 
 

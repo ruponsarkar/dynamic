@@ -15,8 +15,11 @@
         ));
         $metaImage = trim($__env->yieldContent('meta_image', asset('fav/android-icon-192x192.png')));
         $metaType = trim($__env->yieldContent('meta_type', 'website'));
-        $metaRobots = trim($__env->yieldContent('meta_robots', 'index,follow'));
+        $metaRobots = trim($__env->yieldContent('meta_robots', request()->is('search', 'author/*', 'payments', 'manuscript', 'join-editor', 'join-reviewer') ? 'noindex,follow' : 'index,follow'));
         $canonicalUrl = url()->current();
+        if (request()->is('archives/*/*/*') && isset($volume, $issue)) {
+            $canonicalUrl .= '?i=' . $issue->id . '&v=' . $volume->id;
+        }
     @endphp
 
     <title>{{ $metaTitle }}</title>
@@ -80,6 +83,10 @@
 
 
 
+    <style>
+        .article-affiliations { overflow-wrap: anywhere; line-height: 1.6; }
+        sup { font-size: .75em; line-height: 0; vertical-align: super; position: static; }
+    </style>
     <!-- Custom -->
     <style>
         body {
@@ -169,6 +176,10 @@
         }
         
     </style>
+    @unless (request()->is('article/*'))
+        @include('partials.site-schema')
+    @endunless
+    @yield('meta_tags')
 </head>
 
 <body>

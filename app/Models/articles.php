@@ -9,4 +9,9 @@ class articles extends Model
 {
     use HasFactory;
     protected $table = 'article';
+
+    public function publicationAuthors()
+    {
+        return $this->hasMany(ArticleAuthor::class, 'article_id')->orderBy('position');
+    }
 }

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', $data->meta_title)
+@section('title', $data->meta_title ?: $data->page_title)
+@section('description', \App\Support\ScholarlyMetadata::text($data->meta_description ?? ''))
 
 @section('content')
 

@@ -171,7 +171,7 @@
                                                 </div>
 
                                                 <div>
-                                                    <b>Author(s):</b> {{ $article->aname }}
+                                                    <b>Author(s):</b> {!! \App\Support\ArticleAuthors::display($article->aname) !!}
                                                 </div>
 
                                                 @if ($article->doi)

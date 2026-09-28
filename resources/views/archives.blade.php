@@ -48,7 +48,7 @@
                                                 {{ $issues[0]->volume_name }} ({{ $issues[0]->year }}) 
                                             </b>
                                         </div>
-                                        <div class="row gap-4">
+                                        <div class="row gap-4 justify-content-center">
                                         @foreach ($issues as $issue)
 
                                             <div class="col-md-3 text-center">

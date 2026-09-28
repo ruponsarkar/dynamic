@@ -27,7 +27,7 @@
                 <b><a class="text-dark" href="/article/{{ $article->slug }}">{{ $article->name }}</a></b>
             </div>
             <div>
-                <b class="text-muted">Author(s):</b>{{ $article->aname }}
+                <b class="text-muted">Author(s):</b>{!! \App\Support\ArticleAuthors::display($article->aname) !!}
             </div>
 
             {{-- <div>

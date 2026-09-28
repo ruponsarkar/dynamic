@@ -25,37 +25,33 @@
                     <div class="modal-body">
                         <form action="{{ URL('addArticleData/' . $id) }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @if ($errors->any())
+                                <div class="alert alert-danger" role="alert"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
+                            @endif
 
                             <div class="row p-3">
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Sr No</label>
-                                    <input type="text" name="sr_no" id="sr_no" class="form-control">
+                                    <input type="text" name="sr_no" id="sr_no" class="form-control" value="{{ old('sr_no') }}">
                                 </div>
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Published date</label>
-                                    <input type="date" name="published_date" id="published_date" class="form-control">
+                                    <input type="date" name="published_date" id="published_date" class="form-control" value="{{ old('published_date') }}">
                                 </div>
 
                                 <div class="col-md-12 pt-4">
                                     <label for="name" class="form-label">Article Name</label>
-                                    <input type="text" name="name" id="" class="form-control">
+                                    <input type="text" name="name" id="" class="form-control" value="{{ old('name') }}">
                                 </div>
 
 
-                                <div class="col-md-12 pt-4">
-                                    <label class="form-label" for="name">Corresponding Author</label>
-                                    <input type="text" name="aname" id="" class="form-control">
-                                </div>
-
-
-                                <div class="col-md-12 pt-4">
-                                    <label class="form-label" for="name">Author Designation</label>
-                                    <input type="text" name="designation" id="" class="form-control">
+                                <div class="col-12 pt-4">
+                                    @include('adminpanel.partials.article-authors')
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Email</label>
-                                    <input type="text" name="email" id="" class="form-control">
+                                    <input type="text" name="email" id="" class="form-control" value="{{ old('email') }}">
                                 </div>
 
                                 <div class="col-md-6 pt-4">
@@ -87,28 +83,28 @@
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Cited By</label>
-                                    <input type="text" name="cited_by" id="cited_by" class="form-control">
+                                    <input type="text" name="cited_by" id="cited_by" class="form-control" value="{{ old('cited_by') }}">
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Language</label>
-                                    <input type="text" name="language" id="language" class="form-control">
+                                    <input type="text" name="language" id="language" class="form-control" value="{{ old('language') }}">
                                 </div>
                                 {{-- <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Licence</label>
-                                    <input type="text" name="licence" id="licence" class="form-control">
+                                    <input type="text" name="licence" id="licence" class="form-control" value="{{ old('licence') }}">
                                 </div> --}}
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Received</label>
-                                    <input type="date" name="received" id="received" class="form-control">
+                                    <input type="date" name="received" id="received" class="form-control" value="{{ old('received') }}">
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Revised</label>
-                                    <input type="date" name="revised" id="revised" class="form-control">
+                                    <input type="date" name="revised" id="revised" class="form-control" value="{{ old('revised') }}">
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Accepted</label>
-                                    <input type="date" name="accepted" id="accepted" class="form-control">
+                                    <input type="date" name="accepted" id="accepted" class="form-control" value="{{ old('accepted') }}">
                                 </div>
 
 
@@ -118,32 +114,32 @@
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">DOI</label>
-                                    <input type="text" name="doi" id="doi" class="form-control">
+                                    <input type="text" name="doi" id="doi" class="form-control" value="{{ old('doi') }}">
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">DOI Link</label>
-                                    <input type="text" name="doi_link" id="doi_link" class="form-control">
+                                    <input type="text" name="doi_link" id="doi_link" class="form-control" value="{{ old('doi_link') }}">
                                 </div>
 
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Page No</label>
-                                    <input type="text" name="page" id="page" class="form-control">
+                                    <input type="text" name="page" id="page" class="form-control" value="{{ old('page') }}">
                                 </div>
                                 <div class="col-md-6 pt-4">
                                     <label class="form-label" for="name">Orcid-id</label>
-                                    <input type="text" name="orcid_id" id="orcid_id" class="form-control">
+                                    <input type="text" name="orcid_id" id="orcid_id" class="form-control" value="{{ old('orcid_id') }}">
                                 </div>
 
                                 <div class="col-md-12 pt-4">
                                     <label class="form-label" for="name">Keywords</label>
-                                    <input type="text" name="keywords" id="keywords" class="form-control">
+                                    <input type="text" name="keywords" id="keywords" class="form-control" value="{{ old('keywords') }}">
                                 </div>
 
                                 <div class="one pt-4">
                                     <label class="form-label" for="name">Abstract</label>
                                     {{-- <textarea name="abstract" id="" cols="30" rows="10" class="form-control"></textarea> --}}
-                                    <textarea class="form-control summernote" name="abstract" placeholder=""> </textarea>
-                                    {{-- <input type="text" name="designation" id=""> --}}
+                                    <textarea class="form-control summernote" name="abstract" placeholder="">{{ old('abstract') }}</textarea>
+                                    {{-- <input type="text" name="designation" id="" value="{{ old('designation') }}"> --}}
                                 </div>
 
 
@@ -208,8 +204,8 @@
                         <tr>
                             <td scope="row"> {{ $loop->index + 1 }}</td>
                             <td>{{ $data->name }}</td>
-                            <td>{{ $data->aname }}</td>
-                            <td>{{ $data->designation }}</td>
+                            <td>{!! \App\Support\ArticleAuthors::display($data->aname) !!}</td>
+                            <td>{!! \App\Support\ArticleAuthors::display($data->designation) !!}</td>
                             <td>{{ $data->doi }}</td>
                             <td>{{ $data->page }}</td>
                             {{-- <td>{{ $data->abstract }}</td> --}}
@@ -236,6 +232,9 @@
 
 
 
+    @if ($errors->any())
+        <script>window.addEventListener('load', () => { new bootstrap.Modal(document.getElementById('exampleModal')).show(); });</script>
+    @endif
     <script>
         $('.summernote').summernote({
             placeholder: 'write here',
