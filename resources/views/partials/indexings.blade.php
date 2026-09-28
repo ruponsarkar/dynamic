@@ -9,7 +9,14 @@
             <div class="bg-light p-3">
                 <div class="text-center">
                     {{-- <div>Journals</div> --}}
-                    <img src="{{ url('assets/indexing/img/' . $index->img) }}" alt="" class="col-12">
+                    @php($indexingUrl = \App\Support\PublicationLinks::indexing($index->link ?? null))
+                    @if ($indexingUrl)
+                        <a href="{{ $indexingUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Visit indexing service">
+                            <img src="{{ url('assets/indexing/img/' . $index->img) }}" alt="Indexing service" class="col-12">
+                        </a>
+                    @else
+                        <img src="{{ url('assets/indexing/img/' . $index->img) }}" alt="Indexing service" class="col-12">
+                    @endif
                 </div>
             </div>
         </div>

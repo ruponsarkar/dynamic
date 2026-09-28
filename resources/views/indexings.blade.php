@@ -51,8 +51,14 @@
 
 
 
-                                            <img class="img-fluid" src="{{ url('/assets/indexing/img/' . $i->img) }}"
-                                                alt="Image" style=" width: 100%; object-fit: contain;">
+                                            @php($indexingUrl = \App\Support\PublicationLinks::indexing($i->link ?? null))
+                    @if ($indexingUrl)
+                        <a href="{{ $indexingUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Visit indexing service">
+                            <img src="{{ url('assets/indexing/img/' . $i->img) }}" alt="Indexing service" class="img-fluid" style="width: 100%; object-fit: contain;">
+                        </a>
+                    @else
+                        <img src="{{ url('assets/indexing/img/' . $i->img) }}" alt="Indexing service" class="img-fluid" style="width: 100%; object-fit: contain;">
+                    @endif
 
                                             {{-- <div class="text-center"> 
                                             <div>

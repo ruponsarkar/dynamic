@@ -46,6 +46,7 @@
                                 <div class="col-md-12 pt-4">
                                     <label class="form-label" for="name">Corresponding Author</label>
                                     <input type="text" name="aname" id="" class="form-control">
+        <small>Separate authors with semicolons (e.g. Jane Smith; Doe, John) for citation indexing.</small>
                                 </div>
 
 
@@ -188,7 +189,7 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->aname }}</td>
                             <td>{{ $data->designation }}</td>
-                            <td>{{ $data->doi }}</td>
+                            <td>@include('partials.doi', ['doi' => $data->doi, 'showLabel' => false])</td>
                             <td>{{ $data->page }}</td>
                             {{-- <td>{{ $data->abstract }}</td> --}}
                             <!-- <td><a href="../assets/all-editors/{{ $data->image }}">{{ $data->image }}</a></td> -->
