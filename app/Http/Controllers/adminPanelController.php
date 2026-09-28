@@ -609,13 +609,13 @@ class adminPanelController extends Controller
     {
         $request->validate([
             'name' => 'required|max:500',
-            'aname' => 'required|max:500',
-            'designation' => 'max:500',
             'doi' => 'max:50',
             'page' => 'max:100',
             'file' => 'required|mimes:pdf,docx',
         ]);
 
+
+        $authorRows = \App\Support\ArticleAuthors::fromRequest($request);
 
         $namewithextension = $request->file->getClientOriginalName();
 
@@ -650,13 +650,13 @@ class adminPanelController extends Controller
 
 
         $articles->slug = $slug;
-        $articles->aname = strip_tags($request->aname);
+        $articles->aname = strip_tags($request->aname ?? '');
         $articles->published_date = $request->published_date;
         $articles->googleScholar = $request->googleScholar;
         $articles->abstract = $request->abstract;
         $articles->keywords = $request->keywords;
         $articles->fileOriginalName = $fileOriginalName;
-        $articles->designation = strip_tags($request->designation);
+        $articles->designation = strip_tags($request->designation ?? '');
         $articles->doi = strip_tags($request->doi);
         $articles->doi_link = strip_tags($request->doi_link);
         $articles->article_type = strip_tags($request->article_type);
@@ -670,7 +670,7 @@ class adminPanelController extends Controller
 
         $articles->ip_address = \Request::ip();
 
-        $articles->save();
+        \App\Support\ArticleAuthors::save($articles, $authorRows);
         $request->file->move(base_path('public_html/assets/articles/'), $file);
 
 
@@ -683,7 +683,7 @@ class adminPanelController extends Controller
     function updateArticle(Request $request, $id)
     {
 
-        $article = articles::find($id);
+        $article = articles::with('publicationAuthors')->findOrFail($id);
 
         return view('adminpanel.update-article', ['articles' => $article]);
     }
@@ -693,12 +693,12 @@ class adminPanelController extends Controller
 
         $request->validate([
             'name' => 'required|max:500',
-            'aname' => 'required|max:500',
-            'designation' => 'max:500',
             'doi' => 'max:50',
             'page' => 'max:100',
             'file' => 'mimes:pdf,docx',
         ]);
+        $updateArticle = articles::findOrFail($id);
+        $authorRows = \App\Support\ArticleAuthors::fromRequest($request, $updateArticle->publicationAuthors()->exists());
         if ($request->file) {
 
             $namewithextension = $request->file->getClientOriginalName();
@@ -710,9 +710,8 @@ class adminPanelController extends Controller
             $file = time() . '.' . $request->file->extension();
         }
 
-        $updateArticle = articles::find($id);
         $updateArticle->name = strip_tags($request->name);
-        $updateArticle->aname = strip_tags($request->aname);
+        $updateArticle->aname = (string) ($request->aname ?? '');
 
 
         $updateArticle->sr_no = $request->sr_no;
@@ -727,10 +726,11 @@ class adminPanelController extends Controller
 
 
 
-        $updateArticle->designation = strip_tags($request->designation);
+        $updateArticle->designation = (string) ($request->designation ?? '');
         $updateArticle->published_date = $request->published_date;
         $updateArticle->googleScholar = $request->googleScholar;
         $updateArticle->keywords = $request->keywords;
+        $updateArticle->doi = strip_tags($request->doi ?? '');
         $updateArticle->doi_link = strip_tags($request->doi_link);
         $updateArticle->article_type = strip_tags($request->article_type);
         $updateArticle->page = strip_tags($request->page);
@@ -740,7 +740,7 @@ class adminPanelController extends Controller
 
         $updateArticle->ip_address = \Request::ip();
 
-        $updateArticle->update();
+        \App\Support\ArticleAuthors::save($updateArticle, $authorRows);
         if ($request->file) {
             $request->file->move(base_path('public_html/assets/articles/'), $file);
         }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Archives')
+@section('title', $journal->j_name . ' — ' . $volume->name . ', ' . $issue->name . ' (' . $volume->year . ')')
 
 @section('content')
 
