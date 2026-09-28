@@ -24,9 +24,11 @@
                 <b>Author(s):</b>{{ $article->aname }}
             </div>
 
-            <div>
-                <b>DOI:</b>{{ $article->doi }}
-            </div>
+            @if (trim((string) ($article->doi ?? '')) !== '')
+                <div>
+                    @include('partials.doi', ['doi' => $article->doi])
+                </div>
+            @endif
             <div>
                 <b>Page:</b>{{ $article->page }}
             </div>

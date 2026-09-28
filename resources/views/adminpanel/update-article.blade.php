@@ -89,8 +89,8 @@
       </li>
       <li>
         <label for="last-name">Author Name</label>
-        <input type="text" id="aname" name="aname" value="{{$articles->
-        <small>Separate authors with semicolons (e.g. Jane Smith; Doe, John) for citation indexing.</small>aname}}">
+        <input type="text" id="aname" name="aname" value="{{$articles->aname}}">
+        <small>Separate authors with semicolons (e.g. Jane Smith; Doe, John) for citation indexing.</small>
       </li>
       <li>
         <label for="email">Author Designation</label>

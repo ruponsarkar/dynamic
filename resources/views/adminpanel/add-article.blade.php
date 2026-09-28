@@ -189,7 +189,7 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->aname }}</td>
                             <td>{{ $data->designation }}</td>
-                            <td>{{ $data->doi }}</td>
+                            <td>@include('partials.doi', ['doi' => $data->doi, 'showLabel' => false])</td>
                             <td>{{ $data->page }}</td>
                             {{-- <td>{{ $data->abstract }}</td> --}}
                             <!-- <td><a href="../assets/all-editors/{{ $data->image }}">{{ $data->image }}</a></td> -->

@@ -72,10 +72,10 @@
                                 </div>
                             @endif
 
-                            @if ($article->doi)
+                            @if (trim((string) ($article->doi ?? '')) !== '')
                                 <div class="pb-2">
                                     <div>
-                                        <b>DOI:</b>{{ $article->doi }}
+                                        @include('partials.doi', ['doi' => $article->doi])
                                     </div>
                                 </div>
                             @endif

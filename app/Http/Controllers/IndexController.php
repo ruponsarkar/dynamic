@@ -153,7 +153,7 @@ class IndexController extends Controller
         $journal = DB::table('journals')->where('slug', $slug)->where('active', 1)->first();
         abort_unless($journal, 404);
 
-        $data = DB::table('indexing')->where('j_id', $journal->j_id)->get();
+        $data = DB::table('indexing')->where('j_id', $journal->j_id)->where('active', 1)->get();
 
         // return $data;
 
