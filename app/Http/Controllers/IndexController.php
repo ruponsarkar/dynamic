@@ -26,7 +26,7 @@ class IndexController extends Controller
         ->where('status', 1)
         ->get();
 
-        $indexings = DB::table('indexing')->where('active', 1)->get();
+        $indexings = DB::table('indexing')->where('active', 1)->where('showOnHome', 1)->get();
         $certificates = DB::table('certificates')->where('active', 1)->get();
 
         $articles = DB::table('article')->where('status', 1)->limit(5)->get();
@@ -115,7 +115,7 @@ class IndexController extends Controller
             ->where('i_id', $i->id)
             ->where('j_id', $journal->j_id)
             ->where('status', 1)
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->get();
 
         // return $articles;

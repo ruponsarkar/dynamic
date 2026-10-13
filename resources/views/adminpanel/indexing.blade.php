@@ -55,6 +55,12 @@
                                     </div>
 
                                     <div class="one p-2">
+                                        <input type="hidden" name="showOnHome" value="0">
+                                        <input type="checkbox" name="showOnHome" id="addShowOnHome" value="1" checked>
+                                        <label for="addShowOnHome">Show on home</label>
+                                    </div>
+
+                                    <div class="one p-2">
                                         <input type="submit" class="btn btn-success" name="add-indexing" value="Save" id="">
                                     </div>
                                 </form>
@@ -86,6 +92,7 @@
                                     <th>SL</th>
                                     <th>Link</th>
                                     <th>Indexing</th>
+                                    <th>Show on home</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -100,6 +107,7 @@
                                     <td class="text-center">
                                         <img src="{{url('assets/indexing/img/'.$data->img)}}" alt="No Image" width="200">
                                     </td>
+                                    <td class="text-center">{{ $data->showOnHome ? 'Active' : 'Inactive' }}</td>
                                     <td class="text-center">
 
                                         <a data-bs-toggle="modal" href="#editIndexing{{$data->id}}" role="button">
@@ -157,6 +165,12 @@
                                                     <div class="one">
                                                         <label for="jname">Index link </label>
                                                         <input type="text" value="{{$data->link}}" class="form-control" name="link" id="">
+                                                    </div>
+
+                                                    <div class="one p-2">
+                                                        <input type="hidden" name="showOnHome" value="0">
+                                                        <input type="checkbox" name="showOnHome" id="editShowOnHome{{$data->id}}" value="1" {{ $data->showOnHome ? 'checked' : '' }}>
+                                                        <label for="editShowOnHome{{$data->id}}">Show on home</label>
                                                     </div>
 
                                                     <a class="form-control btn btn-warning btn-sm mt-2" data-bs-toggle="modal" href="#updateImage{{$data->id}}" role="button">Change Image</a>

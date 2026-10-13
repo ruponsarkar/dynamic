@@ -275,6 +275,7 @@ class adminPanelController extends Controller
         $indexing->j_id = strip_tags($request->journal);
         $indexing->link = strip_tags($request->link);
         $indexing->img = strip_tags($photo);
+        $indexing->showOnHome = $request->boolean('showOnHome', true);
         $indexing->ip_address = \Request::ip();
 
         $indexing->save();
@@ -868,10 +869,15 @@ class adminPanelController extends Controller
     {
 
         // return $request->id;
-        if ($request->link) {
-            $indexing = indexings::find($request->id)->update([
-                'link' => $request->link
-            ]);
+        if ($request->has('link') || $request->has('showOnHome')) {
+            $indexing = indexings::findOrFail($request->id);
+            if ($request->has('link')) {
+                $indexing->link = $request->link;
+            }
+            if ($request->has('showOnHome')) {
+                $indexing->showOnHome = $request->boolean('showOnHome');
+            }
+            $indexing->save();
 
             return redirect()->back()->with('message', 'Updated');
         }
