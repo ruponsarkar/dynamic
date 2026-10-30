@@ -657,8 +657,25 @@ body.publisher-site {
 }
 
 .publisher-social a {
-    font-size:10px;
-    color:#d0d9d8;
+    display:inline-flex !important;
+    width:38px;
+    height:38px;
+    align-items:center;
+    justify-content:center;
+    margin:0 !important;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:50%;
+    color:#e5c08e !important;
+    font-size:16px;
+    text-decoration:none !important;
+    transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+
+.publisher-social a:hover {
+    transform:translateY(-2px);
+    border-color:#e5c08e;
+    background:#e5c08e;
+    color:#173d43 !important;
 }
 
 .publisher-footer-bottom {
@@ -3160,6 +3177,246 @@ body.publisher-site h1 {
 
 .publisher-home .publisher-mission-card-heading>span:last-child {
     color:#8b6a46;
+}
+
+/* Carry the journal-card accent down the left edge of each cover tile. */
+.publisher-home .publisher-home-main #journals .publisher-journal-slide {
+    border-left:4px solid #a8121b;
+    border-radius:4px 15px 15px 4px;
+}
+
+.publisher-home .publisher-home-main #journals .publisher-cover {
+    border-radius:0 11px 11px 0;
+}
+
+/* Distinguish latest research with a warm gold top rule. */
+.publisher-home .publisher-home-article-card {
+    border-top:4px solid #c58b43;
+    border-radius:17px;
+    background:linear-gradient(180deg,#fffdf9 0%,#fff 130px);
+}
+
+.publisher-home .publisher-home-main #journals .publisher-journal-slide {
+    position:relative;
+    aspect-ratio:4 / 5;
+    padding:0;
+    border-left-width:4px;
+    border-left-color:#a8121b;
+}
+
+.publisher-home .publisher-home-main #journals .publisher-cover {
+    position:absolute;
+    inset:0;
+    display:block;
+    width:100%;
+    height:100%;
+    min-height:0;
+    padding:0;
+    border-radius:0 11px 11px 0;
+}
+
+.publisher-home .publisher-home-main #journals .publisher-cover img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    box-shadow:none;
+}
+
+.publisher-home .publisher-home-main #journals .publisher-cover-fallback {
+    width:100%;
+    height:100%;
+    padding:22px;
+}
+
+.publisher-home .publisher-cover-overlay {
+    inset:32% 0 0;
+    gap:6px;
+    padding:16px 14px 14px;
+}
+
+.publisher-home .publisher-cover-overlay>strong {
+    font-size:clamp(14px,1.25vw,17px);
+}
+
+.publisher-home .publisher-cover-overlay>span:not(.publisher-cover-action) {
+    font-size:10px;
+}
+
+.publisher-home .publisher-cover-overlay .publisher-cover-action {
+    padding-top:7px;
+    font-size:10px;
+}
+
+.publisher-home .publisher-home-article-grid>.publisher-home-article-card:nth-child(3n+1) {
+    border-top-color:#a8121b;
+}
+
+.publisher-home .publisher-home-article-grid>.publisher-home-article-card:nth-child(3n+2) {
+    border-top-color:#17685e;
+}
+
+.publisher-home .publisher-home-article-grid>.publisher-home-article-card:nth-child(3n) {
+    border-top-color:#c58b43;
+}
+
+.publisher-home .publisher-home-article-actions a:first-child,
+.publisher-home .publisher-home-article-actions a:first-child:hover {
+    border-color:#17685e;
+    background:#17685e;
+    color:#fff !important;
+}
+
+.publisher-home .publisher-home-article-grid>.publisher-home-article-card:nth-child(3n+1):hover {
+    border-top-color:#a8121b;
+}
+
+.publisher-home .publisher-home-article-grid>.publisher-home-article-card:nth-child(3n+2):hover {
+    border-top-color:#17685e;
+}
+
+.publisher-home .publisher-home-article-grid>.publisher-home-article-card:nth-child(3n):hover {
+    border-top-color:#c58b43;
+}
+
+@media(max-width:560px) {
+    .publisher-home .publisher-home-main #journals .publisher-journal-slide {
+        min-height:0;
+    }
+
+    .publisher-home .publisher-cover-overlay {
+        inset:34% 0 0;
+    }
+}
+
+/* Small Bootstrap Icons reinforce actions and section labels without crowding cards. */
+.publisher-home .publisher-hero .publisher-button i,
+.publisher-home .publisher-hero .publisher-text-link i,
+.publisher-home .publisher-rail-submit i,
+.publisher-home .publisher-updates-actions i {
+    font-size:13px;
+}
+
+.publisher-home .publisher-hero .publisher-text-link {
+    gap:9px;
+}
+
+.publisher-home .publisher-journal-directory h3 i,
+.publisher-home .publisher-rail-editors .publisher-rail-heading h2 i {
+    margin-right:7px;
+    color:#e5c08e;
+    font-size:14px;
+}
+
+.publisher-home .publisher-mission-card-heading>i {
+    margin-left:2px;
+    color:#a8121b;
+    font-size:16px;
+}
+
+.publisher-home .publisher-quick-links>a {
+    align-items:center;
+}
+
+.publisher-home .publisher-quick-links>a>i:first-child {
+    width:18px;
+    flex:0 0 18px;
+    color:#a16b2f;
+    font-size:13px;
+}
+
+.publisher-home .publisher-quick-links>a>span {
+    margin-left:auto;
+}
+
+.publisher-home .publisher-rail-publish .publisher-eyebrow i {
+    margin-right:5px;
+}
+
+.publisher-home .publisher-home-article-meta>span i {
+    margin-right:4px;
+    font-size:10px;
+}
+
+.publisher-home .publisher-home-article-meta time i {
+    margin-right:4px;
+    color:#a16b2f;
+}
+
+.publisher-home .publisher-home-article-authors>i {
+    margin-right:4px;
+    color:#a16b2f;
+}
+
+.publisher-home .publisher-home-article-actions a i {
+    font-size:12px;
+}
+
+.publisher-home .publisher-community-icon i {
+    font-size:17px;
+}
+
+.publisher-home .publisher-updates-actions {
+    gap:14px;
+}
+
+.publisher-home .publisher-updates-actions>a:last-child {
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+}
+
+.publisher-home .publisher-home-stats-inner>div {
+    grid-template-columns:42px minmax(0,1fr);
+    grid-template-rows:auto auto;
+    align-items:center;
+    column-gap:14px;
+}
+
+.publisher-home .publisher-home-stats-inner>div>i {
+    grid-column:1;
+    grid-row:1 / span 2;
+    display:grid;
+    width:38px;
+    height:38px;
+    place-items:center;
+    border:1px solid rgba(240,197,142,.35);
+    border-radius:11px;
+    color:#f0c58e;
+    font-size:17px;
+}
+
+.publisher-home .publisher-home-stats-inner>div>.publisher-stat-copy {
+    display:grid;
+    gap:3px;
+}
+
+.publisher-home .publisher-home-stats-inner>div>.publisher-stat-copy strong,
+.publisher-home .publisher-home-stats-inner>div>.publisher-stat-copy>span {
+    grid-column:1;
+}
+
+.publisher-home .publisher-home-stats-inner>div>.publisher-stat-copy>span {
+    color:rgba(255,255,255,.76);
+    font-size:11px;
+}
+
+.publisher-home .publisher-home-updates .publisher-button i {
+    color:#17685e;
+}
+
+@media(max-width:760px) {
+    .publisher-home .publisher-home-stats-inner>div {
+        grid-template-columns:1fr;
+        justify-items:center;
+        text-align:center;
+    }
+
+    .publisher-home .publisher-home-stats-inner>div>i {
+        grid-column:1;
+        grid-row:auto;
+        margin-bottom:5px;
+    }
 }
 
 .publisher-home .publisher-home-community {

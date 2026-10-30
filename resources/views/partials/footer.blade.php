@@ -5,9 +5,9 @@
                 <a class="publisher-footer-brand" href="{{ url('/') }}">Corpus Scientific Publisher</a>
                 <p>A home for scholarly research.<br>Connecting authors, readers and ideas.</p>
                 <div class="publisher-social">
-                    <a href="https://www.facebook.com/share/15mpNfjkmR7/?mibextid=wwXIfr">Facebook ↗</a>
-                    <a href="https://www.instagram.com/RJMS_publisher?igsh=NXZ4d3RreW96MWlt&utm_source=qr">Instagram ↗</a>
-                    <a href="whatsapp://send?phone=+917002207076">WhatsApp ↗</a>
+                    <a href="https://www.facebook.com/share/15mpNfjkmR7/?mibextid=wwXIfr" aria-label="Visit Corpus Scientific Publisher on Facebook" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/RJMS_publisher?igsh=NXZ4d3RreW96MWlt&amp;utm_source=qr" aria-label="Visit Corpus Scientific Publisher on Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+                    <a href="https://wa.me/917002207076" aria-label="Contact Corpus Scientific Publisher on WhatsApp" title="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
             <div>
