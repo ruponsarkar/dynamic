@@ -85,14 +85,14 @@
         </div>
         <div class="publisher-mission-values">
             <article>
-                <span>01 / Our mission</span>
+                <div class="publisher-mission-card-heading"><span class="publisher-mission-card-number">01</span><span>Our mission</span></div>
                 <h3>Make quality research easier to share.</h3>
                 <p>Our mission is to provide academicians, researchers, and scholars with up-to-date information on discoveries, developments, and ongoing activities in the fields of science and technology. We aim to make this information easily accessible, enabling individuals in these domains to stay informed effortlessly.
 
 </p>
             </article>
             <article>
-                <span>02 / Our vision</span>
+                <div class="publisher-mission-card-heading"><span class="publisher-mission-card-number">02</span><span>Our vision</span></div>
                 <h3>Build trust through open scholarship.</h3>
                 <p>Our vision is to uphold the highest standards of quality in the publication of research and review articles. We are deeply committed to the timely and effective dissemination of peer-reviewed, top-quality work. To achieve this, we have assembled a team of esteemed editorial members representing diverse disciplines and specializations. Their dedication ensures an efficient and constructive review process that aligns with international research publishing standards.</p>
             </article>
@@ -315,6 +315,46 @@
         @endif
         </div>
     </section>
+
+
+     <section class="publisher-home-updates" aria-labelledby="updates-heading">
+        <div class="container publisher-home-updates-inner">
+            <div>
+                <p class="publisher-eyebrow">Stay connected</p>
+                <h2 id="updates-heading">Stay updated with our research.</h2>
+                <p>Discover new articles, journal announcements, and publishing updates from our research community.</p>
+            </div>
+            <div class="publisher-updates-actions">
+                <a class="publisher-button" href="{{ route('article.search') }}">Explore latest articles <span aria-hidden="true">↗</span></a>
+                <a href="mailto:editor@csp.com?subject=Research%20updates">Ask to receive research updates <span aria-hidden="true">↗</span></a>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <section class="publisher-home-community" aria-labelledby="community-heading">
+        <div class="container">
+            <div class="publisher-community-intro">
+                <p class="publisher-eyebrow">For reviewers &amp; editors</p>
+                <h2 id="community-heading">Good research deserves good stewardship.</h2>
+                <p>Join the scholarly community helping authors strengthen ideas, uphold standards, and move research forward.</p>
+            </div>
+            <div class="publisher-community-cards">
+                <a class="publisher-community-card" href="{{ url('join-reviewer') }}">
+                    <span class="publisher-community-icon" aria-hidden="true">↗</span>
+                    <span class="publisher-community-card-copy"><strong>Join as a reviewer</strong><small>Support rigorous, constructive peer review across our journals.</small></span>
+                    <span class="publisher-community-arrow" aria-hidden="true">→</span>
+                </a>
+                <a class="publisher-community-card" href="{{ url('join-editor') }}">
+                    <span class="publisher-community-icon" aria-hidden="true">✦</span>
+                    <span class="publisher-community-card-copy"><strong>Join as an editor</strong><small>Bring your expertise to a growing editorial community.</small></span>
+                    <span class="publisher-community-arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="publisher-home-stats" aria-label="Corpus Scientific Publisher at a glance">
         <div class="container publisher-home-stats-inner">
             <div><strong>{{ number_format($countJournal) }}</strong><span>Active journals</span></div>
