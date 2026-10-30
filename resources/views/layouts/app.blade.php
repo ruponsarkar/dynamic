@@ -6,12 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
      @php
-        $metaTitle = trim($__env->yieldContent('title', 'Research Journal of Medical Science'));
+        $metaTitle = trim($__env->yieldContent('title', 'Corpus Scientific Publisher | Scholarly Journals'));
         $metaDescription = trim($__env->yieldContent(
             'description',
-            'The Research Journal of Medical Sciences (RJMS) is an international, peer-reviewed, open-access scholarly journal dedicated to publishing Half-Yearly research in the fields of medical, pharmaceutical, and allied health sciences. The journal serves as a global platform for researchers, clinicians, academicians, and healthcare professionals to disseminate innovative scientific findings and contribute to the advancement of healthcare knowledge and practice.
-
-',
+            'Explore the Corpus Scientific Publisher journal collection, discover recent research and find guidance for manuscript submissions.',
         ));
         $metaImage = trim($__env->yieldContent('meta_image', asset('fav/android-icon-192x192.png')));
         $metaType = trim($__env->yieldContent('meta_type', 'website'));
@@ -25,7 +23,7 @@
     <title>{{ $metaTitle }}</title>
     <meta name="description" content="{{ $metaDescription }}">
     <meta name="robots" content="{{ $metaRobots }}">
-    <meta name="author" content="IRGS Publisher">
+    <meta name="author" content="Corpus Scientific Publisher">
     <meta name="theme-color" content="#0056a3">
     <meta name="msapplication-TileColor" content="#0056a3">
     <meta name="msapplication-config" content="{{ asset('fav/browserconfig.xml') }}">
@@ -55,7 +53,7 @@
     <meta property="og:title" content="{{ $metaTitle }}">
     <meta property="og:description" content="{{ $metaDescription }}">
     <meta property="og:url" content="{{ $canonicalUrl }}">
-    <meta property="og:site_name" content="Research Journal of Medical Science">
+    <meta property="og:site_name" content="Corpus Scientific Publisher">
     <meta property="og:image" content="{{ $metaImage }}">
     <meta property="og:image:alt" content="{{ $metaTitle }}">
 
@@ -66,7 +64,7 @@
 
 
 
-    <!--<title>@yield('title', 'IRGS Publisher')</title>-->
+    <!--<title>@yield('title', 'Corpus Scientific Publisher')</title>-->
     <!--<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon/favicon-32x32.png') }}">-->
     <!--<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/favicon-16x16.png') }}">-->
     <!--<link rel="shortcut icon" href="{{ asset('assets/favicon/favicon.ico') }}">-->
@@ -180,9 +178,11 @@
         @include('partials.site-schema')
     @endunless
     @yield('meta_tags')
+    <link rel="stylesheet" href="{{ asset('assets/css/publisher.css') }}?v={{ filemtime(public_path('assets/css/publisher.css')) }}">
 </head>
 
-<body>
+<body class="publisher-site">
+    <a class="publisher-skip" href="#main-content">Skip to content</a>
 
     <div class="">
         @include('partials.header')
@@ -212,7 +212,7 @@
 
 
 
-    <main class="">
+    <main id="main-content">
         @yield('content')
     </main>
 

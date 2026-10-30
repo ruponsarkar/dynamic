@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-        {{-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Add Journals</a> --}}
+        <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Add Journals</a>
 
       </div>
       <br>

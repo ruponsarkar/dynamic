@@ -8,6 +8,8 @@
         <!-- MAIN CONTENT GRID -->
         <div class="container mt-4">
 
+            @include('partials.journal-tabs', ['activeJournalTab' => 'archive'])
+
             <div class="row">
 
                 <div class="col-md-3">

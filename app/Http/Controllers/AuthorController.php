@@ -12,18 +12,22 @@ class AuthorController extends Controller
 {
     public function login()
     {
-        if (session()->has('AuthorLoggedUser')) {
+        if ($this->currentAuthor()) {
             return redirect()->route('author.dashboard');
         }
+
+        session()->forget('AuthorLoggedUser');
 
         return view('author.login');
     }
 
     public function register()
     {
-        if (session()->has('AuthorLoggedUser')) {
+        if ($this->currentAuthor()) {
             return redirect()->route('author.dashboard');
         }
+
+        session()->forget('AuthorLoggedUser');
 
         return view('author.register');
     }
@@ -49,7 +53,7 @@ class AuthorController extends Controller
 
         session()->put('AuthorLoggedUser', $author->id);
 
-        return redirect()->route('author.dashboard')->with('message', 'Registration completed successfully.');
+        return redirect()->intended(route('author.dashboard'))->with('message', 'Registration completed successfully.');
     }
 
     public function authenticate(Request $request)
@@ -67,7 +71,7 @@ class AuthorController extends Controller
 
         session()->put('AuthorLoggedUser', $author->id);
 
-        return redirect()->route('author.dashboard')->with('message', 'Logged in successfully.');
+        return redirect()->intended(route('author.dashboard'))->with('message', 'Logged in successfully.');
     }
 
     public function dashboard()

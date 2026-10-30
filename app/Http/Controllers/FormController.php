@@ -7,9 +7,10 @@ use App\Models\editor;
 use App\Models\journal;
 use App\Models\manuscripts;
 use App\Models\reviewer;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Author;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class FormController extends Controller
 {
@@ -68,10 +69,20 @@ class FormController extends Controller
     // for manuscript 
     function manuscript()
     {
-        $journal = journal::select('j_name', 'j_id')
-            ->get();
+        $author = Author::find(session('AuthorLoggedUser'));
+        if (!$author) {
+            session()->forget('AuthorLoggedUser');
+            return redirect()->guest(route('author.login'))->with('message', 'Please login as an author to submit manuscript.');
+        }
 
-        return view('manuscript', ['journal' => $journal]);
+        $journals = journal::where('active', 1)->select('j_name', 'j_id')->orderBy('j_name')->get();
+        $top_editors = \DB::table('editors_data')->where('is_top_editor', 1)->where('active', 1)->orderBy('id', 'desc')->get();
+
+        return view('manuscript', [
+            'journals' => $journals,
+            'author' => $author,
+            'top_editors' => $top_editors,
+        ]);
     }
 
     function submit_manuscript(Request $request)
@@ -79,51 +90,57 @@ class FormController extends Controller
         $authorAccount = Author::find(session('AuthorLoggedUser'));
 
         if (!$authorAccount) {
+            session()->forget('AuthorLoggedUser');
+            session()->put('url.intended', url('manuscript'));
             return redirect()->route('author.login')->with('message', 'Please login as an author to submit manuscript.');
         }
 
         $request->validate([
             'mode' => 'required|string|max:50',
             'type' => 'required|string|max:80',
-            'journal' => 'required|numeric',
+            'journal' => [
+                'required',
+                'integer',
+                Rule::exists('journals', 'j_id')->where(fn ($query) => $query->where('active', 1)),
+            ],
             'author' => 'required|string|max:120',
             'affiliation' => 'required|string|max:500',
             'mail' => 'required|email',
             'mobile' => 'required|string|max:30',
             'manuscript' => 'required|string|max:500',
-            'file' => 'required|mimes:pdf,docx',
+            'file' => 'required|file|mimes:pdf,docx|max:20480',
         ]);
 
 
         $j_name = journal::where('j_id', $request->journal)
-            ->get('j_name')
-            ->first();
+            ->where('active', 1)
+            ->value('j_name');
+        abort_unless($j_name, 422, 'Please select an active journal.');
+
         $count = \DB::table('manuscript')->count();
-        $dater = new Carbon(); 
-        $year = date('Y', strtotime($dater));
-        $month = date('m', strtotime($dater));
-        $file = time() . '.' . $request->file->extension();
+        $year = now()->format('Y');
+        $month = now()->format('m');
+        $fileUpload = $request->file('file');
+        $file = Str::uuid() . '.' . strtolower($fileUpload->extension());
 
         $manuscript = new manuscripts;
         $manuscript->muuid = strip_tags('IJPSM/'.$year.'/'.$month.'/'.$count);
         $manuscript->author_id = $authorAccount->id;
         $manuscript->mode = strip_tags($request->mode);
         $manuscript->type = strip_tags($request->type);
-        $manuscript->journal = $j_name->j_name;
+        $manuscript->journal = $j_name;
         $manuscript->author = strip_tags($request->author);
         $manuscript->affiliation = strip_tags($request->affiliation);
         $manuscript->email = strip_tags($request->mail);
-        $manuscript->orcid_id = strip_tags($request->orcid_id);
+        $manuscript->orcid_id = strip_tags($request->input('orcid_id', ''));
         $manuscript->mobile = strip_tags($request->mobile);
         $manuscript->manuscript = strip_tags($request->manuscript);
         $manuscript->file = strip_tags($file);
 
         $manuscript->ip_address = \Request::ip();
 
+        $fileUpload->move(base_path('public_html/assets/manuscript'), $file);
         $manuscript->save();
-
-
-        $request->file->move(base_path('public_html/assets/manuscript'), $file);
 
 
 

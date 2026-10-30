@@ -1,469 +1,67 @@
-<div>
-    <style>
-        .floating-submit-btn {
-            position: fixed;
-            bottom: 18px;
-            left: 18px;
-            /* top: 18px;
-            right: 18px; */
-            z-index: 1055;
-            gap: 8px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 18px;
-            border-radius: 999px;
-            background-color: #00664f;
-            color: #fff;
-            border: 2px solid #ffffff;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .floating-submit-btn:hover {
-            background-color: #bb2d3b;
-            color: #fff;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 576px) {
-            .floating-submit-btn {
-                inset: auto 12px 12px auto;
-                padding: 8px 14px;
-                font-size: 12px;
-                width: auto;
-                max-width: calc(100vw - 24px);
-            }
-        }
-
-        @media (max-width: 991.98px) {
-            body.mobile-webview #navMenu {
-                display: block !important;
-            }
-
-            body.mobile-webview .navbar-toggler {
-                display: none;
-            }
-
-            body.mobile-webview .navbar-nav {
-                align-items: flex-start !important;
-            }
-
-            body.mobile-webview .navbar-nav .nav-link,
-            body.mobile-webview .navbar-nav .dropdown-item {
-                white-space: normal;
-            }
-        }
-
-        .header-search-form {
-            width: 220px;
-            padding-top: 0;
-            flex-shrink: 0;
-            margin-bottom: 0;
-            align-items: center;
-        }
-
-        .header-search-form .form-control {
-            min-height: 36px;
-            font-size: 14px;
-        }
-
-        .header-search-form .btn {
-            min-width: 42px;
-            width: 42px;
-            height: 36px;
-            padding: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .header-search-form .btn i {
-            line-height: 1;
-        }
-
-        .site-navbar .container {
-            gap: 1rem;
-        }
-
-        .site-navbar .navbar-collapse {
-            min-height: 56px;
-            align-items: center;
-        }
-
-        .site-navbar .navbar-nav {
-            flex-wrap: nowrap;
-            align-items: center;
-        }
-
-        .site-navbar .nav-link {
-            padding: 0.75rem 0.7rem;
-            line-height: 1.2;
-            white-space: nowrap;
-        }
-
-        .site-navbar .dropdown-toggle {
-            display: flex;
-            align-items: center;
-        }
-
-        .top-banner {
-            padding: 12px 0;
-        }
-
-        .top-banner .container>.d-flex {
-            align-items: center;
-            gap: 1.5rem;
-            min-height: 110px;
-        }
-
-        .top-banner .logo {
-            max-height: 84px;
-            width: auto;
-            object-fit: contain;
-            display: block;
-        }
-
-        .top-banner .journal-meta {
-            text-align: left;
-            line-height: 1.4;
-        }
-
-        @media (max-width: 991.98px) {
-            .top-banner .container>.d-flex {
-                min-height: auto;
-                gap: 1rem;
-            }
-
-            .top-banner .logo {
-                max-height: 72px;
-            }
-        }
-
-        @media (max-width: 991.98px) {
-            .site-navbar .container {
-                gap: 0;
-            }
-
-            .site-navbar .navbar-collapse {
-                min-height: auto;
-            }
-
-            .site-navbar .navbar-nav {
-                flex-wrap: wrap;
-            }
-
-            .site-navbar .nav-link {
-                white-space: normal;
-                padding: 0.65rem 0;
-            }
-
-            .header-search-form {
-                width: 100%;
-                margin-top: 10px;
-            }
-        }
-    </style>
-
-    <style>
-        .impact {
-            background: orange;
-            height: 80px;
-            width: 80px;
-            border-radius: 50%;
-        }
-
-        .impact-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-    </style>
-
-
-    <a href="/submit-article" class="floating-submit-btn">
-        <i class="bi bi-upload"></i>
-        <span>Submit Manuscript</span>
-    </a>
-
-    <script>
-        (function() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera || '';
-            var hasTouch = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
-            var smallScreen = Math.min(window.screen.width || 0, window.screen.height || 0) <= 1024;
-            var isWebView =
-                /(wv|WebView|Instagram|FBAN|FBAV|Line\/|; wv\)|Version\/[\d.]+.*Chrome|GSA|MiuiBrowser|DuckDuckGo|YaBrowser)/i
-                .test(ua) ||
-                !!window.ReactNativeWebView ||
-                !!(window.webkit && window.webkit.messageHandlers) ||
-                document.referrer.indexOf('android-app://') === 0;
-
-            if (isWebView && hasTouch && smallScreen) {
-                document.addEventListener('DOMContentLoaded', function() {
-                    document.body.classList.add('mobile-webview');
-                });
-            }
-        })();
-    </script>
-
-    <div class="px-2 py-1" style="background-color: #4571ff; text-align: right">
-        <div class="text-white " style="font-size: small">
-            <!--<i class="bi bi-telephone"></i> +91 8638261097 &nbsp; &nbsp;-->
-            <i class="bi bi-envelope"></i> editor@rjmsonline.com
+<header class="publisher-header">
+    <div class="publisher-utility">
+        <div class="container publisher-utility-inner">
+            <span>Research. Discovery. Knowledge.</span>
+            <a href="{{ session()->has('AuthorLoggedUser') ? route('author.dashboard') : route('author.login') }}">Author {{ session()->has('AuthorLoggedUser') ? 'dashboard' : 'login' }} <span aria-hidden="true">↗</span>
+            </a>
         </div>
     </div>
-
-    <!-- TOP BLUE HEADING (EXACT COPY) -->
-    <div class="top-banner ">
-        <div class="container">
-            {{-- <div class="d-flex align-items-center justify-content-between"> --}}
-            <div class="d-flex align-items-center gap-4 justify-content-between">
-
-                <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" class="logo" alt="">
-                <div class="journal-meta  text-center text-md-start">
-
-                    <div class="journal-title">
-                        {{-- Research Journal of Medical Science --}}
-                        {{ $journal->j_name }}
-
-                    </div>
-                    <div class="text-small" style="font-size: small;">
-                        <div>
-                            <b>Abbreviation: </b> {{ $journal->abbr_title }}
-                        </div>
-                        <div>
-                            <!--<b> ISSN (Print): </b> 2957-3610 | <b> ISSN (Online): </b> 2957-3629-->
-                           <b> E-ISSN: </b> 3078-2481 | <b> P-ISSN: </b> 3078-2473
-                        </div>
-                        <div>
-                            <b>Frequency: </b> {{ $journal->frequency }}
-                        </div>
-                    </div>
+    <div class="container publisher-masthead">
+        <a class="publisher-brand" href="{{ url('/') }}" aria-label="Corpus Scientific Publisher home">
+            @if (!empty($assets->logo))
+                <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" alt="" width="64" height="64" onerror="this.hidden=true">
+            @endif
+            <span>Corpus Scientific <strong>Publisher</strong>
+                <small>CSP · A home for scholarly research</small>
+            </span>
+        </a>
+        <form class="publisher-search" action="{{ route('article.search') }}" method="GET" role="search">
+            <label class="visually-hidden" for="publisher-search">Search articles</label>
+            <input id="publisher-search" type="search" name="q" value="{{ request('q') }}" placeholder="Search articles…">
+            <button type="submit" aria-label="Search articles">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                    <circle cx="10" cy="10" r="6.5"/>
+                    <path d="m15 15 6 6"/>
+                </svg>
+            </button>
+        </form>
+        <a class="publisher-button publisher-button-small" href="{{ url('submit-article') }}">Submit manuscript <span aria-hidden="true">↗</span>
+        </a>
+    </div>
+    <nav class="publisher-nav" aria-label="Main navigation">
+        <div class="container publisher-nav-inner">
+            <a href="{{ url('/') }}" aria-current="{{ request()->is('/') ? 'page' : 'false' }}">Home</a>
+            <a href="{{ url('journals') }}" aria-current="{{ request()->is('journals', 'journal/*') ? 'page' : 'false' }}">Journals</a>
+            <a href="{{ url('about-us') }}">About us</a>
+            <details class="publisher-menu">
+                <summary>For authors</summary>
+                <div class="publisher-menu-panel">
+                    <a href="{{ url('instructons-for-authors') }}">Author guidelines</a>
+                    <a href="{{ url('review-process') }}">Review process</a>
+                    <a href="{{ url('publication-ethics') }}">Publication ethics</a>
+                    <a href="{{ url('processing-fee') }}">Article processing charges</a>
+                    <a href="{{ url('copyrights') }}">Copyright</a>
                 </div>
-
-
-                <div class="d-none d-sm-block">
-                    {{-- <div class="impact  text-center text-md-start">
-                        <div class="impact-text">
-                            <div>
-                                Impact:
-                            </div>
-                            <div>
-                                {{ $assets->impact_factor }}
+            </details>
+            <details class="publisher-menu">
+                <summary>Explore journals</summary>
+                <div class="publisher-menu-panel publisher-journal-menu">
+                    @forelse($journals as $navJournal)
+                        <div>
+                            <a class="publisher-menu-title" href="{{ url('journal/' . $navJournal->slug) }}">{{ $navJournal->j_name }}</a>
+                            <div class="publisher-menu-links">
+                                <a href="{{ url('current-issue/' . $navJournal->slug) }}">Current issue</a>
+                                <a href="{{ url('archives/' . $navJournal->slug) }}">Archive</a>
+                                <a href="{{ url('editorial-board/' . $navJournal->slug) }}">Editorial board</a>
+                                <a href="{{ url('indexings/' . $navJournal->slug) }}">Indexing</a>
                             </div>
                         </div>
-                    </div> --}}
+                    @empty
+                        <a href="{{ url('journals') }}">Journal catalogue</a>
+                    @endforelse
                 </div>
-
-
-
-                <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-            </div>
-
+            </details>
+            <a href="{{ url('contact-us') }}">Contact</a>
         </div>
-    </div>
-</div>
-
-<nav class="navbar navbar-expand-lg shadow-sm site-navbar"
-    style="background-color: #01654e; border-top: 4px solid #f66b08; padding: 0px !important;">
-
-    <div class="container">
-
-        {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button> --}}
-
-        <div class="collapse navbar-collapse" id="navMenu" style="font-weight: bold;">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-
-                <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
-                        href="/">Home</a></li>
-
-                {{-- <li class="nav-item"><a class="nav-link {{ request()->is('journals') ? 'active' : '' }}"
-                        href="/journals">JOURNALS</a></li> --}}
-
-                {{-- <li class="nav-item"><a class="nav-link {{ request()->is('/about-us') ? 'active' : '' }}"
-                        href="/about-us">ABOUT US</a></li> --}}
-
-
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle 
-                                        {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
-                        href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        About the Journal
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('aim-and-scope') ? 'active' : '' }}"
-                                href="/aim-and-scope">
-                                Aim and Scope
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item {{ request()->is('editorial-board/*') ? 'active' : '' }}"
-                                href="{{ url('editorial-board/' . $journal->slug) }}">
-                                Editorial board
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('news') ? 'active' : '' }}"
-                                href="/news">
-                                News
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('announcements') ? 'active' : '' }}"
-                                href="/announcements">
-                                Announcements
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item {{ request()->is('indexings/*') ? 'active' : '' }}"
-                                href="{{ url('indexings/' . $journal->slug) }}">
-                                Indexings
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle 
-                                        {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
-                        href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        For Authors
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
-
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('copyrights') ? 'active' : '' }}"
-                                href="/copyrights">
-                                Copyright
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('authors-guidelines') ? 'active' : '' }}"
-                                href="/authors-guidelines">
-                                Author Guidelines
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('review-process') ? 'active' : '' }}"
-                                href="/review-process">
-                                Review Process
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('publication-ethics') ? 'active' : '' }}"
-                                href="/publication-ethics">
-                                Publication Ethics
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('processing-fee') ? 'active' : '' }}"
-                                href="/processing-fee">
-                                Article Processing Charges
-                            </a>
-                        </li>
-
-
-                        {{-- <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('open-access-policy') ? 'active' : '' }}"
-                                href="/open-access-policy">
-                                Publication Criteria
-                            </a>
-                        </li> --}}
-                    </ul>
-                </li>
-
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle 
-                                        {{ request()->is('instructons-for-authors') ? 'active' : '' }}"
-                        href="#" id="forAuthorsDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Archives
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="forAuthorsDropdown">
-
-                        <li>
-                            {{-- <a class="dropdown-item {{ request()->is('archives/*') ? 'active' : '' }}" --}}
-                            <a class="dropdown-item "
-                                href="{{ url('archives/' . $journal->slug) }}">
-                                Archives
-                            </a>
-                        </li>
-                        <li>
-                            {{-- <a class="dropdown-item {{ request()->is('current-issue/*') ? 'active' : '' }}" --}}
-                            <a class="dropdown-item"
-                                href="{{ url('current-issue/' . $journal->slug) }}">
-                                Current Issue
-                            </a>
-                        </li>
-                        {{-- <li>
-                            <a class="dropdown-item 
-                                                {{ request()->is('copyrights') ? 'active' : '' }}"
-                                href="/copyrights">
-                                Article in-Press
-                            </a>
-                        </li> --}}
-
-                    </ul>
-                </li>
-
-
-                {{-- <li class="nav-item"><a class="nav-link {{ request()->is('manuscript') ? 'active' : '' }}"
-                        href="/manuscript">SUBMIT MANUSCRIPT</a></li> --}}
-
-                {{-- <li class="nav-item"><a class="nav-link {{ request()->is('payments') ? 'active' : '' }}"
-                        href="/payments">PAYMENTS</a></li> --}}
-                <li class="nav-item"><a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
-                        href="/contact-us">Contact Us</a></li>
-
-            </ul>
-            <form class="header-search-form d-flex ms-lg-3" action="{{ route('article.search') }}" method="GET"
-                role="search">
-                <input class="form-control form-control-sm" type="search" name="q" value="{{ request('q') }}"
-                    placeholder="Search articles" aria-label="Search articles">
-                <button class="btn btn-sm btn-light ms-1" type="submit" aria-label="Search">
-                    <i class="bi bi-search"></i>
-                </button>
-            </form>
-        </div>
-
-    </div>
-</nav>
+    </nav>
+</header>

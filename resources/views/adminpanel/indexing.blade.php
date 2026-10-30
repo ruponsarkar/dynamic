@@ -45,8 +45,12 @@
                                         </select>
                                     </div>
                                     <div class="one">
-                                        <label for="jname">Index link</label>
-                                        <input type="text" class="form-control" name="link" id="">
+                                        <label for="new-indexing-name">Organization name</label>
+                                        <input type="text" class="form-control" name="name" id="new-indexing-name" required>
+                                    </div>
+                                    <div class="one">
+                                        <label for="new-indexing-link">Official destination link (optional)</label>
+                                        <input type="url" class="form-control" name="link" id="new-indexing-link">
                                     </div>
 
                                     <div class="one">
@@ -84,6 +88,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>SL</th>
+                                    <th>Organization</th>
                                     <th>Link</th>
                                     <th>Indexing</th>
                                     <th>Edit</th>
@@ -96,7 +101,21 @@
                                 @foreach($indexing->reverse() as $data)
                                 <tr>
                                     <td>{{ $loop->index+1}}</td>
-                                    <td> <a href="{{$data->link}}"> {{$data->link}}</a></td>
+                                    <td>{{ $data->name ?: 'Name required' }}</td>
+                                    <td>
+                                        @php
+                                            $indexingHost = strtolower(parse_url($data->link ?? '', PHP_URL_HOST) ?: '');
+                                            $validIndexingLink = filter_var($data->link ?? '', FILTER_VALIDATE_URL)
+                                                && in_array(strtolower(parse_url($data->link ?? '', PHP_URL_SCHEME) ?: ''), ['http', 'https'], true)
+                                                && $indexingHost !== 'google.com'
+                                                && substr($indexingHost, -11) !== '.google.com';
+                                        @endphp
+                                        @if($validIndexingLink)
+                                            <a href="{{ $data->link }}" target="_blank" rel="noopener noreferrer">{{ $data->link }}</a>
+                                        @else
+                                            <span>Not set</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <img src="{{url('assets/indexing/img/'.$data->img)}}" alt="No Image" width="200">
                                     </td>
@@ -155,8 +174,12 @@
                                                         </select>
                                                     </div>
                                                     <div class="one">
-                                                        <label for="jname">Index link </label>
-                                                        <input type="text" value="{{$data->link}}" class="form-control" name="link" id="">
+                                                        <label for="indexing-name-{{$data->id}}">Organization name</label>
+                                                        <input type="text" value="{{$data->name}}" class="form-control" name="name" id="indexing-name-{{$data->id}}" required>
+                                                    </div>
+                                                    <div class="one">
+                                                        <label for="indexing-link-{{$data->id}}">Official destination link (optional)</label>
+                                                        <input type="url" value="{{ $data->link !== 'https://google.com' ? $data->link : '' }}" class="form-control" name="link" id="indexing-link-{{$data->id}}">
                                                     </div>
 
                                                     <a class="form-control btn btn-warning btn-sm mt-2" data-bs-toggle="modal" href="#updateImage{{$data->id}}" role="button">Change Image</a>

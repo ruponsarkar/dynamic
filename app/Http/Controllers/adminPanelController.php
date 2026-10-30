@@ -165,7 +165,7 @@ class adminPanelController extends Controller
         $journal->save();
 
 
-        $request->photo->move(base_path('public_html/assets/journals/img'), $photo);
+        $request->photo->move(base_path('public/assets/journals/img'), $photo);
 
 
         return redirect('journalForm')->with('message', 'Your request Submitted successfully');
@@ -194,7 +194,7 @@ class adminPanelController extends Controller
             'title' => $request->title,
             'file' => $file
         ]);
-        $request->file->move(base_path('public_html/assets/conference'), $file);
+        $request->file->move(base_path('public/assets/conference'), $file);
         return redirect('add-conference')->with('message', 'Your request Submitted successfully');
     }
     function updateconference(Request $request, $id)
@@ -252,34 +252,24 @@ class adminPanelController extends Controller
 
     function addIndexing(Request $request)
     {
-        // return $request->all();
-
-        // $request->validate([
-        //     'journal' => 'required|max:100',
-        //     'link' => 'max:1000',
-        //     'photo' => 'required|mimes:jpeg,jpg,png',
-        // ]);
-
-        // if($request->file('photo')){
-        //     return  $request->photo->getClientOriginalName();;
-        // }
-        // else{
-        //     return "no";
-        // }
-
-
+        $request->validate([
+            'journal' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'link' => 'nullable|url|max:2048',
+            'photo' => 'required|image|mimes:jpeg,jpg,png,webp',
+        ]);
 
         $photo = time() . '.' . $request->photo->getClientOriginalName();
-        // return $photo;
         $indexing = new indexings;
         $indexing->j_id = strip_tags($request->journal);
-        $indexing->link = strip_tags($request->link);
+        $indexing->name = strip_tags($request->name);
+        $indexing->link = $request->filled('link') ? trim($request->link) : null;
         $indexing->img = strip_tags($photo);
         $indexing->ip_address = \Request::ip();
 
         $indexing->save();
 
-        $request->photo->move(base_path('public_html/assets/indexing/img'), $photo);
+        $request->photo->move(base_path('public/assets/indexing/img'), $photo);
 
         return back()->with('message', 'Your request Submitted successfully');
     }
@@ -300,7 +290,7 @@ class adminPanelController extends Controller
         ]);
 
         $photo = time() . '.' . $request->photo->getClientOriginalName();
-        $directory = base_path('public_html/assets/certificates/img');
+        $directory = base_path('public/assets/certificates/img');
 
         if (!file_exists($directory)) {
             mkdir($directory, 0755, true);
@@ -417,7 +407,7 @@ class adminPanelController extends Controller
         $editor->ip_address = \Request::ip();
 
         $editor->save();
-        $request->photo->move(base_path('public_html/assets/img/editor-img'), $photo);
+        $request->photo->move(base_path('public/assets/img/editor-img'), $photo);
 
 
 
@@ -473,7 +463,7 @@ class adminPanelController extends Controller
 
         $editor->update();
         if($request->file('photo')){
-           $request->photo->move(base_path('public_html/assets/img/editor-img'), $photo);
+           $request->photo->move(base_path('public/assets/img/editor-img'), $photo);
         }
 
         return redirect('addEditors')->with('message', 'Your request Submitted successfully');
@@ -671,7 +661,7 @@ class adminPanelController extends Controller
         $articles->ip_address = \Request::ip();
 
         \App\Support\ArticleAuthors::save($articles, $authorRows);
-        $request->file->move(base_path('public_html/assets/articles/'), $file);
+        $request->file->move(base_path('public/assets/articles/'), $file);
 
 
         return back()->with('message', 'Added');
@@ -742,7 +732,7 @@ class adminPanelController extends Controller
 
         \App\Support\ArticleAuthors::save($updateArticle, $authorRows);
         if ($request->file) {
-            $request->file->move(base_path('public_html/assets/articles/'), $file);
+            $request->file->move(base_path('public/assets/articles/'), $file);
         }
         return back()->with('message', 'Your request Submitted successfully');
         // return dd($request->all());
@@ -812,7 +802,7 @@ class adminPanelController extends Controller
         $book->ip_address = \Request::ip();
 
         $book->save();
-        $request->photo->move(base_path('public_html/assets/img/books'), $photo);
+        $request->photo->move(base_path('public/assets/img/books'), $photo);
 
 
         return back()->with('message', 'Added');
@@ -823,7 +813,7 @@ class adminPanelController extends Controller
 
         $photo = time() . '.' . $request->photo->extension();
 
-        $request->photo->move(base_path('public_html/assets/journals/img'), $photo);
+        $request->photo->move(base_path('public/assets/journals/img'), $photo);
 
         $journal = journal::where('j_id', '=', $request->id)->update([
             'photo' => $photo,
@@ -867,27 +857,37 @@ class adminPanelController extends Controller
 
     function UpdateIndexing(Request $request)
     {
+        $request->validate([
+            'id' => 'required|integer|exists:indexing,id',
+            'name' => 'sometimes|required|string|max:255',
+            'link' => 'sometimes|nullable|url|max:2048',
+            'photo' => 'sometimes|image|mimes:jpeg,jpg,png,webp',
+        ]);
 
-        // return $request->id;
-        if ($request->link) {
-            $indexing = indexings::find($request->id)->update([
-                'link' => $request->link
-            ]);
+        $indexing = indexings::findOrFail($request->id);
 
-            return redirect()->back()->with('message', 'Updated');
+        if ($request->exists('name')) {
+            $indexing->name = strip_tags($request->name);
         }
 
-        if ($request->photo) {
+        if ($request->exists('link')) {
+            $indexing->link = $request->filled('link') ? trim($request->link) : null;
+        }
 
+        if ($request->hasFile('photo')) {
             $photo = time() . '.' . $request->photo->extension();
-            $indexing = indexings::find($request->id)->update([
-                'img' => $photo
-            ]);
-
-            $request->photo->move(base_path('public_html/assets/indexing/img'), $photo);
-
-            return redirect()->back()->with('message', 'Updated');
+            $indexing->img = $photo;
         }
+
+        if ($indexing->isDirty()) {
+            $indexing->save();
+        }
+
+        if ($request->hasFile('photo')) {
+            $request->photo->move(base_path('public/assets/indexing/img'), $photo);
+        }
+
+        return redirect()->back()->with('message', 'Updated');
     }
 
 
@@ -917,7 +917,7 @@ class adminPanelController extends Controller
             ]);
 
             $photo = time() . '.' . $request->photo->extension();
-            $directory = base_path('public_html/assets/certificates/img');
+            $directory = base_path('public/assets/certificates/img');
 
             if (!file_exists($directory)) {
                 mkdir($directory, 0755, true);
@@ -954,7 +954,7 @@ class adminPanelController extends Controller
             $logo = home_asset::where('id', $id)->update([
                 'logo' => $photo
             ]);
-            $request->logo->move(base_path('public_html/assets/homeAssets'), $photo);
+            $request->logo->move(base_path('public/assets/homeAssets'), $photo);
             return redirect()->back()->with('message', 'Updated');
         }
         if ($request->banner) {
@@ -964,7 +964,7 @@ class adminPanelController extends Controller
             $banner = home_asset::where('id', $id)->update([
                 'banner' => $photo
             ]);
-            $request->banner->move(base_path('public_html/assets/homeAssets'), $photo);
+            $request->banner->move(base_path('public/assets/homeAssets'), $photo);
             return redirect()->back()->with('message', 'Updated');
         }
         if ($request->impact_factor) {

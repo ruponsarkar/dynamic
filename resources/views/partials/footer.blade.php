@@ -1,121 +1,42 @@
-<!-- Social Links -->
-<div class="bg-light py-3 mt-4">
-    <div class="text-center">
-
-        <a href="whatsapp://send?phone=+917002207076" class="mx-2 text-dark">
-            <i class="bi bi-whatsapp"></i>
-        </a>
-
-        <a href="https://www.facebook.com/share/15mpNfjkmR7/?mibextid=wwXIfr" class="mx-2 text-dark">
-            <i class="bi bi-facebook"></i>
-        </a>
-
-        {{-- <a href="https://twitter.com" class="mx-2 text-dark">
-            <i class="bi bi-twitter-x"></i>
-        </a>
-        <a href="https://linkedin.com" class="mx-2 text-dark">
-            <i class="bi bi-linkedin"></i>
-        </a> --}}
-        <a href="https://www.instagram.com/RJMS_publisher?igsh=NXZ4d3RreW96MWlt&utm_source=qr" class="mx-2 text-dark">
-            <i class="bi bi-instagram"></i>
-        </a>
-
-    </div>
-</div>
-
-<div class="py-3 footer" >
-    {{-- <div class="text-center">
-        The publication is licensed under Creative Commons License
-        <img src="https://ijpqa.com/wp-content/uploads/2020/08/creative-commons.png" style="height:30px"
-            alt="Creative Commons">
-        <a href="https://creativecommons.org/licenses/by/4.0/legalcode">View Legal</a>
-    </div> --}}
-
-
-
+<footer class="publisher-footer">
     <div class="container">
-        <div class="row p-0 m-0">
-            <div class="col-md-4 " style="text-align: justify;">
-                <div class="text-left">
-                    <div>
-                        <u>
-                            <b>Quick Links</b>
-                        </u>
-                    </div>
-                    <div>
-                        <a href="/">Home</a>
-                    </div>
-                     <div>
-                        <a href="/privacy-policy">Privacy Policy</a>
-                    </div>
-                    {{-- <div>
-                        <a href="/journals">Journals</a>
-                    </div>
-                    <div>
-                        <a href="/instructons-for-authors">Author Instructions</a>
-                    </div>
-                    <div>
-                        <a href="/manuscript">Submit Manuscript</a>
-                    </div>
-                   
-                    <div>
-                        <a href="/terms-and-conditions">Terms and Conditions</a>
-                    </div>
-                    <div>
-                        <a href="/refund-policy">Refund Policy</a>
-                    </div>
-                    <div>
-                        <a href="/cancellation-policy">Cancellation Policy</a>
-                    </div> --}}
-                    <div>
-                        <a href="/contact-us">Contact Us</a>
-                    </div>
+        <div class="publisher-footer-grid">
+            <div>
+                <a class="publisher-footer-brand" href="{{ url('/') }}">Corpus Scientific Publisher</a>
+                <p>A home for scholarly research.<br>Connecting authors, readers and ideas.</p>
+                <div class="publisher-social">
+                    <a href="https://www.facebook.com/share/15mpNfjkmR7/?mibextid=wwXIfr">Facebook ↗</a>
+                    <a href="https://www.instagram.com/RJMS_publisher?igsh=NXZ4d3RreW96MWlt&utm_source=qr">Instagram ↗</a>
+                    <a href="whatsapp://send?phone=+917002207076">WhatsApp ↗</a>
                 </div>
             </div>
-
-            <div class="col-md-5 " style="display: flex; align-items: center; flex-direction: column; justify-content: space-around; gap: 10px;">
-                <div class="text-center" style="">
-                    The publication is licensed under Creative Commons License
-                    <img src="https://ijpqa.com/wp-content/uploads/2020/08/creative-commons.png" style="height:30px"
-                        alt="Creative Commons">
-                    <a href="https://creativecommons.org/licenses/by/4.0/legalcode">View Legal</a>
-                </div>
-
-                <div class="">
-                    © 2026 Research Journal of Medical science
-                </div>
+            <div>
+                <h2>Explore</h2>
+                <a href="{{ url('journals') }}">Our journals</a>
+                <a href="{{ url('about-us') }}">About us</a>
+                <a href="{{ url('news') }}">News</a>
+                <a href="{{ url('announcements') }}">Announcements</a>
             </div>
-
-            <div class="col-md-3 " style="text-align: justify;">
-                <div class="text-left">
-                    <div>
-                        <u>
-                            <b>Contact Us</b>
-                        </u>
-                    </div>
-                    <div style="text-align: justify;">
-                        <i class="bi bi-pin"></i> Ngong Road, Upperhill, PO Box-206, Kenya. Post code 20100.    
-                        <br>
-                        <!--<i class="bi bi-telephone"></i> +91 700000000-->
-                        <!--<br>-->
-                        <i class="bi bi-envelope"></i> editor@rjmsonline.com
-                        
-                    </div>
-                   
-                </div>
+            <div>
+                <h2>For authors</h2>
+                <a href="{{ url('instructons-for-authors') }}">Author guidelines</a>
+                <a href="{{ url('submit-article') }}">Submit a manuscript</a>
+                <a href="{{ url('processing-fee') }}">Publication charges</a>
+                <a href="{{ url('copyrights') }}">Copyright</a>
+            </div>
+            <div>
+                <h2>Get in touch</h2>
+                <a href="mailto:editor@rjmsonline.com">editor@rjmsonline.com</a>
+                <p>Ngong Road, Upperhill<br>PO Box 206, Kenya · 20100</p>
+                <a href="{{ url('contact-us') }}">Contact our team ↗</a>
             </div>
         </div>
-        <br>
+        <div class="publisher-footer-bottom">
+            <span>© {{ date('Y') }} Corpus Scientific Publisher</span>
+            <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons license</a>
+            <a href="{{ url('privacy-policy') }}">Privacy policy</a>
+            <span>Developed by <a href="https://pageuptechnologies.com">PageUp Technologies</a>
+            </span>
+        </div>
     </div>
-
-</div>
-
-{{-- <footer class="text-center bg-light py-2">
-    © 2025 Global Scholars Academic & Scientific Research Publisher
-</footer> --}}
-
-<div class="text-center text-muted">
-    <small>
-        Developed by <a href="https://pageuptechnologies.com">PageUp Technologies</a>
-    </small>
-</div>
+</footer>

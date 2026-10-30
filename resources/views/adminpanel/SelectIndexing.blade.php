@@ -50,8 +50,12 @@
                                         </select>
                                     </div>
                                     <div class="one">
-                                        <label for="jname">Index link</label>
-                                        <input type="text" class="form-control" name="link" id="">
+                                        <label for="indexing-name">Organization name</label>
+                                        <input type="text" class="form-control" name="name" id="indexing-name" required>
+                                    </div>
+                                    <div class="one">
+                                        <label for="indexing-link">Official destination link (optional)</label>
+                                        <input type="url" class="form-control" name="link" id="indexing-link">
                                     </div>
 
                                     <div class="one">

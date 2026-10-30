@@ -192,6 +192,7 @@
 
     <div class="jd-page">
         <div class="container">
+            @include('partials.journal-tabs', ['activeJournalTab' => 'about'])
             <div class="row g-4">
                 <div class="col-lg-3">
                     <aside class="jd-sidebar p-3">

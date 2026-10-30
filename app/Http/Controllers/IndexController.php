@@ -31,7 +31,35 @@ class IndexController extends Controller
         $indexings = DB::table('indexing')->where('active', 1)->get();
         $certificates = DB::table('certificates')->where('active', 1)->get();
 
-        $articles = DB::table('article')->where('status', 1)->limit(6)->get();
+        $articles = DB::table('article')
+            ->join('journals', function ($join) {
+                $join->on('article.j_id', '=', 'journals.j_id')
+                    ->where('journals.active', 1);
+            })
+            ->join('issues', function ($join) {
+                $join->on('article.i_id', '=', 'issues.id')
+                    ->where('issues.active', 1);
+            })
+            ->where('article.status', 1)
+            ->whereNotNull('article.accepted')
+            ->whereNotNull('article.published_date')
+            ->whereDate('article.accepted', '<=', now()->toDateString())
+            ->whereDate('article.published_date', '<=', now()->toDateString())
+            ->select('article.*')
+            ->orderBy('article.id', 'desc')
+            ->limit(6)
+            ->get();
+
+        $editors = DB::table('editors_data')
+            ->leftJoin('journals', function ($join) {
+                $join->on('editors_data.j_id', '=', 'journals.j_id')
+                    ->where('journals.active', 1);
+            })
+            ->where('editors_data.active', 1)
+            ->where('editors_data.is_top_editor', 1)
+            ->select('editors_data.*', 'journals.j_name', 'journals.slug as journal_slug')
+            ->orderBy('editors_data.id', 'desc')
+            ->get();
         
         $countJournal = journal::where('active', 1)->count('j_id');
         $countArticle = articles::where('status', 1)->count('id');
@@ -40,7 +68,8 @@ class IndexController extends Controller
         // return $content;
         return view('home', [
             'contents' => $content, 
-            'articles'=>$articles, 
+            'articles'=>$articles,
+            'editors'=>$editors,
             'indexings'=>$indexings,
             'certificates'=>$certificates,
             'countJournal'=>$countJournal,
@@ -104,19 +133,37 @@ class IndexController extends Controller
         $author = Author::find(session('AuthorLoggedUser'));
 
         if (!$author) {
-            return redirect()->route('author.login')->with('message', 'Please login as an author to submit manuscript.');
+            session()->forget('AuthorLoggedUser');
+            return redirect()->guest(route('author.login'))->with('message', 'Please login as an author to submit manuscript.');
         }
 
-        $journals = journal::get();
-        return view('manuscript', ['journals' => $journals, 'author' => $author]);
+        $journals = journal::where('active', 1)->orderBy('j_name')->get();
+        $top_editors = DB::table('editors_data')
+            ->where('is_top_editor', 1)
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('manuscript', [
+            'journals' => $journals,
+            'author' => $author,
+            'top_editors' => $top_editors,
+        ]);
     }
 
     function payments()
     {
+        $top_editors = DB::table('editors_data')
+            ->where('is_top_editor', 1)
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->get();
+
         return view('payments', [
             'paymentConfig' => config('payments'),
             'paypalConfig' => config('services.paypal'),
             'razorpayConfig' => config('services.razorpay'),
+            'top_editors' => $top_editors,
         ]);
     }
 
@@ -136,7 +183,11 @@ class IndexController extends Controller
 
 
         // return $volumes;
-        return view('archives', ['data' => $volumes, 'journal' => $journal]);
+        return view('archives', [
+            'data' => $volumes,
+            'journal' => $journal,
+            'activeJournalTab' => 'archive',
+        ]);
     }
 
 
@@ -162,15 +213,33 @@ class IndexController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
+        $currentIssueId = DB::table('issues')
+            ->join('volume', 'issues.v_id', '=', 'volume.id')
+            ->where('volume.j_id', $journal->j_id)
+            ->where('issues.active', 1)
+            ->select('issues.id as id')
+            ->orderBy('volume.year', 'desc')
+            ->orderBy('volume.id', 'desc')
+            ->orderBy('issues.id', 'desc')
+            ->value('id');
+
         // return $articles;
-        return view('articles', ['articles' => $articles, 'volume' => $v, 'issue' => $i, 'journal' => $journal]);
+        return view('articles', [
+            'articles' => $articles,
+            'volume' => $v,
+            'issue' => $i,
+            'journal' => $journal,
+            'activeJournalTab' => (int) $currentIssueId === (int) $i->id ? 'current' : 'archive',
+        ]);
     }
 
 
     function allJournals(Request $request){
 
         // $journals = DB::table('journals')->where('active', 1)->orderBy('j_id', 'desc')->get();
-        return view('allJournals');
+        $journals = journal::where('active', 1)->orderBy('j_name')->get();
+
+        return view('allJournals', ['journals' => $journals]);
     }
 
     function journal($slug){
@@ -179,7 +248,12 @@ class IndexController extends Controller
         abort_unless($journal, 404);
         $recent = DB::table('article')->where('j_id', '=', $journal->j_id)->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
         $certificates = DB::table('certificates')->where('j_id', $journal->j_id)->where('active', 1)->orderBy('id', 'desc')->get();
-        return view('details', ['journal' => $journal, 'articles' => $recent, 'certificates' => $certificates]);
+        return view('details', [
+            'journal' => $journal,
+            'articles' => $recent,
+            'certificates' => $certificates,
+            'activeJournalTab' => 'about',
+        ]);
     }
 
     function article($slug){
@@ -247,7 +321,11 @@ class IndexController extends Controller
         ->where('active', 1)
         ->orderBy('type', 'desc')
         ->get();
-        return view('editorial-board', ['journal' => $journal, 'editors' => $editors]);
+        return view('editorial-board', [
+            'journal' => $journal,
+            'editors' => $editors,
+            'activeJournalTab' => 'editorial',
+        ]);
     }
 
 }

@@ -26,23 +26,22 @@
                             </div>
                         @endif
         
-                        <div class="error_msg">
+                        @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
                             <ul>
                                 @foreach ($errors->all() as $e)
                                     <li>{{ $e }}</li>
                                 @endforeach
                             </ul>
                         </div>
-        
-        
-        
-        
+                        @endif
+
                         <form method="POST" action="{{ url('submit_manuscript') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
-                                <label for="Select Mode" class="col-sm-4 col-form-label">Select Mode</label>
+                                <label for="submission-mode" class="col-sm-4 col-form-label">Select Mode</label>
                                 <div class="col-sm-8">
-                                    <select class="form-select" id="specificSizeSelect" name="mode">
+                                    <select class="form-select" id="submission-mode" name="mode" required>
                                         <option value="">Select</option>
                                         <option value="Normal Mode" {{ old('mode') == 'Normal Mode' ? 'selected' : '' }}>Normal Mode</option>
                                         <option value="Fast Track Mode" {{ old('mode') == 'Fast Track Mode' ? 'selected' : '' }}>Fast Track Mode</option>
@@ -51,9 +50,9 @@
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Article Type" class="col-sm-4 col-form-label">Article Type</label>
+                                <label for="article-type" class="col-sm-4 col-form-label">Article Type</label>
                                 <div class="col-sm-8">
-                                    <select class="form-select" id="specificSizeSelect" name="type">
+                                    <select class="form-select" id="article-type" name="type" required>
                                         <option value="">Select</option>
                                         <option value="Research article" {{ old('type') == 'Research article' ? 'selected' : '' }}>Research article</option>
                                         <option value="Review article" {{ old('type') == 'Review article' ? 'selected' : '' }}>Review article</option>
@@ -65,9 +64,9 @@
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Select Journal" class="col-sm-4 col-form-label">Select Journal</label>
+                                <label for="journal-id" class="col-sm-4 col-form-label">Select Journal</label>
                                 <div class="col-sm-8">
-                                    <select class="form-select" id="specificSizeSelect" name="journal">
+                                    <select class="form-select" id="journal-id" name="journal" required>
                                         <option value="">Select</option>
                                         @foreach ($journals as $data)
                                             <option value="{{ $data->j_id }}" {{ old('journal') == $data->j_id ? 'selected' : '' }}> {{ $data->j_name }}</option>
@@ -77,24 +76,24 @@
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Corresponding Author" class="col-sm-4 col-form-label">Corresponding Author</label>
+                                <label for="corresponding-author" class="col-sm-4 col-form-label">Corresponding Author</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="author" class="form-control" placeholder="Full Name"
+                                    <input type="text" id="corresponding-author" name="author" class="form-control" placeholder="Full Name" required
                                         value="{{ old('author', $author->name ?? '') }}">
                                 </div>
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Full Affiliation" class="col-sm-4 col-form-label">Full Affiliation</label>
+                                <label for="author-affiliation" class="col-sm-4 col-form-label">Full Affiliation</label>
                                 <div class="col-sm-8">
-                                    <textarea type="text" name="affiliation" class="form-control" placeholder="Affiliation">{{ old('affiliation', $author->affiliation ?? '') }}</textarea>
+                                    <textarea id="author-affiliation" name="affiliation" class="form-control" placeholder="Affiliation" required>{{ old('affiliation', $author->affiliation ?? '') }}</textarea>
                                 </div>
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Email" class="col-sm-4 col-form-label">Email</label>
+                                <label for="author-email" class="col-sm-4 col-form-label">Email</label>
                                 <div class="col-sm-8">
-                                    <input type="email" name="mail" class="form-control" placeholder="Email"
+                                    <input type="email" id="author-email" name="mail" class="form-control" placeholder="Email" required
                                         value="{{ old('mail', $author->email ?? '') }}">
                                 </div>
                             </div>
@@ -106,47 +105,33 @@
                             </div> --}}
         
                             <div class="row mb-3">
-                                <label for="Mobile" class="col-sm-4 col-form-label">Mobile</label>
+                                <label for="author-mobile" class="col-sm-4 col-form-label">Mobile</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="mobile" class="form-control"
+                                    <input type="text" id="author-mobile" name="mobile" class="form-control" required
                                         placeholder="Mobile Number (Country code mandatory)"
                                         value="{{ old('mobile', $author->mobile ?? '') }}">
                                 </div>
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Manuscript Title" class="col-sm-4 col-form-label">Manuscript Title</label>
+                                <label for="manuscript-title" class="col-sm-4 col-form-label">Manuscript Title</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="manuscript" class="form-control" placeholder="Manuscript Title"
+                                    <input type="text" id="manuscript-title" name="manuscript" class="form-control" placeholder="Manuscript Title" required
                                         value="{{ old('manuscript') }}">
                                 </div>
                             </div>
         
                             <div class="row mb-3">
-                                <label for="Choose a file to upload" class="col-sm-4 col-form-label">Choose a file to upload</label>
+                                <label for="manuscript-file" class="col-sm-4 col-form-label">Choose a file to upload</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" name="file" type="file" id="formFile">
+                                    <input class="form-control" name="file" type="file" id="manuscript-file" accept=".pdf,.docx" required>
+                                    <small class="form-text text-muted">PDF or DOCX, up to 20 MB.</small>
                                 </div>
                             </div>
         
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn effect01">Submit Manuscript</button>
                             </div>
-        
-                            @if (session()->has('message'))
-                            <div class="alert alert-success text-center">
-                                {{ session()->get('message') }}
-                            </div>
-                        @endif
-        
-                        <div class="error_msg">
-                            <ul>
-                                @foreach ($errors->all() as $e)
-                                    <li>{{ $e }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-        
                         </form>
                     </div>
                 </div>
