@@ -262,7 +262,7 @@
     <div class="payments-page">
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-9 order-1">
                     <div class="payments-hero mb-4">
                         <div class="payments-kicker">
                             <i class="bi bi-credit-card-2-front"></i>
@@ -496,7 +496,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 order-2">
                     @include('partials.quicklinks1')
                     @include('partials.top_editors')
                 </div>

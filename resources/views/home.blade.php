@@ -102,8 +102,10 @@
         <aside class="publisher-home-rail" aria-label="Explore and connect">
             <section class="publisher-rail-card publisher-rail-directory" aria-labelledby="journal-directory-heading">
             <div class="publisher-journal-directory">
-                <p class="publisher-eyebrow">Browse by title</p>
-                <h3 id="journal-directory-heading">The journal directory</h3>
+                <div class="publisher-rail-heading">
+                    <p class="publisher-eyebrow">Browse by title</p>
+                    <h3 id="journal-directory-heading">The journal directory</h3>
+                </div>
                 <ul>
                     @forelse($journals as $directoryJournal)
                         <li><a href="{{ url('journal/' . $directoryJournal->slug) }}">{{ $directoryJournal->j_name }} <span aria-hidden="true">↗</span></a></li>
@@ -117,7 +119,7 @@
     <div class="publisher-editorial" aria-labelledby="editor-heading">
         <div class="container publisher-section">
             <div class="publisher-section-heading">
-                <div>
+                <div class="publisher-rail-heading">
                     <p class="publisher-eyebrow">Guided by scholars</p>
                     <h2 id="editor-heading">Top editors</h2>
                 </div>
@@ -180,17 +182,19 @@
     </div>
             </section>
             <section class="publisher-rail-card publisher-quick-links" aria-labelledby="quick-links-heading">
+                <div class="publisher-rail-heading">
+                    <h2 id="quick-links-heading">Quick links</h2>
+                </div>
+                <a href="{{ url('instructons-for-authors') }}">Author guidelines <span aria-hidden="true">↗</span></a>
+                <a href="{{ url('review-process') }}">Review process <span aria-hidden="true">↗</span></a>
+                <a href="{{ url('publication-ethics') }}">Publication ethics <span aria-hidden="true">↗</span></a>
+                <a href="{{ url('contact-us') }}">Contact the editorial team <span aria-hidden="true">↗</span></a>
                 <div class="publisher-rail-publish">
                     <p class="publisher-eyebrow">Publish with us</p>
                     <h3>Share your research with a wider community.</h3>
                     <p>Find the right journal and take the next step toward publication.</p>
                     <a class="publisher-button publisher-rail-submit" href="{{ url('submit-article') }}">Submit your manuscript <span aria-hidden="true">↗</span></a>
                 </div>
-                <h2 id="quick-links-heading">Quick links</h2>
-                <a href="{{ url('instructons-for-authors') }}">Author guidelines <span aria-hidden="true">↗</span></a>
-                <a href="{{ url('review-process') }}">Review process <span aria-hidden="true">↗</span></a>
-                <a href="{{ url('publication-ethics') }}">Publication ethics <span aria-hidden="true">↗</span></a>
-                <a href="{{ url('contact-us') }}">Contact the editorial team <span aria-hidden="true">↗</span></a>
             </section>
         </aside>
     </div>

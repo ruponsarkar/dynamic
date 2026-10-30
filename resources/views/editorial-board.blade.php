@@ -1,118 +1,60 @@
 @extends('layouts.app')
 
-@section('title', 'Editorial Board')
+@section('title', 'Editorial Board | ' . $journal->j_name)
 
 @section('content')
-
-    <div>
-        <!-- MAIN CONTENT GRID -->
-        <div class="container mt-4">
-
+    <main class="publisher-interior-page publisher-editorial-page">
+        <div class="container py-4 py-lg-5">
             @include('partials.journal-tabs', ['activeJournalTab' => 'editorial'])
 
-            <div class="row">
-
-                <div class="col-md-3">
-
-
-                    <div class="card-c mb-3">
-                        <img class="img-fluid" src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
-                            style=" width: 100%; object-fit: contain;">
+            <div class="row g-4 align-items-start">
+                <aside class="col-lg-3 order-2">
+                    <div class="publisher-interior-cover">
+                        <img src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="{{ $journal->j_name }} cover">
                     </div>
-
-
-
                     @include('partials.quicklinks1')
+                </aside>
 
+                <section class="col-lg-9 order-1">
+                    <header class="publisher-page-hero">
+                        <p class="publisher-eyebrow">People behind the journal</p>
+                        <h1>Editorial board</h1>
+                        <p>{{ $journal->j_name }} brings together experienced scholars to guide its editorial standards and research direction.</p>
+                    </header>
 
-                </div>
-
-                <!-- LEFT SECTION -->
-                <div class="col-md-9">
-
-                    <div>
-
-
-
-                        <div class="card-c">
-
-                            <div class="card-header">
-                                <div class="h-box">
-                                    <div class="h-box-text p-2">
-                                        {{ $journal->j_name }}
+                    @if (count($editors))
+                        <div class="publisher-editor-grid">
+                            @foreach ($editors as $editor)
+                                <article class="publisher-editor-card">
+                                    <div class="publisher-editor-card-top">
+                                        <span class="publisher-editor-avatar">
+                                            @if (!empty($editor->image))
+                                                <img src="{{ url('/assets/img/editor-img/' . $editor->image) }}" alt="{{ $editor->name }}">
+                                            @else
+                                                <span aria-hidden="true">{{ \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr($editor->name, 0, 1)) }}</span>
+                                            @endif
+                                        </span>
+                                        <span class="publisher-editor-role">{{ $editor->type }} editor</span>
                                     </div>
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="row px-4 pb-4">
-
-                                @foreach ($editors as $editor)
-                                <div class="col-md-3 mb-4">
-                                    <div class="card-c h-100 p-2 flex-bottom">
-
-                                        <div>
-                                            <b>{{ $editor->type }} Editor</b>
-                                            <hr class="p-0 m-0">
-                                        </div>
-
-                                        <img class="img-fluid" src="{{ url('/assets/img/editor-img/' . $editor->image) }}"
-                                        alt="Image" style=" width: 100%; object-fit: contain;">
-
-                                        <div class="text-center"> 
-                                            <div>
-                                               <small> <b>{{ $editor->name }}</b> </small>
-                                            </div>
-                                            <div>
-                                            <small> <i> {{ $editor->university }} </i> </small>
-                                            </div>
-                                            <div>
-                                            <small>  {{ $editor->details }} </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-
-                               
-
-
-
-                            </div>
-
-
-
-
+                                    <h2>{{ $editor->name }}</h2>
+                                    @if ($editor->university)
+                                        <p class="publisher-editor-affiliation">{{ $editor->university }}</p>
+                                    @endif
+                                    @if ($editor->details)
+                                        <p class="publisher-editor-bio">{{ $editor->details }}</p>
+                                    @endif
+                                </article>
+                            @endforeach
                         </div>
-
-                    </div>
-
-                    <div>
-
-
-
-
-
-                    </div>
-
-
-
-
-
-
-                </div>
-
-
-
-
-
-
+                    @else
+                        <div class="publisher-editor-empty">
+                            <span aria-hidden="true">✦</span>
+                            <h2>Editorial appointments are being updated</h2>
+                            <p>Please check back soon for the latest information about the {{ $journal->j_name }} editorial board.</p>
+                        </div>
+                    @endif
+                </section>
             </div>
         </div>
-    </div>
-
-
-
-
-
+    </main>
 @endsection

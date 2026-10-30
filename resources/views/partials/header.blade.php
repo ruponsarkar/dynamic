@@ -29,39 +29,58 @@
         </a>
     </div>
     <nav class="publisher-nav" aria-label="Main navigation">
-        <div class="container publisher-nav-inner">
-            <a href="{{ url('/') }}" aria-current="{{ request()->is('/') ? 'page' : 'false' }}">Home</a>
-            <a href="{{ url('journals') }}" aria-current="{{ request()->is('journals', 'journal/*') ? 'page' : 'false' }}">Journals</a>
-            <a href="{{ url('about-us') }}">About us</a>
-            <details class="publisher-menu">
-                <summary>For authors</summary>
-                <div class="publisher-menu-panel">
-                    <a href="{{ url('instructons-for-authors') }}">Author guidelines</a>
-                    <a href="{{ url('review-process') }}">Review process</a>
-                    <a href="{{ url('publication-ethics') }}">Publication ethics</a>
-                    <a href="{{ url('processing-fee') }}">Article processing charges</a>
-                    <a href="{{ url('copyrights') }}">Copyright</a>
-                </div>
-            </details>
-            <details class="publisher-menu">
-                <summary>Explore journals</summary>
-                <div class="publisher-menu-panel publisher-journal-menu">
-                    @forelse($journals as $navJournal)
-                        <div>
-                            <a class="publisher-menu-title" href="{{ url('journal/' . $navJournal->slug) }}">{{ $navJournal->j_name }}</a>
-                            <div class="publisher-menu-links">
-                                <a href="{{ url('current-issue/' . $navJournal->slug) }}">Current issue</a>
-                                <a href="{{ url('archives/' . $navJournal->slug) }}">Archive</a>
-                                <a href="{{ url('editorial-board/' . $navJournal->slug) }}">Editorial board</a>
-                                <a href="{{ url('indexings/' . $navJournal->slug) }}">Indexing</a>
-                            </div>
+        <div class="container publisher-nav-container">
+            <details class="publisher-nav-disclosure" open>
+                <summary class="publisher-nav-toggle"><span>Menu</span><span class="publisher-nav-toggle-icon" aria-hidden="true"></span></summary>
+                <div class="publisher-nav-inner" id="publisher-nav-links">
+                    <a href="{{ url('/') }}" aria-current="{{ request()->is('/') ? 'page' : 'false' }}">Home</a>
+                    <a href="{{ url('journals') }}" aria-current="{{ request()->is('journals', 'journal/*') ? 'page' : 'false' }}">Journals</a>
+                    <a href="{{ url('about-us') }}">About us</a>
+                    <details class="publisher-menu">
+                        <summary>For authors</summary>
+                        <div class="publisher-menu-panel">
+                            <a href="{{ url('instructons-for-authors') }}">Author guidelines</a>
+                            <a href="{{ url('review-process') }}">Review process</a>
+                            <a href="{{ url('publication-ethics') }}">Publication ethics</a>
+                            <a href="{{ url('processing-fee') }}">Article processing charges</a>
+                            <a href="{{ url('copyrights') }}">Copyright</a>
                         </div>
-                    @empty
-                        <a href="{{ url('journals') }}">Journal catalogue</a>
-                    @endforelse
+                    </details>
+                    <details class="publisher-menu">
+                        <summary>Explore journals</summary>
+                        <div class="publisher-menu-panel publisher-journal-menu">
+                            @forelse($journals as $navJournal)
+                                <div>
+                                    <a class="publisher-menu-title" href="{{ url('journal/' . $navJournal->slug) }}">{{ $navJournal->j_name }}</a>
+                                    <div class="publisher-menu-links">
+                                        <a href="{{ url('current-issue/' . $navJournal->slug) }}">Current issue</a>
+                                        <a href="{{ url('archives/' . $navJournal->slug) }}">Archive</a>
+                                        <a href="{{ url('editorial-board/' . $navJournal->slug) }}">Editorial board</a>
+                                        <a href="{{ url('indexings/' . $navJournal->slug) }}">Indexing</a>
+                                    </div>
+                                </div>
+                            @empty
+                                <a href="{{ url('journals') }}">Journal catalogue</a>
+                            @endforelse
+                        </div>
+                    </details>
+                    <a href="{{ url('contact-us') }}">Contact</a>
                 </div>
             </details>
-            <a href="{{ url('contact-us') }}">Contact</a>
         </div>
     </nav>
+    <script>
+        (() => {
+            const disclosure = document.querySelector('.publisher-nav-disclosure');
+            if (!disclosure) return;
+
+            const desktop = window.matchMedia('(min-width: 761px)');
+            const syncNavigation = () => {
+                disclosure.open = desktop.matches;
+            };
+
+            syncNavigation();
+            desktop.addEventListener('change', syncNavigation);
+        })();
+    </script>
 </header>

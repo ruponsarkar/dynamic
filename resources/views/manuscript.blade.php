@@ -13,7 +13,7 @@
        <div class="row">
 
            <!-- LEFT SECTION -->
-           <div class="col-md-9">
+           <div class="col-md-9 order-1">
             <div class="container-fluid">
 
                 <div class="row manuscript-bg pb-3">
@@ -142,7 +142,7 @@
            </div>
 
            <!-- RIGHT SIDEBAR -->
-           <div class="col-md-3">
+           <div class="col-md-3 order-2">
 
 
 

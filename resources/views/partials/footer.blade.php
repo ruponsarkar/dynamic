@@ -26,7 +26,7 @@
             </div>
             <div>
                 <h2>Get in touch</h2>
-                <a href="mailto:editor@rjmsonline.com">editor@rjmsonline.com</a>
+                <a href="mailto:editor@csp.com">editor@csp.com</a>
                 <p>Ngong Road, Upperhill<br>PO Box 206, Kenya · 20100</p>
                 <a href="{{ url('contact-us') }}">Contact our team ↗</a>
             </div>

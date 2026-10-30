@@ -6,7 +6,7 @@
     <div>
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 order-2">
                     <div class="card-c mb-3">
                         <img class="img-fluid" src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
                             style="width: 100%; object-fit: contain;">
@@ -15,7 +15,7 @@
                     @include('partials.quicklinks1')
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-9 order-1">
                     <div class="card-c">
                         <div class="card-header">
                             <div class="h-box">
