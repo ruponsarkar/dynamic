@@ -167,7 +167,7 @@ class adminPanelController extends Controller
             'chief' => 'max:1000',
             'publisher' => 'max:1000',
             'country' => 'max:1000',
-            // 'aim' => 'max:10000',
+            'aim' => 'required|string|max:50000',
             'photo' => 'required|mimes:jpeg,jpg,png',
 
 
@@ -196,7 +196,7 @@ class adminPanelController extends Controller
         $journal->chief_editor = strip_tags($request->chief);
         $journal->publisher = strip_tags($request->publisher);
         $journal->country_of_origin = strip_tags($request->country);
-        $journal->aim_and_scope = strip_tags($request->aim);
+        $journal->aim_and_scope = $request->input('aim');
         $journal->photo = strip_tags($photo);
 
         $journal->ip_address = \Request::ip();
@@ -793,6 +793,10 @@ class adminPanelController extends Controller
 
     function updateJournalsData(Request $request, $id)
     {
+
+        $request->validate([
+            'aim' => 'nullable|string|max:50000',
+        ]);
 
         $journal = journal::where('j_id', '=', $id)->update([
             'j_name' => $request->jname,

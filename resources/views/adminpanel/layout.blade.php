@@ -20,6 +20,7 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{{ url('admin/assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ url('admin/assets/css/admin-redesign.css') }}?v={{ filemtime(public_path('admin/assets/css/admin-redesign.css')) }}">
+    @yield('styles')
     <!-- DataTables -->
     <!-- <link rel="stylesheet" href="admin/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
     <link rel="stylesheet"

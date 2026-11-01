@@ -1065,6 +1065,29 @@ body.admin-redesign .content-wrapper .admin-form-title {
   font-weight: 700;
 }
 
+body.admin-redesign .note-editor.note-frame {
+  overflow: hidden;
+  border: 1px solid var(--admin-line);
+  border-radius: 9px;
+}
+
+body.admin-redesign .note-editor .note-toolbar {
+  border-bottom: 1px solid var(--admin-line);
+  background: #f6f8fb;
+}
+
+body.admin-redesign .note-editor .note-editable {
+  min-height: 180px;
+  padding: 14px;
+  color: #27364b;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+body.admin-redesign .content-wrapper form .flex-outer > .admin-journal-aim-field {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 767.98px) {
   body.admin-redesign .content-wrapper .container > form,
   body.admin-redesign .content-wrapper > form,

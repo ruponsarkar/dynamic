@@ -3,15 +3,28 @@
 @section('title', 'Dashboard')
 @section('breadcrumb', 'Dashboard')
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+@section('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
+@endsection
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+@section('script2')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+  $(function () {
+    $('#journal-aim').summernote({
+      placeholder: 'Describe the journal’s aims, subject areas, and scope…',
+      height: 260,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link']],
+        ['view', ['codeview']]
+      ]
+    });
+  });
+</script>
+@endsection
 
 @section('content')
 
@@ -93,10 +106,10 @@
         <input type="text" class="form-control" id="type" name="country" value="{{$journal->country_of_origin}}">
       </div>
 
-      {{-- <div class="pb-3">
-        <label for="phone">Aim and Scope</label>
-        <textarea class="form-control summernote" name="aim" placeholder=""> {{$journal->aim_and_scope}}</textarea>
-      </div> --}}
+      <div class="pb-3 admin-journal-aim-field">
+        <label for="journal-aim">Aim and Scope</label>
+        <textarea id="journal-aim" class="form-control" name="aim">{{ old('aim', $journal->aim_and_scope) }}</textarea>
+      </div>
 
 
       <div class="pb-3">
@@ -126,14 +139,6 @@
 
 </div>
 
-
-<script>
-  $('.summernote').summernote({
-      placeholder: 'write here',
-      tabsize: 2,
-      height: 500
-  });
-</script>
 
 
 @endsection
