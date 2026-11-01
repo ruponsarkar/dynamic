@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ url('admin/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- custom css -->
     <link rel="stylesheet" href="{{ url('admin/assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url('admin/assets/css/admin-redesign.css') }}?v={{ filemtime(public_path('admin/assets/css/admin-redesign.css')) }}">
     <!-- DataTables -->
     <!-- <link rel="stylesheet" href="admin/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
     <link rel="stylesheet"
@@ -34,7 +35,7 @@
 </head>
 
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed admin-redesign">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -109,7 +110,7 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ URL('receive-editors') }}"
                                 class="nav-link {{ request()->is('receive-editors') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user-plus"></i>
@@ -117,8 +118,8 @@
                                     Editor Receive
                                 </p>
                             </a>
-                        </li> --}}
-                        {{-- <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ URL('receive-reviewers') }}"
                                 class="nav-link {{ request()->is('receive-reviewers') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -126,7 +127,7 @@
                                     Reviewer Receive
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
 
                         {{-- <li class="nav-item">
                             <a href="{{ URL('add-conference') }}"

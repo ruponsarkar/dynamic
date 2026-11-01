@@ -21,6 +21,12 @@
 
 <div class="container">
 
+  <header class="admin-page-heading">
+    <span>JOURNALS / EDIT</span>
+    <h1>Edit journal profile</h1>
+    <p>Update publication details and the journal cover image.</p>
+  </header>
+
   @if(session()->has('message'))
   <div class="alert alert-success">
     {{ session()->get('message') }}
@@ -37,6 +43,7 @@
 
   <form method="POST" action="{{URL('updateJournalsData/'.$journal->j_id)}}">
     @csrf
+    <h2 class="admin-form-title">Publication details</h2>
     <ul class="flex-outer">
       <div class="pb-3"> 
         <label for="first-name">Journal Name</label>
@@ -102,10 +109,10 @@
     </ul>
   </form>
 
-  <br><br><br><br><br><br><br><br>
-
   <form action="{{URL('updateJournalPhoto/'.$journal->j_id)}}" method="post" enctype="multipart/form-data">
     @csrf
+    <h2 class="admin-form-title">Journal cover</h2>
+    <p class="admin-form-help">Choose a clear, high-resolution image for the journal listing.</p>
     <ul class="flex-outer">
       <div>
         <label for="phone">Change image</label>

@@ -65,6 +65,7 @@
                         </div>
                     </details>
                     <a href="{{ url('contact-us') }}">Contact</a>
+                    <a href="{{ url('payments') }}">Payments</a>
                 </div>
             </details>
         </div>

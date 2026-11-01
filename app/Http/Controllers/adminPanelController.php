@@ -35,9 +35,48 @@ class adminPanelController extends Controller
     {
         $HomeAssets = home_asset::where('active', 1)->first();
         $countJournal = journal::count('j_id');
+        $activeJournalCount = journal::where('active', 1)->count('j_id');
         $countArticle = articles::where('status', 1)->count('id');
         $countDownload = articles::sum('count');
-        return view('adminpanel.index', ['HomeAssets' => $HomeAssets, 'countJournal' => $countJournal, 'countArticle' => $countArticle, 'countDownload' => $countDownload]);
+        $manuscriptTotal = manuscripts::count();
+        $manuscriptStatusCounts = manuscripts::select(['status', DB::raw('COUNT(*) as total')])
+            ->groupBy('status')
+            ->pluck('total', 'status');
+        $publishedManuscriptCount = (int) $manuscriptStatusCounts->get(5, 0);
+        $rejectedManuscriptCount = (int) $manuscriptStatusCounts->get(6, 0);
+        $openManuscriptCount = max(0, $manuscriptTotal - $publishedManuscriptCount - $rejectedManuscriptCount);
+
+        $recentManuscripts = manuscripts::orderBy('m_id', 'DESC')->limit(6)->get();
+        $recentArticles = articles::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $topJournalArticleCounts = articles::select(['j_id', DB::raw('COUNT(*) as total')])
+            ->where('status', 1)
+            ->groupBy('j_id')
+            ->orderBy('total', 'DESC')
+            ->limit(5)
+            ->get();
+        $topJournals = journal::whereIn('j_id', $topJournalArticleCounts->pluck('j_id'))
+            ->get()
+            ->keyBy('j_id');
+        $journalNames = journal::select(['j_id', 'j_name'])->get()->keyBy('j_id');
+
+        return view('adminpanel.index', [
+            'HomeAssets' => $HomeAssets,
+            'countJournal' => $countJournal,
+            'activeJournalCount' => $activeJournalCount,
+            'inactiveJournalCount' => max(0, $countJournal - $activeJournalCount),
+            'countArticle' => $countArticle,
+            'countDownload' => $countDownload,
+            'manuscriptTotal' => $manuscriptTotal,
+            'openManuscriptCount' => $openManuscriptCount,
+            'publishedManuscriptCount' => $publishedManuscriptCount,
+            'rejectedManuscriptCount' => $rejectedManuscriptCount,
+            'manuscriptStatusCounts' => $manuscriptStatusCounts,
+            'recentManuscripts' => $recentManuscripts,
+            'recentArticles' => $recentArticles,
+            'topJournalArticleCounts' => $topJournalArticleCounts,
+            'topJournals' => $topJournals,
+            'journalNames' => $journalNames,
+        ]);
     }
 
     function allManuscript()
