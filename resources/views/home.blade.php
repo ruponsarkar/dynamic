@@ -57,7 +57,7 @@
                                     <span>Journal cover unavailable</span>
                                 </span>
                                 @if($coverIsAssignedToJournal)
-                                    <img src="{{ asset('assets/journals/img/' . $catalogueJournal->photo) }}" alt="" width="260" height="350" onerror="this.hidden=true; this.previousElementSibling.hidden=false;">
+                                    <img src="{{ asset('assets/journals/img/' . $catalogueJournal->photo) }}" alt="" width="260" height="350" loading="lazy" decoding="async" onerror="this.hidden=true; this.previousElementSibling.hidden=false;">
                                 @endif
                                 <span class="publisher-cover-overlay">
                                     <strong>{{ $catalogueJournal->j_name }}</strong>
@@ -80,21 +80,19 @@
     <section class="publisher-home-mission" aria-labelledby="mission-heading">
         <div class="publisher-mission-intro">
             <p class="publisher-eyebrow">Purpose &amp; direction</p>
-            <h2 id="mission-heading">Research deserves a clear path to the world.</h2>
-            <p>We connect rigorous scholarship with the readers, practitioners, and communities who can put it to use.</p>
+            <h2 id="mission-heading">{{ $homeContent['home_purpose_heading'] }}</h2>
+            <p>{{ $homeContent['home_purpose_intro'] }}</p>
         </div>
         <div class="publisher-mission-values">
             <article>
                 <div class="publisher-mission-card-heading"><span class="publisher-mission-card-number">01</span><i class="bi bi-bullseye" aria-hidden="true"></i><span>Our mission</span></div>
-                <h3>Make quality research easier to share.</h3>
-                <p>Our mission is to provide academicians, researchers, and scholars with up-to-date information on discoveries, developments, and ongoing activities in the fields of science and technology. We aim to make this information easily accessible, enabling individuals in these domains to stay informed effortlessly.
-
-</p>
+                <h3>{{ $homeContent['home_mission_title'] }}</h3>
+                <p>{!! nl2br(e($homeContent['home_mission_text'])) !!}</p>
             </article>
             <article>
                 <div class="publisher-mission-card-heading"><span class="publisher-mission-card-number">02</span><i class="bi bi-eye" aria-hidden="true"></i><span>Our vision</span></div>
-                <h3>Build trust through open scholarship.</h3>
-                <p>Our vision is to uphold the highest standards of quality in the publication of research and review articles. We are deeply committed to the timely and effective dissemination of peer-reviewed, top-quality work. To achieve this, we have assembled a team of esteemed editorial members representing diverse disciplines and specializations. Their dedication ensures an efficient and constructive review process that aligns with international research publishing standards.</p>
+                <h3>{{ $homeContent['home_vision_title'] }}</h3>
+                <p>{!! nl2br(e($homeContent['home_vision_text'])) !!}</p>
             </article>
         </div>
     </section>

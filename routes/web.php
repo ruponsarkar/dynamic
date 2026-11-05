@@ -8,6 +8,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\AdminSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,14 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('login', [adminPanelController::class, 'login']);
     Route::get('admin_index', [adminPanelController::class, 'adminIndex']);
+
+    Route::get('payment-settings', [AdminSettingsController::class, 'paymentSettings']);
+    Route::post('payment-settings', [AdminSettingsController::class, 'savePaymentSettings']);
+    Route::get('payment-transactions', [AdminSettingsController::class, 'paymentTransactions']);
+    Route::get('home-content', [AdminSettingsController::class, 'homeContent']);
+    Route::post('home-content', [AdminSettingsController::class, 'saveHomeContent']);
+    Route::post('clear-cache', [AdminSettingsController::class, 'clearCache']);
+
     Route::get('add-indexing' , [adminPanelController::class,'addIndexingPage']);
     Route::get('add-certificate' , [adminPanelController::class,'addCertificatePage']);
 

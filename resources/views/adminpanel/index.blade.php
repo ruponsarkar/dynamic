@@ -28,6 +28,10 @@
             <div class="admin-dashboard-heading-actions">
                 <span class="admin-dashboard-date"><i class="far fa-calendar-alt" aria-hidden="true"></i> {{ now()->format('F j, Y') }}</span>
                 <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary"><i class="fas fa-external-link-alt" aria-hidden="true"></i> View site</a>
+                <form action="{{ url('clear-cache') }}" method="post" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-secondary"><i class="fas fa-broom" aria-hidden="true"></i> Clear cache</button>
+                </form>
             </div>
         </header>
 
@@ -171,12 +175,12 @@
                         <input id="admin-home-logo" class="form-control" type="file" name="logo" accept=".jpg,.jpeg,.png" required>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-upload" aria-hidden="true"></i> Update logo</button>
                     </form>
-                    <form action="{{ url('changeHomeAsset') }}" method="post">
+                    {{-- <form action="{{ url('changeHomeAsset') }}" method="post">
                         @csrf
                         <label for="admin-impact-factor">Impact factor</label>
                         <input id="admin-impact-factor" class="form-control" type="text" name="impact_factor" value="{{ $HomeAssets->impact_factor ?? '' }}" required>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-save" aria-hidden="true"></i> Save value</button>
-                    </form>
+                    </form> --}}
                 </div>
             </article>
         </section>

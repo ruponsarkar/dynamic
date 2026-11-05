@@ -276,6 +276,7 @@
                     </div>
 
                     <div class="row g-4">
+                        @if ($paymentConfig['methods']['upi'] ?? true)
                         <div class="col-lg-6">
                             <div class="payment-card">
                                 <div class="payment-card-title">
@@ -291,8 +292,7 @@
                                     @else
                                         <div class="payment-placeholder">
                                             <i class="bi bi-qr-code"></i>
-                                            <strong>QR code not added yet</strong>
-                                            <div class="mt-2">Set <code>PAYMENTS_QR_IMAGE</code> to show your QR image.</div>
+                                            <strong>QR code not available yet</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -303,7 +303,9 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
+                        @if ($paymentConfig['methods']['razorpay'] ?? true)
                         <div class="col-lg-6">
                             <div class="payment-card">
                                 <div class="payment-card-title">
@@ -321,7 +323,7 @@
                                     <label class="payment-select-label" for="razorpay-currency-option">Select currency</label>
                                     <select class="form-select" id="razorpay-currency-option">
                                         @foreach ($paymentConfig['razorpay_supported_currencies'] ?? [] as $currencyOption)
-                                            <option value="{{ $currencyOption['key'] }}" @selected(($currencyOption['key'] ?? '') === 'USD')>
+                                            <option value="{{ $currencyOption['key'] }}" {{ ($currencyOption['key'] ?? '') === 'USD' ? 'selected' : '' }}>
                                                 {{ $currencyOption['label'] }}
                                             </option>
                                         @endforeach
@@ -361,12 +363,14 @@
                                     <div id="razorpay-status" class="gateway-status"></div>
                                 @else
                                     <div class="payment-note">
-                                        Add <code>RAZORPAY_KEY_ID</code> and <code>RAZORPAY_KEY_SECRET</code> in your environment to enable the live Razorpay checkout on this page.
+                                        Razorpay checkout is not available right now. Please use another payment method.
                                     </div>
                                 @endif
                             </div>
                         </div>
+                        @endif
 
+                        @if ($paymentConfig['methods']['paypal'] ?? true)
                         <div class="col-lg-6">
                             <div class="payment-card">
                                 <div class="payment-card-title">
@@ -399,12 +403,14 @@
                                     <div id="paypal-status" class="gateway-status"></div>
                                 @else
                                     <div class="payment-note">
-                                        Add <code>PAYPAL_CLIENT_ID</code> and <code>PAYPAL_CLIENT_SECRET</code> in your environment to enable the live PayPal button on this page.
+                                        PayPal checkout is not available right now. Please use another payment method.
                                     </div>
                                 @endif
                             </div>
                         </div>
+                        @endif
 
+                        @if ($paymentConfig['methods']['bank'] ?? true)
                         <div class="col-12">
                             <div class="payment-card">
                                 <div class="payment-card-title">
@@ -442,6 +448,7 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
 
                         <div class="col-12">
                             <div class="payment-note">
@@ -488,9 +495,9 @@
                         <div class="col-12">
                             <div class="payment-contact">
                                 <h4 class="fw-bold mb-3">Contact for Payment Assistance</h4>
-                                <div class="mb-1"><strong>IRGS Publisher</strong></div>
-                                <div class="mb-1">International Research &amp; Global Society</div>
-                                <div><strong>Phone:</strong> +91-7002207076</div>
+                                <div class="mb-1"><strong>{{ $paymentConfig['contact']['name'] }}</strong></div>
+                                <div class="mb-1">{{ $paymentConfig['contact']['organisation'] }}</div>
+                                <div><strong>Phone:</strong> {{ $paymentConfig['contact']['phone'] }}</div>
                             </div>
                         </div>
                     </div>

@@ -24,7 +24,7 @@
     <meta name="description" content="{{ $metaDescription }}">
     <meta name="robots" content="{{ $metaRobots }}">
     <meta name="author" content="Corpus Scientific Publisher">
-    <meta name="theme-color" content="#0056a3">
+    <meta name="theme-color" content="#0a2f63">
     <meta name="msapplication-TileColor" content="#0056a3">
     <meta name="msapplication-config" content="{{ asset('fav/browserconfig.xml') }}">
     <meta name="apple-mobile-web-app-capable" content="yes">

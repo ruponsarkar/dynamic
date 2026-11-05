@@ -18,6 +18,7 @@ use App\Models\editor;
 use App\Models\home_asset;
 use App\Models\manuscript_status;
 use App\Models\conference;
+use App\Support\CachedJournals;
 use Carbon;
 use Illuminate\Support\Facades\Hash;
 use DB;
@@ -206,6 +207,7 @@ class adminPanelController extends Controller
 
         $request->photo->move(base_path('public/assets/journals/img'), $photo);
 
+        CachedJournals::forget();
 
         return redirect('journalForm')->with('message', 'Your request Submitted successfully');
     }
@@ -279,6 +281,7 @@ class adminPanelController extends Controller
         $journal = journal::where('j_id', $id)->update([
             'active' => 0
         ]);
+        CachedJournals::forget();
         return redirect()->back()->with('message', 'Deleted');
     }
 
@@ -814,6 +817,7 @@ class adminPanelController extends Controller
 
 
         ]);
+        CachedJournals::forget();
         return redirect('journalForm');
     }
 
@@ -862,8 +866,7 @@ class adminPanelController extends Controller
             'photo' => $photo,
         ]);
 
-
-
+        CachedJournals::forget();
 
         return back()->with('message', 'Successfully Updated Image');
     }

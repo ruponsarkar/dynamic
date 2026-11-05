@@ -364,6 +364,7 @@ body.admin-redesign .admin-dashboard-date i {
 }
 
 body.admin-redesign .admin-dashboard-heading-actions .btn {
+  white-space: nowrap;
   border-color: #dce2e9;
   background: #fff;
   color: #475569;

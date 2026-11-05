@@ -8,7 +8,7 @@
                     <span>Journal cover unavailable</span>
                 </span>
                 @if(!empty($catalogueJournal->photo))
-                    <img src="{{ asset('assets/journals/img/' . $catalogueJournal->photo) }}" alt="{{ $catalogueJournal->j_name }} journal cover" onerror="this.hidden=true; this.previousElementSibling.hidden=false;" width="260" height="350">
+                    <img src="{{ asset('assets/journals/img/' . $catalogueJournal->photo) }}" alt="{{ $catalogueJournal->j_name }} journal cover" onerror="this.hidden=true; this.previousElementSibling.hidden=false;" width="260" height="350" loading="lazy" decoding="async">
                 @endif
             </a>
             <div class="publisher-journal-info">

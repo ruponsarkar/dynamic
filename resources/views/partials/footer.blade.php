@@ -15,7 +15,7 @@
                 <a href="{{ url('journals') }}">Our journals</a>
                 <a href="{{ url('about-us') }}">About us</a>
                 <a href="{{ url('news') }}">News</a>
-                <a href="{{ url('announcements') }}">Announcements</a>
+                <a href="{{ url('privacy-policy') }}">Privacy policy</a>
             </div>
             <div>
                 <h2>For authors</h2>
