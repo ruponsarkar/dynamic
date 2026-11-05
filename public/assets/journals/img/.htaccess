@@ -1,0 +1,4 @@
+# Every upload gets a new filename, so browsers can safely keep covers for a year.
+<IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>

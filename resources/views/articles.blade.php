@@ -13,7 +13,7 @@
             <div class="row">
 
 
-                <div class="col-md-3">
+                <div class="col-md-3 order-2">
 
 
                     <div class="card-c mb-3">
@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- LEFT SECTION -->
-                <div class="col-md-9">
+                <div class="col-md-9 order-1">
                     
                     <div class="card-c">
 

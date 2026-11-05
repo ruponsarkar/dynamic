@@ -1,132 +1,53 @@
 @extends('layouts.app')
 
-@section('title', 'Archives')
+@section('title', 'Journal archive | ' . $journal->j_name)
 
 @section('content')
-
-    <div>
-        <!-- MAIN CONTENT GRID -->
-        <div class="container mt-4">
-
+    <main class="publisher-interior-page publisher-archive-page">
+        <div class="container py-4 py-lg-5">
             @include('partials.journal-tabs', ['activeJournalTab' => 'archive'])
 
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="card-c mb-3">
-                        <img class="img-fluid"
-                                src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="Image"
-                                style=" width: 100%; object-fit: contain;"
-                                >
+            <div class="row g-4 align-items-start">
+                <aside class="col-lg-3 order-2">
+                    <div class="publisher-interior-cover">
+                        <img src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="{{ $journal->j_name }} cover">
                     </div>
-
                     @include('partials.quicklinks1')
-                </div>
+                </aside>
 
-                <!-- LEFT SECTION -->
-                <div class="col-md-9">
-                    <div class="card-c p-4">
+                <section class="col-lg-9 order-1">
+                    <header class="publisher-page-hero publisher-page-hero-compact">
+                        <p class="publisher-eyebrow">Explore past research</p>
+                        <h1>Journal archive</h1>
+                        <p>Browse published issues of <strong>{{ $journal->j_name }}</strong> by volume and year.</p>
+                    </header>
 
-                        <div class="card-header">
-                            <div class="h-box">
-                                <div class="h-box-text p-2">
-                                    Archives | {{ $journal->j_name }}
-                                </div>
+                    @forelse ($data as $year => $issues)
+                        <section class="publisher-archive-volume">
+                            <header class="publisher-archive-volume-head">
+                                <span class="publisher-archive-year">{{ $issues[0]->year }}</span>
+                                <h2>{{ $issues[0]->volume_name }}</h2>
+                                <span class="publisher-archive-count">{{ count($issues) }} {{ \Illuminate\Support\Str::plural('issue', count($issues)) }}</span>
+                            </header>
+                            <div class="publisher-archive-issues">
+                                @foreach ($issues as $issue)
+                                    <a class="publisher-archive-issue" href="{{ url('archives/' . $journal->slug . '/' . $issue->volume_slug . '/' . $issue->slug) }}?i={{ $issue->id }}&v={{ $issue->v_id }}">
+                                        <span class="publisher-archive-issue-icon" aria-hidden="true">▤</span>
+                                        <span><small>Volume {{ $issue->volume_name }}</small><strong>{{ $issue->name }}</strong></span>
+                                        <span class="publisher-archive-arrow" aria-hidden="true">↗</span>
+                                    </a>
+                                @endforeach
                             </div>
+                        </section>
+                    @empty
+                        <div class="publisher-editor-empty">
+                            <span aria-hidden="true">▤</span>
+                            <h2>No archived issues yet</h2>
+                            <p>Published issues for {{ $journal->j_name }} will appear here.</p>
                         </div>
-
-                        <br>
-
-                        <div>
-
-
-                            @foreach ($data as $year => $issues)
-                                <div class="mb-3 card-c p-2">
-                                    
-
-                                    <div>
-                                        <div class="btn btn-primary disabled w-100 text-center mb-2">
-                                            <b>
-                                                {{ $issues[0]->volume_name }} ({{ $issues[0]->year }}) 
-                                            </b>
-                                        </div>
-                                        <div class="row gap-4 justify-content-center">
-                                        @foreach ($issues as $issue)
-
-                                            <div class="col-md-3 text-center">
-                                                    <a href="/archives/{{ $journal->slug }}/{{ $issue->volume_slug }}/{{ $issue->slug }}?i={{ $issue->id }}&v={{ $issue->v_id }}" class="btn btn-primary w-100">
-                                                        {{ $issue->name }}
-                                                    </a>
-                                                    
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-
-                                    </div>
-
-                                </div>
-
-
-                                {{-- <div class="accordion-item">
-
-                                    <h2 class="accordion-header" id="heading-{{ $loop->iteration }}">
-                                        <button class="accordion-button {{ $loop->iteration === 1 ? '' : 'collapsed' }}"
-                                            type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse-{{ $loop->iteration }}"
-                                            aria-expanded="{{ $loop->iteration === 1 ? 'true' : 'false' }}"
-                                            aria-controls="collapse-{{ $loop->iteration }}">
-                                            Archive Issues - {{ $year }}
-                                        </button>
-                                    </h2>
-
-                                    <div id="collapse-{{ $loop->iteration }}"
-                                        class="accordion-collapse collapse {{ $loop->iteration === 1 ? 'show' : '' }}"
-                                        aria-labelledby="heading-{{ $loop->iteration }}"
-                                        data-bs-parent="#accordionExample">
-
-                                        <div class="accordion-body">
-
-                                            @foreach ($issues as $issue)
-                                                <div class="mb-1">
-                                                    <a href="/archives/{{ $issue->volume_slug }}/{{ $issue->slug }}"
-                                                        class="text-primary">
-                                                        {{ $issue->volume_name }} - {{ $issue->name }}
-                                                    </a>
-                                                </div>
-                                            @endforeach
-
-                                        </div>
-                                    </div>
-
-                                </div> --}}
-                            @endforeach
-
-
-
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-
-
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-         
-
-
-
+                    @endforelse
+                </section>
             </div>
         </div>
-    </div>
-
-
-
-
-
+    </main>
 @endsection

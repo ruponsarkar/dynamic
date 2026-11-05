@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ url('admin/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- custom css -->
     <link rel="stylesheet" href="{{ url('admin/assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url('admin/assets/css/admin-redesign.css') }}?v={{ filemtime(public_path('admin/assets/css/admin-redesign.css')) }}">
+    @yield('styles')
     <!-- DataTables -->
     <!-- <link rel="stylesheet" href="admin/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
     <link rel="stylesheet"
@@ -34,7 +36,7 @@
 </head>
 
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed admin-redesign">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -109,7 +111,7 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ URL('receive-editors') }}"
                                 class="nav-link {{ request()->is('receive-editors') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user-plus"></i>
@@ -117,8 +119,8 @@
                                     Editor Receive
                                 </p>
                             </a>
-                        </li> --}}
-                        {{-- <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ URL('receive-reviewers') }}"
                                 class="nav-link {{ request()->is('receive-reviewers') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -126,7 +128,7 @@
                                     Reviewer Receive
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
 
                         {{-- <li class="nav-item">
                             <a href="{{ URL('add-conference') }}"
@@ -216,7 +218,7 @@
                             </ul>
                         </li>
 
-                        {{-- <li
+                        <li
                             class="nav-item has-treeview {{ request()->is('add-certificate') || request()->is('certificateList/*') ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-certificate"></i>
@@ -233,7 +235,42 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> --}}
+                        </li>
+
+                        <li
+                            class="nav-item has-treeview {{ request()->is('payment-settings', 'payment-transactions') ? 'menu-is-opening menu-open' : '' }}">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>
+                                    Payments
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ URL('payment-settings') }}"
+                                        class="nav-link {{ request()->is('payment-settings') ? 'active' : '' }}">
+                                        <p class="p-4"><i class="fas fa-arrow-right"></i> Settings</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ URL('payment-transactions') }}"
+                                        class="nav-link {{ request()->is('payment-transactions') ? 'active' : '' }}">
+                                        <p class="p-4"><i class="fas fa-arrow-right"></i> Transactions</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ URL('home-content') }}"
+                                class="nav-link {{ request()->is('home-content') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-bullseye"></i>
+                                <p>
+                                    Mission &amp; Vision
+                                </p>
+                            </a>
+                        </li>
 
 
                         {{-- <li class="nav-item">

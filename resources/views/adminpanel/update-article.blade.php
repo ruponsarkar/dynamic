@@ -85,8 +85,15 @@
 
     <div class="container">
 
+        <header class="admin-page-heading">
+            <span>ARTICLES / EDIT</span>
+            <h1>Edit article</h1>
+            <p>Manage article details, authorship, publication metadata, and the full text.</p>
+        </header>
+
         <form action="update-article-data/{{ $articles->id }}" method="post" enctype="multipart/form-data">
             @csrf
+            <h2 class="admin-form-title">Article information</h2>
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
             @endif
@@ -208,16 +215,6 @@
                 </li>
             </ul>
         </form>
-
-        <br><br><br><br><br>
-
-        <form action="update-article-data.php" method="post" enctype="multipart/form-data">
-            <ul class="flex-outer">
-
-            </ul>
-        </form>
-
-
 
     </div>
 

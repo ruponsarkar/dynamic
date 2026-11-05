@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="container py-4">
+        <div class="row g-4 align-items-start">
+            <aside class="col-lg-3 order-2" aria-label="Quick links">
+                @include('partials.quicklinks1')
+            </aside>
+            <main class="col-lg-9 order-1">
         <div class="card-c p-3">
             <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-3">
                 <div>
@@ -35,6 +40,8 @@
             @else
                 <div class="alert alert-warning mb-0">No articles found for <b>{{ $query }}</b>.</div>
             @endif
+        </div>
+            </main>
         </div>
     </div>
 @endsection

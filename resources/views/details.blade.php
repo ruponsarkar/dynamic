@@ -194,17 +194,23 @@
         <div class="container">
             @include('partials.journal-tabs', ['activeJournalTab' => 'about'])
             <div class="row g-4">
-                <div class="col-lg-3">
+                <div class="col-lg-3 order-2">
                     <aside class="jd-sidebar p-3">
                         <div class="jd-cover-wrap mb-3">
                             <img class="jd-cover" src="{{ url('assets/journals/img/' . $journal->photo) }}" alt="{{ $journal->j_name }} cover image">
                         </div>
 
-                        @include('partials.quicklinks1')
+                        @include('partials.quicklinks1', ['extraQuickLinks' => [
+                            ['label' => 'About the journal', 'url' => url('journal/' . $journal->slug)],
+                            ['label' => 'Archive', 'url' => url('archives/' . $journal->slug)],
+                            ['label' => 'Current issue', 'url' => url('current-issue/' . $journal->slug)],
+                            ['label' => 'Editorial board', 'url' => url('editorial-board/' . $journal->slug)],
+                            ['label' => 'Indexing', 'url' => url('indexings/' . $journal->slug)],
+                        ]])
                     </aside>
                 </div>
 
-                <div class="col-lg-9">
+                <div class="col-lg-9 order-1">
                     <section class="jd-main-card">
                         <header class="jd-hero">
                             <span class="jd-badge">Journal Profile</span>

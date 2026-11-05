@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\home_asset;
+use App\Support\CachedJournals;
+use App\Support\PaymentSettings;
 use DB;
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
 
 
         $HomeAssets = DB::table('home_assets')->where('active', 1)->first();
-        $journal = DB::table('journals')->where('active', 1)->first();
-        $journals = DB::table('journals')->where('active', 1)->get();
+        $journals = CachedJournals::all();
+        $journal = $journals->first();
         // $top_editors = DB::table('editors_data')->where('is_top_editor', 1)->where('active', 1)->get();
 
         $useful_links = DB::table('custom_pages')
@@ -46,5 +48,7 @@ class AppServiceProvider extends ServiceProvider
             'useful_links' => $useful_links,
         ]);
         // View::share();
+
+        PaymentSettings::apply();
     }
 }

@@ -66,7 +66,7 @@ class FormController extends Controller
 
 
 
-    // for manuscript 
+    // for manuscript
     function manuscript()
     {
         $author = Author::find(session('AuthorLoggedUser'));
@@ -101,7 +101,9 @@ class FormController extends Controller
             'journal' => [
                 'required',
                 'integer',
-                Rule::exists('journals', 'j_id')->where(fn ($query) => $query->where('active', 1)),
+                Rule::exists('journals', 'j_id')->where(function ($query) {
+                    return $query->where('active', 1);
+                }),
             ],
             'author' => 'required|string|max:120',
             'affiliation' => 'required|string|max:500',
@@ -156,20 +158,20 @@ class FormController extends Controller
         );
 
 
-        // for user 
+        // for user
         // Mail::send('mails.acknowledge', $data, function ($message) use ($data) {
         //     $message->from('submit@IRASSpublishers.com');
         //     $message->to($data['email']);
         //     $message->subject('Submission Acknowledgement');
         // });
 
-        // for admin 
+        // for admin
         // Mail::send('mails.admin', $data, function ($message) use ($data) {
         //     $message->from('submit@IRASSpublishers.com');
         //     $message->to('ruponsarkar108@gmail.com');
         //     $message->subject('New Manuscript Request');
         // });
-        
+
 
         return redirect('manuscript')->with('message', 'Your request Submitted successfully');
     }

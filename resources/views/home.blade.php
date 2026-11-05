@@ -10,9 +10,9 @@
                 <h1>Research that moves<br>knowledge forward.</h1>
                 <p class="publisher-intro">Discover our journals, explore the latest research, and find the right home for your next manuscript.</p>
                 <div class="publisher-actions">
-                    <a class="publisher-button" href="#journals">Browse journals <span aria-hidden="true">↓</span>
+                    <a class="publisher-button" href="#journals">Browse journals <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
                     </a>
-                    <a class="publisher-text-link" href="{{ url('instructons-for-authors') }}">Information for authors <span aria-hidden="true">↗</span>
+                    <a class="publisher-text-link" href="{{ url('instructons-for-authors') }}"><i class="bi bi-person-lines-fill" aria-hidden="true"></i> Information for authors <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                                     <span>Journal cover unavailable</span>
                                 </span>
                                 @if($coverIsAssignedToJournal)
-                                    <img src="{{ asset('assets/journals/img/' . $catalogueJournal->photo) }}" alt="" width="260" height="350" onerror="this.hidden=true; this.previousElementSibling.hidden=false;">
+                                    <img src="{{ asset('assets/journals/img/' . $catalogueJournal->photo) }}" alt="" width="260" height="350" loading="lazy" decoding="async" onerror="this.hidden=true; this.previousElementSibling.hidden=false;">
                                 @endif
                                 <span class="publisher-cover-overlay">
                                     <strong>{{ $catalogueJournal->j_name }}</strong>
@@ -80,21 +80,19 @@
     <section class="publisher-home-mission" aria-labelledby="mission-heading">
         <div class="publisher-mission-intro">
             <p class="publisher-eyebrow">Purpose &amp; direction</p>
-            <h2 id="mission-heading">Research deserves a clear path to the world.</h2>
-            <p>We connect rigorous scholarship with the readers, practitioners, and communities who can put it to use.</p>
+            <h2 id="mission-heading">{{ $homeContent['home_purpose_heading'] }}</h2>
+            <p>{{ $homeContent['home_purpose_intro'] }}</p>
         </div>
         <div class="publisher-mission-values">
             <article>
-                <span>01 / Our mission</span>
-                <h3>Make quality research easier to share.</h3>
-                <p>Our mission is to provide academicians, researchers, and scholars with up-to-date information on discoveries, developments, and ongoing activities in the fields of science and technology. We aim to make this information easily accessible, enabling individuals in these domains to stay informed effortlessly.
-
-</p>
+                <div class="publisher-mission-card-heading"><span class="publisher-mission-card-number">01</span><i class="bi bi-bullseye" aria-hidden="true"></i><span>Our mission</span></div>
+                <h3>{{ $homeContent['home_mission_title'] }}</h3>
+                <p>{!! nl2br(e($homeContent['home_mission_text'])) !!}</p>
             </article>
             <article>
-                <span>02 / Our vision</span>
-                <h3>Build trust through open scholarship.</h3>
-                <p>Our vision is to uphold the highest standards of quality in the publication of research and review articles. We are deeply committed to the timely and effective dissemination of peer-reviewed, top-quality work. To achieve this, we have assembled a team of esteemed editorial members representing diverse disciplines and specializations. Their dedication ensures an efficient and constructive review process that aligns with international research publishing standards.</p>
+                <div class="publisher-mission-card-heading"><span class="publisher-mission-card-number">02</span><i class="bi bi-eye" aria-hidden="true"></i><span>Our vision</span></div>
+                <h3>{{ $homeContent['home_vision_title'] }}</h3>
+                <p>{!! nl2br(e($homeContent['home_vision_text'])) !!}</p>
             </article>
         </div>
     </section>
@@ -102,8 +100,10 @@
         <aside class="publisher-home-rail" aria-label="Explore and connect">
             <section class="publisher-rail-card publisher-rail-directory" aria-labelledby="journal-directory-heading">
             <div class="publisher-journal-directory">
-                <p class="publisher-eyebrow">Browse by title</p>
-                <h3 id="journal-directory-heading">The journal directory</h3>
+                <div class="publisher-rail-heading">
+                    <p class="publisher-eyebrow">Browse by title</p>
+                    <h3 id="journal-directory-heading"><i class="bi bi-journals" aria-hidden="true"></i> The journal directory</h3>
+                </div>
                 <ul>
                     @forelse($journals as $directoryJournal)
                         <li><a href="{{ url('journal/' . $directoryJournal->slug) }}">{{ $directoryJournal->j_name }} <span aria-hidden="true">↗</span></a></li>
@@ -117,9 +117,9 @@
     <div class="publisher-editorial" aria-labelledby="editor-heading">
         <div class="container publisher-section">
             <div class="publisher-section-heading">
-                <div>
+                <div class="publisher-rail-heading">
                     <p class="publisher-eyebrow">Guided by scholars</p>
-                    <h2 id="editor-heading">Top editors</h2>
+                    <h2 id="editor-heading"><i class="bi bi-people" aria-hidden="true"></i> Top editors</h2>
                 </div>
                     @if($editors->isNotEmpty())
                         <div class="publisher-carousel-controls">
@@ -180,17 +180,19 @@
     </div>
             </section>
             <section class="publisher-rail-card publisher-quick-links" aria-labelledby="quick-links-heading">
+                <div class="publisher-rail-heading">
+                    <h2 id="quick-links-heading">Quick links</h2>
+                </div>
+                <a href="{{ url('instructons-for-authors') }}"><i class="bi bi-file-earmark-text" aria-hidden="true"></i> Author guidelines <span aria-hidden="true">↗</span></a>
+                <a href="{{ url('review-process') }}"><i class="bi bi-arrow-repeat" aria-hidden="true"></i> Review process <span aria-hidden="true">↗</span></a>
+                <a href="{{ url('publication-ethics') }}"><i class="bi bi-shield-check" aria-hidden="true"></i> Publication ethics <span aria-hidden="true">↗</span></a>
+                <a href="{{ url('contact-us') }}"><i class="bi bi-envelope" aria-hidden="true"></i> Contact the editorial team <span aria-hidden="true">↗</span></a>
                 <div class="publisher-rail-publish">
-                    <p class="publisher-eyebrow">Publish with us</p>
+                    <p class="publisher-eyebrow"><i class="bi bi-send" aria-hidden="true"></i> Publish with us</p>
                     <h3>Share your research with a wider community.</h3>
                     <p>Find the right journal and take the next step toward publication.</p>
-                    <a class="publisher-button publisher-rail-submit" href="{{ url('submit-article') }}">Submit your manuscript <span aria-hidden="true">↗</span></a>
+                    <a class="publisher-button publisher-rail-submit" href="{{ url('submit-article') }}">Submit your manuscript <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
                 </div>
-                <h2 id="quick-links-heading">Quick links</h2>
-                <a href="{{ url('instructons-for-authors') }}">Author guidelines <span aria-hidden="true">↗</span></a>
-                <a href="{{ url('review-process') }}">Review process <span aria-hidden="true">↗</span></a>
-                <a href="{{ url('publication-ethics') }}">Publication ethics <span aria-hidden="true">↗</span></a>
-                <a href="{{ url('contact-us') }}">Contact the editorial team <span aria-hidden="true">↗</span></a>
             </section>
         </aside>
     </div>
@@ -222,14 +224,14 @@
                         @endphp
                         <article class="publisher-home-article-card">
                             <div class="publisher-home-article-meta">
-                                <span>{{ $article->article_type ?: 'Research article' }}</span>
-                                @if($publishedDate)<time datetime="{{ $publishedDate }}">{{ $publishedDate }}</time>@endif
+                                <span><i class="bi bi-journal-bookmark" aria-hidden="true"></i> {{ $article->article_type ?: 'Research article' }}</span>
+                                @if($publishedDate)<time datetime="{{ $publishedDate }}"><i class="bi bi-calendar3" aria-hidden="true"></i> {{ $publishedDate }}</time>@endif
                             </div>
                             <h3><a href="{{ url('article/' . $article->slug) }}">{{ $article->name }}</a></h3>
                             @if($articleJournal)
                                 <a class="publisher-home-article-journal" href="{{ url('journal/' . $articleJournal->slug) }}">{{ $articleJournal->j_name }}</a>
                             @endif
-                            <p class="publisher-home-article-authors"><strong>Authors</strong> {!! \App\Support\ArticleAuthors::display($article->aname) !!}</p>
+                            <p class="publisher-home-article-authors"><i class="bi bi-people" aria-hidden="true"></i> <strong>Authors</strong> {!! \App\Support\ArticleAuthors::display($article->aname) !!}</p>
                             @if($articleAbstract !== '')
                                 <p class="publisher-home-article-abstract">{{ $articleAbstract }}</p>
                             @endif
@@ -238,9 +240,9 @@
                                 @if($article->page)<span><strong>Pages</strong> {{ $article->page }}</span>@endif
                             </div>
                             <div class="publisher-home-article-actions">
-                                <a href="{{ url('article/' . $article->slug) }}">Read article <span aria-hidden="true">↗</span></a>
+                                <a href="{{ url('article/' . $article->slug) }}"><i class="bi bi-journal-richtext" aria-hidden="true"></i> Read article</a>
                                 @if($article->file)
-                                    <a href="{{ asset('assets/articles/' . $article->file) }}" target="_blank" rel="noopener noreferrer">Download PDF <span aria-hidden="true">↓</span></a>
+                                    <a href="{{ asset('assets/articles/' . $article->file) }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Download PDF</a>
                                 @endif
                             </div>
                         </article>
@@ -311,11 +313,51 @@
         @endif
         </div>
     </section>
+
+
+     <section class="publisher-home-updates" aria-labelledby="updates-heading">
+        <div class="container publisher-home-updates-inner">
+            <div>
+                <p class="publisher-eyebrow">Stay connected</p>
+                <h2 id="updates-heading">Stay updated with our research.</h2>
+                <p>Discover new articles, journal announcements, and publishing updates from our research community.</p>
+            </div>
+            <div class="publisher-updates-actions">
+                <a class="publisher-button" href="{{ route('article.search') }}"><i class="bi bi-search" aria-hidden="true"></i> Explore latest articles</a>
+                <a href="mailto:editor@csp.com?subject=Research%20updates"><i class="bi bi-envelope-paper" aria-hidden="true"></i> Ask to receive research updates <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <section class="publisher-home-community" aria-labelledby="community-heading">
+        <div class="container">
+            <div class="publisher-community-intro">
+                <p class="publisher-eyebrow">For reviewers &amp; editors</p>
+                <h2 id="community-heading">Good research deserves good stewardship.</h2>
+                <p>Join the scholarly community helping authors strengthen ideas, uphold standards, and move research forward.</p>
+            </div>
+            <div class="publisher-community-cards">
+                <a class="publisher-community-card" href="{{ url('join-reviewer') }}">
+                    <span class="publisher-community-icon"><i class="bi bi-person-check" aria-hidden="true"></i></span>
+                    <span class="publisher-community-card-copy"><strong>Join as a reviewer</strong><small>Support rigorous, constructive peer review across our journals.</small></span>
+                    <span class="publisher-community-arrow" aria-hidden="true">→</span>
+                </a>
+                <a class="publisher-community-card" href="{{ url('join-editor') }}">
+                    <span class="publisher-community-icon"><i class="bi bi-journal-check" aria-hidden="true"></i></span>
+                    <span class="publisher-community-card-copy"><strong>Join as an editor</strong><small>Bring your expertise to a growing editorial community.</small></span>
+                    <span class="publisher-community-arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="publisher-home-stats" aria-label="Corpus Scientific Publisher at a glance">
         <div class="container publisher-home-stats-inner">
-            <div><strong>{{ number_format($countJournal) }}</strong><span>Active journals</span></div>
-            <div><strong>{{ number_format($countArticle) }}</strong><span>Published articles</span></div>
-            <div><strong>{{ number_format($countDownload) }}</strong><span>Article downloads</span></div>
+            <div><i class="bi bi-journals" aria-hidden="true"></i><span class="publisher-stat-copy"><strong>{{ number_format($countJournal) }}</strong><span>Active journals</span></span></div>
+            <div><i class="bi bi-file-earmark-richtext" aria-hidden="true"></i><span class="publisher-stat-copy"><strong>{{ number_format($countArticle) }}</strong><span>Published articles</span></span></div>
+            <div><i class="bi bi-download" aria-hidden="true"></i><span class="publisher-stat-copy"><strong>{{ number_format($countDownload) }}</strong><span>Article downloads</span></span></div>
         </div>
     </section>
 

@@ -3,6 +3,29 @@
 @section('title', 'Home')
 @section('breadcrumb', 'Add Journals')
 
+@section('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
+@endsection
+
+@section('script2')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+  $(function () {
+    $('#journal-aim').summernote({
+      placeholder: 'Describe the journal’s aims, subject areas, and scope…',
+      height: 220,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link']],
+        ['view', ['codeview']]
+      ]
+    });
+  });
+</script>
+@endsection
+
 
 @section('content')
 
@@ -108,9 +131,9 @@
                     </div>
                   </div>
                   <div class="form-group row p-1">
-                    <label class="col-sm-4 col-form-label">Aim And Scope:</label>
+                    <label class="col-sm-4 col-form-label" for="journal-aim">Aim And Scope:</label>
                     <div class="col-sm-8">
-                      <input type="textarea" class="form-control" name="aim" required="required" placeholder="Aim And Scope">
+                      <textarea id="journal-aim" class="form-control" name="aim">{{ old('aim') }}</textarea>
                     </div>
                   </div>
                   <div class="form-group row p-1">

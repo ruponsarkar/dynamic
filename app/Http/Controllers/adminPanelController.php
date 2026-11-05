@@ -18,6 +18,7 @@ use App\Models\editor;
 use App\Models\home_asset;
 use App\Models\manuscript_status;
 use App\Models\conference;
+use App\Support\CachedJournals;
 use Carbon;
 use Illuminate\Support\Facades\Hash;
 use DB;
@@ -35,9 +36,48 @@ class adminPanelController extends Controller
     {
         $HomeAssets = home_asset::where('active', 1)->first();
         $countJournal = journal::count('j_id');
+        $activeJournalCount = journal::where('active', 1)->count('j_id');
         $countArticle = articles::where('status', 1)->count('id');
         $countDownload = articles::sum('count');
-        return view('adminpanel.index', ['HomeAssets' => $HomeAssets, 'countJournal' => $countJournal, 'countArticle' => $countArticle, 'countDownload' => $countDownload]);
+        $manuscriptTotal = manuscripts::count();
+        $manuscriptStatusCounts = manuscripts::select(['status', DB::raw('COUNT(*) as total')])
+            ->groupBy('status')
+            ->pluck('total', 'status');
+        $publishedManuscriptCount = (int) $manuscriptStatusCounts->get(5, 0);
+        $rejectedManuscriptCount = (int) $manuscriptStatusCounts->get(6, 0);
+        $openManuscriptCount = max(0, $manuscriptTotal - $publishedManuscriptCount - $rejectedManuscriptCount);
+
+        $recentManuscripts = manuscripts::orderBy('m_id', 'DESC')->limit(6)->get();
+        $recentArticles = articles::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $topJournalArticleCounts = articles::select(['j_id', DB::raw('COUNT(*) as total')])
+            ->where('status', 1)
+            ->groupBy('j_id')
+            ->orderBy('total', 'DESC')
+            ->limit(5)
+            ->get();
+        $topJournals = journal::whereIn('j_id', $topJournalArticleCounts->pluck('j_id'))
+            ->get()
+            ->keyBy('j_id');
+        $journalNames = journal::select(['j_id', 'j_name'])->get()->keyBy('j_id');
+
+        return view('adminpanel.index', [
+            'HomeAssets' => $HomeAssets,
+            'countJournal' => $countJournal,
+            'activeJournalCount' => $activeJournalCount,
+            'inactiveJournalCount' => max(0, $countJournal - $activeJournalCount),
+            'countArticle' => $countArticle,
+            'countDownload' => $countDownload,
+            'manuscriptTotal' => $manuscriptTotal,
+            'openManuscriptCount' => $openManuscriptCount,
+            'publishedManuscriptCount' => $publishedManuscriptCount,
+            'rejectedManuscriptCount' => $rejectedManuscriptCount,
+            'manuscriptStatusCounts' => $manuscriptStatusCounts,
+            'recentManuscripts' => $recentManuscripts,
+            'recentArticles' => $recentArticles,
+            'topJournalArticleCounts' => $topJournalArticleCounts,
+            'topJournals' => $topJournals,
+            'journalNames' => $journalNames,
+        ]);
     }
 
     function allManuscript()
@@ -128,7 +168,7 @@ class adminPanelController extends Controller
             'chief' => 'max:1000',
             'publisher' => 'max:1000',
             'country' => 'max:1000',
-            // 'aim' => 'max:10000',
+            'aim' => 'required|string|max:50000',
             'photo' => 'required|mimes:jpeg,jpg,png',
 
 
@@ -157,7 +197,7 @@ class adminPanelController extends Controller
         $journal->chief_editor = strip_tags($request->chief);
         $journal->publisher = strip_tags($request->publisher);
         $journal->country_of_origin = strip_tags($request->country);
-        $journal->aim_and_scope = strip_tags($request->aim);
+        $journal->aim_and_scope = $request->input('aim');
         $journal->photo = strip_tags($photo);
 
         $journal->ip_address = \Request::ip();
@@ -167,6 +207,7 @@ class adminPanelController extends Controller
 
         $request->photo->move(base_path('public/assets/journals/img'), $photo);
 
+        CachedJournals::forget();
 
         return redirect('journalForm')->with('message', 'Your request Submitted successfully');
     }
@@ -240,6 +281,7 @@ class adminPanelController extends Controller
         $journal = journal::where('j_id', $id)->update([
             'active' => 0
         ]);
+        CachedJournals::forget();
         return redirect()->back()->with('message', 'Deleted');
     }
 
@@ -755,6 +797,10 @@ class adminPanelController extends Controller
     function updateJournalsData(Request $request, $id)
     {
 
+        $request->validate([
+            'aim' => 'nullable|string|max:50000',
+        ]);
+
         $journal = journal::where('j_id', '=', $id)->update([
             'j_name' => $request->jname,
             'abbr_title' => $request->abbr,
@@ -771,6 +817,7 @@ class adminPanelController extends Controller
 
 
         ]);
+        CachedJournals::forget();
         return redirect('journalForm');
     }
 
@@ -819,8 +866,7 @@ class adminPanelController extends Controller
             'photo' => $photo,
         ]);
 
-
-
+        CachedJournals::forget();
 
         return back()->with('message', 'Successfully Updated Image');
     }

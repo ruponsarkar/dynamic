@@ -12,6 +12,7 @@ use App\Models\home_asset;
 use App\Models\manuscripts;
 use App\Models\manuscript_status;
 use App\Models\Author;
+use App\Support\HomeContent;
 use DB;
 
 
@@ -74,7 +75,8 @@ class IndexController extends Controller
             'certificates'=>$certificates,
             'countJournal'=>$countJournal,
             'countArticle'=>$countArticle,
-            'countDownload'=>$countDownload
+            'countDownload'=>$countDownload,
+            'homeContent'=>HomeContent::all()
             ]);
     }
 
