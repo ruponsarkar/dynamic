@@ -25,7 +25,8 @@
                 </svg>
             </button>
         </form>
-        <a class="publisher-button publisher-button-small" href="{{ url('submit-article') }}">Submit manuscript <span aria-hidden="true">↗</span>
+        {{-- <a class="publisher-button publisher-button-small" href="{{ url('submit-article') }}">Submit manuscript <span aria-hidden="true">↗</span> --}}
+        <a class="publisher-button publisher-button-small" href="{{ url('manuscript') }}">Submit manuscript <span aria-hidden="true">↗</span>
         </a>
     </div>
     <nav class="publisher-nav" aria-label="Main navigation">

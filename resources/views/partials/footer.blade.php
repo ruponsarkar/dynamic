@@ -5,9 +5,15 @@
                 <a class="publisher-footer-brand" href="{{ url('/') }}">Corpus Scientific Publisher</a>
                 <p>A home for scholarly research.<br>Connecting authors, readers and ideas.</p>
                 <div class="publisher-social">
-                    <a href="https://www.facebook.com/share/15mpNfjkmR7/?mibextid=wwXIfr" aria-label="Visit Corpus Scientific Publisher on Facebook" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook" aria-hidden="true"></i></a>
-                    <a href="https://www.instagram.com/RJMS_publisher?igsh=NXZ4d3RreW96MWlt&amp;utm_source=qr" aria-label="Visit Corpus Scientific Publisher on Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram" aria-hidden="true"></i></a>
-                    <a href="https://wa.me/917002207076" aria-label="Contact Corpus Scientific Publisher on WhatsApp" title="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100014151253407"
+                        aria-label="Visit Corpus Scientific Publisher on Facebook" title="Facebook" target="_blank"
+                        rel="noopener noreferrer"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/corpus_scientific_publisher?cplk=MWtlZGVwdG9qZXUyOQ=="
+                        aria-label="Visit Corpus Scientific Publisher on Instagram" title="Instagram" target="_blank"
+                        rel="noopener noreferrer"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+                    <a href="https://wa.me/917002756501" aria-label="Contact Corpus Scientific Publisher on WhatsApp"
+                        title="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"
+                            aria-hidden="true"></i></a>
                 </div>
             </div>
             <div>
@@ -25,9 +31,12 @@
                 <a href="{{ url('copyrights') }}">Copyright</a>
             </div>
             <div>
-                <h2>Get in touch</h2>
-                <a href="mailto:editor@csp.com">editor@csp.com</a>
-                <p>Ngong Road, Upperhill<br>PO Box 206, Kenya · 20100</p>
+                <h2>Contact Information</h2>
+                {{-- <a href="mailto:editor@csp.com">editor@csp.com</a> --}}
+                <p>PUB ROWARPAR, HOJAI, ASSAM - INDIA
+                    +917002756501</p>
+                <p>Principal Contact : Director<br>
+ Email: director@cspublisher.com</p>
                 <a href="{{ url('contact-us') }}">Contact our team ↗</a>
             </div>
         </div>
