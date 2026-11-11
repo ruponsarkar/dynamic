@@ -154,6 +154,51 @@ body.publisher-site {
     gap:16px;
 }
 
+/* Main nav holds the "Submit manuscript" button and pins to the top on scroll (see header.blade.php). */
+.publisher-nav-container {
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.publisher-nav-container>.publisher-nav-disclosure {
+    flex:1;
+    min-width:0;
+}
+
+.publisher-nav-submit {
+    flex:0 0 auto;
+    align-self:center;
+    margin:0;
+    padding-top:8px;
+    padding-bottom:8px;
+    line-height:1.4;
+    white-space:nowrap;
+}
+
+.publisher-nav.is-fixed {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    box-shadow:0 6px 18px -10px rgba(11,42,85,.35);
+}
+
+@media(max-width:760px) {
+    /* Stay beside the "Menu" toggle row instead of the middle of an open menu. */
+    .publisher-nav-submit {
+        align-self:flex-start;
+        margin-top:7px;
+    }
+
+    /* Let a long open mobile menu scroll while the nav is pinned. */
+    .publisher-nav.is-fixed {
+        max-height:100vh;
+        overflow-y:auto;
+    }
+}
+
 .publisher-nav {
     border-top:1px solid var(--pub-line);
     border-bottom:1px solid var(--pub-line);
