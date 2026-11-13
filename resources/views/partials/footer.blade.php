@@ -3,7 +3,9 @@
         <div class="publisher-footer-grid">
             <div>
                 <a class="publisher-footer-brand" href="{{ url('/') }}">Corpus Scientific Publisher</a>
-                <p>A home for scholarly research.<br>Connecting authors, readers and ideas.</p>
+                <p>Quality Research Trusted Publishing
+                <!--<br>Connecting authors, readers and ideas.-->
+                </p>
                 <div class="publisher-social">
                     <a href="https://www.facebook.com/profile.php?id=100014151253407"
                         aria-label="Visit Corpus Scientific Publisher on Facebook" title="Facebook" target="_blank"
