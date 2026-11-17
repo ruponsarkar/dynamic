@@ -17,7 +17,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // On Hostinger the web root is public_html (it holds index.php), not public/.
+        // Point public_path() there so asset lookups and uploads use the served folder.
+        // Locally public_html has no index.php, so public/ stays in use.
+        $publicHtml = base_path('public_html');
+        if (is_file($publicHtml . DIRECTORY_SEPARATOR . 'index.php')) {
+            $this->app->instance('path.public', $publicHtml);
+        }
     }
 
     /**

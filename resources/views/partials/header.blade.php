@@ -12,7 +12,7 @@
                 <img src="{{ asset('assets/homeAssets/' . $assets->logo) }}" alt="" width="64" height="64" onerror="this.hidden=true">
             @endif
             <span>Corpus Scientific <strong>Publisher</strong>
-                <small>CSP · A home for scholarly research</small>
+                <small>Quality Research Trusted Publishing</small>
             </span>
         </a>
         <form class="publisher-search" action="{{ route('article.search') }}" method="GET" role="search">
@@ -25,8 +25,7 @@
                 </svg>
             </button>
         </form>
-        <a class="publisher-button publisher-button-small" href="{{ url('submit-article') }}">Submit manuscript <span aria-hidden="true">↗</span>
-        </a>
+        {{-- <a class="publisher-button publisher-button-small" href="{{ url('submit-article') }}">Submit manuscript <span aria-hidden="true">↗</span> --}}
     </div>
     <nav class="publisher-nav" aria-label="Main navigation">
         <div class="container publisher-nav-container">
@@ -68,6 +67,8 @@
                     <a href="{{ url('payments') }}">Payments</a>
                 </div>
             </details>
+            <a class="publisher-button publisher-button-small publisher-nav-submit" href="{{ url('manuscript') }}">Submit manuscript <span aria-hidden="true">↗</span>
+            </a>
         </div>
     </nav>
     <script>
@@ -82,6 +83,28 @@
 
             syncNavigation();
             desktop.addEventListener('change', syncNavigation);
+        })();
+
+        // Pin the main navigation (with the Submit manuscript button) to the top once it scrolls out of view.
+        (() => {
+            const header = document.querySelector('.publisher-header');
+            const nav = header && header.querySelector('.publisher-nav');
+            if (!nav) return;
+
+            const update = () => {
+                const pinned = nav.classList.contains('is-fixed');
+                // While pinned, the header's bottom padding stands in for the nav's height.
+                const navTop = header.getBoundingClientRect().top + window.scrollY + header.offsetHeight
+                    - (pinned ? parseFloat(header.style.paddingBottom) || 0 : nav.offsetHeight);
+                const shouldPin = window.scrollY > navTop;
+                if (shouldPin === pinned) return;
+                header.style.paddingBottom = shouldPin ? nav.offsetHeight + 'px' : '';
+                nav.classList.toggle('is-fixed', shouldPin);
+            };
+
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
         })();
     </script>
 </header>

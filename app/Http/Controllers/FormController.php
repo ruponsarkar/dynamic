@@ -87,13 +87,8 @@ class FormController extends Controller
 
     function submit_manuscript(Request $request)
     {
+        // Author login is optional for now; guest submissions have no author_id.
         $authorAccount = Author::find(session('AuthorLoggedUser'));
-
-        if (!$authorAccount) {
-            session()->forget('AuthorLoggedUser');
-            session()->put('url.intended', url('manuscript'));
-            return redirect()->route('author.login')->with('message', 'Please login as an author to submit manuscript.');
-        }
 
         $request->validate([
             'mode' => 'required|string|max:50',
@@ -127,7 +122,7 @@ class FormController extends Controller
 
         $manuscript = new manuscripts;
         $manuscript->muuid = strip_tags('IJPSM/'.$year.'/'.$month.'/'.$count);
-        $manuscript->author_id = $authorAccount->id;
+        $manuscript->author_id = $authorAccount ? $authorAccount->id : null;
         $manuscript->mode = strip_tags($request->mode);
         $manuscript->type = strip_tags($request->type);
         $manuscript->journal = $j_name;

@@ -132,12 +132,8 @@ class IndexController extends Controller
 
     function manuscript()
     {
+        // Author login is optional for now: guests can submit directly.
         $author = Author::find(session('AuthorLoggedUser'));
-
-        if (!$author) {
-            session()->forget('AuthorLoggedUser');
-            return redirect()->guest(route('author.login'))->with('message', 'Please login as an author to submit manuscript.');
-        }
 
         $journals = journal::where('active', 1)->orderBy('j_name')->get();
         $top_editors = DB::table('editors_data')

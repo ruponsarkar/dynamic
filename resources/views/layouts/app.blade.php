@@ -11,7 +11,7 @@
             'description',
             'Explore the Corpus Scientific Publisher journal collection, discover recent research and find guidance for manuscript submissions.',
         ));
-        $metaImage = trim($__env->yieldContent('meta_image', asset('fav/android-icon-192x192.png')));
+        $metaImage = trim($__env->yieldContent('meta_image', asset('fav/favicon-512x512.png')));
         $metaType = trim($__env->yieldContent('meta_type', 'website'));
         $metaRobots = trim($__env->yieldContent('meta_robots', request()->is('search', 'author/*', 'payments', 'manuscript', 'join-editor', 'join-reviewer') ? 'noindex,follow' : 'index,follow'));
         $canonicalUrl = url()->current();
@@ -26,7 +26,7 @@
     <meta name="author" content="Corpus Scientific Publisher">
     <meta name="theme-color" content="#0a2f63">
     <meta name="msapplication-TileColor" content="#0056a3">
-    <meta name="msapplication-config" content="{{ asset('fav/browserconfig.xml') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('fav/favicon-128x128.png') }}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="{{ $metaTitle }}">
@@ -36,17 +36,13 @@
     <link rel="shortcut icon" href="{{ asset('fav/favicon.ico') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('fav/favicon-16x16.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('fav/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('fav/favicon-96x96.png') }}">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('fav/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('fav/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('fav/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('fav/apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('fav/apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('fav/apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('fav/apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('fav/apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('fav/apple-icon-180x180.png') }}">
-    <link rel="manifest" href="{{ asset('fav/manifest.json') }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('fav/favicon-48x48.png') }}">
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('fav/favicon-64x64.png') }}">
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('fav/favicon-128x128.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('fav/favicon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('fav/favicon-512x512.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('fav/favicon-180x180.png') }}">
+    <link rel="manifest" href="{{ asset('fav/site.webmanifest') }}">
 
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="{{ $metaType }}">
