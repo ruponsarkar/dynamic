@@ -453,6 +453,13 @@
                     </section>
 
                     <section class="mb-3">
+                        <div class="p-2">
+                            <a href="/assets/temp/article-templates.pdf" class="btn btn-primary w-100"><i class="bi bi-file-earmark-text me-2" aria-hidden="true"></i>Article Templates</a>
+                        </div>
+                    </section>
+
+
+                    <section class="mb-3">
                         @include('partials.certificates')
                     </section>
 
